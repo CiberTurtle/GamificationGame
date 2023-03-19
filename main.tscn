@@ -52,12 +52,23 @@ unique_name_in_owner = true
 [node name="LoadLevelDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
 initial_position = 2
-title = "Pick a level to load - Press 'L' to open this again"
+title = "Open a File"
 size = Vector2i(800, 600)
-ok_button_text = "Open"
+ok_button_text = "Load"
 dialog_hide_on_ok = true
 file_mode = 0
 root_subfolder = "res://levels/"
 filters = PackedStringArray("*.tscn", "*.scn")
 
+[node name="SpawnItemDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+initial_position = 2
+title = "Open a File"
+size = Vector2i(800, 600)
+ok_button_text = "Spawn"
+file_mode = 0
+root_subfolder = "res://items/"
+filters = PackedStringArray("*.tscn", "*.scn")
+
 [connection signal="file_selected" from="LoadLevelDialog" to="." method="_on_load_level_dialog_file_selected"]
+[connection signal="file_selected" from="SpawnItemDialog" to="." method="_on_spawn_item_dialog_file_selected"]

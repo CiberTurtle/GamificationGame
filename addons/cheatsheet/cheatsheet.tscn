@@ -145,6 +145,9 @@ bbcode_enabled = true
 text = "[b]Welcome to the cheatsheet console[/b]
 
 [color=gray]Type '[color=ff8ccc]help[/color]' to list the available commands[/color]
+	
+	Press 'L' to load a level
+	Press 'I' to spawn an item
 "
 scroll_following = true
 
