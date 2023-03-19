@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcido5i1c4i5k"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_o4v7j"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_53wji"]
+[ext_resource type="Texture2D" uid="uid://bn7p7htr1810y" path="res://content/sprites/knife.png" id="2_rrtfr"]
+[ext_resource type="PackedScene" uid="uid://cungy1m5bjb3b" path="res://scenes/knife.tscn" id="4_f5uts"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsbct"]
+size = Vector2(15, 7)
+
+[node name="Knife" instance=ExtResource("1_o4v7j")]
+item_name = "Knife"
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_gsbct")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_rrtfr")
+
+[node name="Shoot" type="Marker2D" parent="OnUse" index="1"]
+position = Vector2(7, 0)
+script = ExtResource("2_53wji")
+scene = ExtResource("4_f5uts")
