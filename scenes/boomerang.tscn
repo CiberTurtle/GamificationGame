@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl7v18x2j8vgb"]
+[gd_scene load_steps=8 format=3 uid="uid://dl7v18x2j8vgb"]
 
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_s2ue2"]
+[ext_resource type="Script" path="res://scripts/spawner_projectile.gd" id="2_h2kb5"]
 [ext_resource type="Texture2D" uid="uid://cwwvdoe1egsne" path="res://content/sprites/boomerang.png" id="2_ncds6"]
+[ext_resource type="PackedScene" uid="uid://bdj6ktgvctx8w" path="res://items/shotgun.tscn" id="3_bx72x"]
 
-[sub_resource type="Curve" id="Curve_nyco2"]
+[sub_resource type="Curve" id="Curve_2krj8"]
 min_value = -300.0
 max_value = 300.0
 _data = [Vector2(0, 300), 0.0, 0.0, 0, 0, Vector2(1, -300), 0.0, 0.0, 0, 0]
@@ -16,7 +18,9 @@ size = Vector2(15, 7)
 size = Vector2(15, 7)
 
 [node name="boomerang" instance=ExtResource("1_s2ue2")]
-speed_over_lifetime = SubResource("Curve_nyco2")
+script = ExtResource("2_h2kb5")
+scene = ExtResource("3_bx72x")
+speed_over_lifetime = SubResource("Curve_2krj8")
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_ncds6")
