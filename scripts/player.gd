@@ -256,7 +256,7 @@ func try_drop_item() -> bool:
 	return true
 
 func take_damage(damage: int, source: Player) -> bool:
-	if source.player == self: return false
+	if source == self: return false
 	health -= damage
 	if health < 0:
 		die()

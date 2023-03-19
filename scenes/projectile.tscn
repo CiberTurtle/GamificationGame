@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_l40mn"]
 [ext_resource type="Texture2D" uid="uid://cqtp4lf2ok6sa" path="res://content/sprites/bullet.png" id="2_3ndkd"]
-[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_ubyj1"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_23f81"]
 
 [sub_resource type="Curve" id="Curve_hc487"]
 max_value = 256.0
@@ -29,7 +29,7 @@ shape = SubResource("CircleShape2D_ec2td")
 [node name="PassiveHitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 96
-script = ExtResource("3_ubyj1")
+script = ExtResource("3_23f81")
 damage = 30
 auto_attack = true
 remember_hits = true
