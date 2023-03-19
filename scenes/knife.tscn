@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cungy1m5bjb3b"]
+[gd_scene load_steps=6 format=3 uid="uid://cungy1m5bjb3b"]
 
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_0n4t5"]
 [ext_resource type="Texture2D" uid="uid://bn7p7htr1810y" path="res://content/sprites/knife.png" id="2_p6655"]
@@ -7,6 +7,9 @@
 max_value = 0.01
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esuqn"]
+size = Vector2(15, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73dyd"]
 size = Vector2(15, 7)
 
 [node name="knife" instance=ExtResource("1_0n4t5")]
@@ -21,3 +24,6 @@ shape = SubResource("RectangleShape2D_esuqn")
 
 [node name="PassiveHitbox" parent="." index="2"]
 damage = 60
+
+[node name="Collision" parent="PassiveHitbox" index="0"]
+shape = SubResource("RectangleShape2D_73dyd")
