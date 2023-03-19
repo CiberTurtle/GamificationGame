@@ -219,7 +219,7 @@ func process_action(delta: float) -> void:
 			item = it
 			break
 		
-		if item:
+		if item and item.check_pickup():
 			try_pickup_item(item)
 			action_buffer_timer = -1.
 	else:

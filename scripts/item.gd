@@ -20,8 +20,11 @@ var damage_source: Player
 
 @onready var on_use := $OnUse
 
+func check_pickup() -> bool:
+	return player == null
+
 func check_drop() -> bool:
-	return true
+	return player != null
 
 func check_use() -> bool:
 	if cooldown > 0: return false
