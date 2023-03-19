@@ -27,7 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var age_ratio := age/lifetime_sec
 	var speed := speed_over_lifetime.sample_baked(age_ratio)
-	var motion := Vector2(1, proj_skew).normalized() * delta * speed
+	var motion := Vector2(transform.basis_xform(Vector2.RIGHT).x, proj_skew).normalized() * delta * speed
 	var hit := move_and_collide(motion)
 	
 	if hit:
