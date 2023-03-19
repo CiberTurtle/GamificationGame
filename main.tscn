@@ -11,40 +11,67 @@ script = ExtResource("1_epd5g")
 metadata/_edit_horizontal_guides_ = [-136.0, 136.0, -184.0, 184.0]
 metadata/_edit_vertical_guides_ = [-240.0, 240.0, -320.0, 320.0]
 
-[node name="World" type="Node2D" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+physics_object_picking = true
+size = Vector2i(640, 360)
+
+[node name="World" type="Node2D" parent="SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 
-[node name="Test Level" parent="World" instance=ExtResource("3_lmu5j")]
+[node name="Test Level" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("3_lmu5j")]
 
-[node name="Player" parent="World" instance=ExtResource("2_etx5l")]
+[node name="Player" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("2_etx5l")]
 position = Vector2(-96, 80)
 
-[node name="Shotgun" parent="World" instance=ExtResource("3_do8bn")]
+[node name="Shotgun" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("3_do8bn")]
 position = Vector2(0, -128)
 grounded_dec = 64.0
 gravity = 512.0
 max_fall_speed = 256.0
 
-[node name="Crate" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(176, 72)
 
-[node name="Crate2" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate2" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(160, -24)
 
-[node name="Crate3" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate3" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(-176, -24)
 
-[node name="Crate4" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate4" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(-264, 40)
 
-[node name="Crate5" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate5" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(-192, 72)
 
-[node name="Crate6" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate6" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(-64, -128)
 
-[node name="Crate7" parent="World" instance=ExtResource("5_dqu7c")]
+[node name="Crate7" parent="SubViewportContainer/SubViewport/World" instance=ExtResource("5_dqu7c")]
 position = Vector2(64, -128)
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

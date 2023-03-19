@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgoh0duogyonh"]
+[gd_scene load_steps=3 format=3 uid="uid://bgoh0duogyonh"]
 
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="1_klyho"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_xtk21"]
 
 [node name="Test Level" type="Node2D"]
+script = ExtResource("1_xtk21")
 metadata/_edit_horizontal_guides_ = [-184.0, 184.0]
 metadata/_edit_vertical_guides_ = [-320.0, 320.0]
 
