@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx3svwqjrt6r8"]
+
+[ext_resource type="Script" path="res://scripts/gui/scene_picker.gd" id="1_ufjtr"]
+
+[node name="PanelContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 300)
+offset_left = 810.0
+offset_top = 390.0
+offset_right = 1110.0
+offset_bottom = 690.0
+script = ExtResource("1_ufjtr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pick a scene to load"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="item_activated" from="MarginContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_activated"]
