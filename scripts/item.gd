@@ -20,23 +20,33 @@ var damage_source: Player
 
 @onready var on_use := $OnUse
 
+func is_held() -> bool:
+	return player != null
+
 func check_pickup() -> bool:
-	return player == null
+	return not is_held()
 
 func check_drop() -> bool:
-	return player != null
+	return true
 
 func check_use() -> bool:
 	if cooldown > 0: return false
 	return true
 
-func _process(delta: float) -> void:
-	_try_process_movement(delta)
+func _physics_process(delta: float) -> void:
 	cooldown -= delta
+	if is_held():
+		_process_held(delta)
+	else:
+		_process_notheld(delta)
 
-func _try_process_movement(delta: float) -> void:
-	if player: return
-	
+func _process_held(delta: float) -> void:
+	pass
+
+func _process_notheld(delta: float) -> void:
+	process_notheld_gravity(delta)
+
+func process_notheld_gravity(delta: float) -> void:
 	velocity.y += gravity*delta
 	if velocity.y > max_fall_speed:
 		velocity.y = max_fall_speed
