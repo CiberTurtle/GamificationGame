@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5llq25ob1dfb"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_hhn5q"]
+[ext_resource type="Texture2D" uid="uid://cwwvdoe1egsne" path="res://content/sprites/boomerang.png" id="2_087jg"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_uyrqo"]
+[ext_resource type="PackedScene" uid="uid://dl7v18x2j8vgb" path="res://scenes/boomerang.tscn" id="4_36y2m"]
+[ext_resource type="Script" path="res://scripts/parts/make_invisible.gd" id="5_cn2v4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_663d7"]
+size = Vector2(15, 7)
+
+[node name="boomerang" instance=ExtResource("1_hhn5q")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_663d7")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_087jg")
+
+[node name="Cooldown" parent="OnUse" index="0"]
+ticks = 60.0
+
+[node name="Shoot" type="Marker2D" parent="OnUse" index="1"]
+script = ExtResource("2_uyrqo")
+scene = ExtResource("4_36y2m")
+
+[node name="Make Invisible" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("5_cn2v4")
+ticks = 60
+sprite = NodePath("../../Sprite")
