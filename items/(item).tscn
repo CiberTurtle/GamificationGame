@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dww6yjs6qfyhp"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_88eqp"]
+[ext_resource type="Script" path="res://scripts/parts/group.gd" id="2_yyp3w"]
+[ext_resource type="Script" path="res://scripts/parts/cooldown.gd" id="3_rs34f"]
+
+[node name="Item" type="CharacterBody2D"]
+collision_layer = 64
+script = ExtResource("1_88eqp")
+grounded_dec = 128.0
+gravity = 384.0
+max_fall_speed = 512.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="OnPickup" type="Node2D" parent="."]
+script = ExtResource("2_yyp3w")
+
+[node name="Cooldown" type="Node2D" parent="OnPickup"]
+script = ExtResource("3_rs34f")
+ticks = 20.0
+
+[node name="OnUse" type="Node2D" parent="."]
+script = ExtResource("2_yyp3w")
+
+[node name="Cooldown" type="Node2D" parent="OnUse"]
+script = ExtResource("3_rs34f")
+ticks = 20.0
+
+[node name="OnDrop" type="Node2D" parent="."]
+script = ExtResource("2_yyp3w")
+
+[node name="OnDeath" type="Node2D" parent="."]
+script = ExtResource("2_yyp3w")
+
+[connection signal="death" from="." to="OnDeath" method="trigger"]
+[connection signal="drop" from="." to="OnDrop" method="trigger"]
+[connection signal="pickup" from="." to="OnPickup" method="trigger"]
+[connection signal="use" from="." to="OnUse" method="trigger"]

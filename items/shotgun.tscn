@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdj6ktgvctx8w"]
+
+[ext_resource type="Texture2D" uid="uid://c4fenpxg2xp0c" path="res://content/sprites/shotgun.png" id="1_h2d4u"]
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_xy0sw"]
+[ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="2_h8dqg"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_bhri1"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="5_hugqe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfdac"]
+size = Vector2(15, 7)
+
+[node name="Shotgun" instance=ExtResource("1_xy0sw")]
+
+[node name="Collision" parent="." index="0"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_gfdac")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("1_h2d4u")
+
+[node name="Recoil" type="Node2D" parent="OnUse" index="0"]
+script = ExtResource("2_h8dqg")
+velocity = Vector2(-64, -128)
+
+[node name="Shoot" type="Marker2D" parent="OnUse" index="1"]
+position = Vector2(8, 0)
+script = ExtResource("3_bhri1")
+scene = ExtResource("5_hugqe")
+
+[node name="Cooldown" parent="OnUse" index="2"]
+ticks = 30.0

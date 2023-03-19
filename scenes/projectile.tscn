@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://y4rvdb8panhn"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_l40mn"]
+[ext_resource type="Texture2D" uid="uid://cqtp4lf2ok6sa" path="res://content/sprites/bullet.png" id="2_3ndkd"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_ubyj1"]
+
+[sub_resource type="Curve" id="Curve_hc487"]
+max_value = 256.0
+_data = [Vector2(0, 256), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec2td"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdlnq"]
+radius = 2.0
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_l40mn")
+speed_over_lifetime = SubResource("Curve_hc487")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_3ndkd")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ec2td")
+
+[node name="PassiveHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_ubyj1")
+damage = 30
+auto_attack = true
+remember_hits = true
+
+[node name="Collision" type="CollisionShape2D" parent="PassiveHitbox"]
+shape = SubResource("CircleShape2D_fdlnq")
+debug_color = Color(0.996078, 0, 0.156863, 0.419608)

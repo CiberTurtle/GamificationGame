@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bti5oqdo88ru6"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_epd5g"]
+[ext_resource type="PackedScene" uid="uid://cq68mpffntm2a" path="res://scenes/player.tscn" id="2_etx5l"]
+[ext_resource type="PackedScene" uid="uid://bdj6ktgvctx8w" path="res://items/shotgun.tscn" id="3_do8bn"]
+[ext_resource type="PackedScene" uid="uid://bgoh0duogyonh" path="res://levels/test_level2.tscn" id="3_lmu5j"]
+[ext_resource type="PackedScene" uid="uid://c26yfivgeteet" path="res://items/crate.tscn" id="5_dqu7c"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_epd5g")
+metadata/_edit_horizontal_guides_ = [-136.0, 136.0, -184.0, 184.0]
+metadata/_edit_vertical_guides_ = [-240.0, 240.0, -320.0, 320.0]
+
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Test Level" parent="World" instance=ExtResource("3_lmu5j")]
+
+[node name="Player" parent="World" instance=ExtResource("2_etx5l")]
+position = Vector2(-96, 80)
+
+[node name="Shotgun" parent="World" instance=ExtResource("3_do8bn")]
+position = Vector2(0, -128)
+grounded_dec = 64.0
+gravity = 512.0
+max_fall_speed = 256.0
+
+[node name="Crate" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(176, 72)
+
+[node name="Crate2" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(160, -24)
+
+[node name="Crate3" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(-176, -24)
+
+[node name="Crate4" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(-264, 40)
+
+[node name="Crate5" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(-192, 72)
+
+[node name="Crate6" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(-64, -128)
+
+[node name="Crate7" parent="World" instance=ExtResource("5_dqu7c")]
+position = Vector2(64, -128)
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true

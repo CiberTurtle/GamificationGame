@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://c26yfivgeteet"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_uwg6s"]
+[ext_resource type="Texture2D" uid="uid://r4mtibcoveso" path="res://content/sprites/crate.png" id="2_wwgol"]
+[ext_resource type="Script" path="res://scripts/parts/kill.gd" id="3_77ckj"]
+[ext_resource type="Script" path="res://scripts/parts/drop_lootable.gd" id="3_mdjpy"]
+[ext_resource type="Resource" uid="uid://efu0kn5211cm" path="res://resources/loottable.tres" id="4_kcgy4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05edk"]
+size = Vector2(16, 16)
+
+[node name="Crate" instance=ExtResource("1_uwg6s")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_05edk")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_wwgol")
+
+[node name="Kill" type="Node2D" parent="OnPickup" index="0"]
+script = ExtResource("3_77ckj")
+
+[node name="DropLootable" type="Node2D" parent="OnDeath" index="0"]
+script = ExtResource("3_mdjpy")
+loottable = ExtResource("4_kcgy4")

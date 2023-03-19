@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Custom
+# exclude the contents of exports but include the folder itself
+.exports/*
+!exports/.gitkeep
+
