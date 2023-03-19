@@ -7,7 +7,7 @@
 script = ExtResource("1_epd5g")
 player_scene = ExtResource("2_etx5l")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BackgroundFill" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,7 +52,7 @@ unique_name_in_owner = true
 [node name="LoadLevelDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
 initial_position = 2
-title = "Pick a level to load - Press 'L' to open this again"
+title = "Open a File"
 size = Vector2i(800, 600)
 ok_button_text = "Open"
 dialog_hide_on_ok = true
@@ -60,4 +60,16 @@ file_mode = 0
 root_subfolder = "res://levels/"
 filters = PackedStringArray("*.tscn", "*.scn")
 
+[node name="SpawnItemDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+initial_position = 2
+title = "Open a File"
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+root_subfolder = "res://items/"
+filters = PackedStringArray("*.tscn", "*.scn")
+
 [connection signal="file_selected" from="LoadLevelDialog" to="." method="_on_load_level_dialog_file_selected"]
+[connection signal="file_selected" from="SpawnItemDialog" to="." method="_on_spawn_item_dialog_file_selected"]
