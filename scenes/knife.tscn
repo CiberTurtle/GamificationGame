@@ -13,7 +13,7 @@ size = Vector2(15, 7)
 size = Vector2(15, 7)
 
 [node name="knife" instance=ExtResource("1_0n4t5")]
-lifetime = 1
+lifetime = 2
 speed_over_lifetime = SubResource("Curve_efjnm")
 
 [node name="Sprite" parent="." index="0"]
