@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgx2vb1uecuqx"]
+
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5phig"]
+
+[node name="shotgun_projectile" instance=ExtResource("1_5phig")]
+skew_amount = 0.2

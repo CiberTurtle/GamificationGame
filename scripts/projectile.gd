@@ -4,6 +4,7 @@ const TPS := 60.
 
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks')  var lifetime := 60
 @onready var lifetime_sec := lifetime/TPS
+@export var skew_amount :=0.0
 var age := 0.0
 
 @export var speed_over_lifetime: Curve
@@ -11,6 +12,7 @@ var age := 0.0
 @export_range(0, 10, 1, 'or_greater', 'suffix:count')  var max_hits := 1
 var hits := 0
 var damage_source: Player
+@onready var proj_skew = randf_range(-skew_amount, skew_amount)
 
 func _ready() -> void:
 	var hitboxes := find_children('*', 'Hitbox')
@@ -25,7 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var age_ratio := age/lifetime_sec
 	var speed := speed_over_lifetime.sample_baked(age_ratio)
-	var motion := transform.basis_xform(Vector2.RIGHT)*speed*delta
+	var motion := Vector2(1, proj_skew).normalized() * delta * speed
 	var hit := move_and_collide(motion)
 	
 	if hit:

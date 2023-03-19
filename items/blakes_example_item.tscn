@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx2fp6rqodfyd"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_ss4vq"]
+[ext_resource type="Texture2D" uid="uid://c4fenpxg2xp0c" path="res://content/sprites/shotgun.png" id="2_y6574"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_1u5nr"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="4_1hgrw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20lwn"]
+size = Vector2(15, 7)
+
+[node name="Blakes Example Item" instance=ExtResource("1_ss4vq")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_20lwn")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_y6574")
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("3_1u5nr")
+scene = ExtResource("4_1hgrw")

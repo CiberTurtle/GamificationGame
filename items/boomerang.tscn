@@ -20,7 +20,7 @@ pickup_range = 16.0
 speed_over_lifetime = SubResource("Curve_d8ag7")
 roations_per_second = 2.0
 to_rotate = NodePath("Sprite")
-max_hits = 1
+max_hits = 3
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_440my")
