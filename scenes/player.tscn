@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq68mpffntm2a"]
+[gd_scene load_steps=6 format=3 uid="uid://cq68mpffntm2a"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
@@ -8,6 +8,9 @@ size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_je6ji"]
 size = Vector2(8, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0w16f"]
+size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 32
@@ -47,3 +50,12 @@ position = Vector2(6, -6)
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_je6ji")
+
+[node name="LadderDetectorArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="LadderDetectorArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_0w16f")

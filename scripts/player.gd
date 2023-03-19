@@ -49,6 +49,12 @@ var jump_buffer_timer := -1.
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks')  var action_buffer_ticks := 6
 var action_buffer_timer := -1.
 
+@export_group('Climbing', 'climb_')
+@export var climb_speed_vertical := 64.
+@export var climb_speed_horizontal := 32.
+@export var climb_coyote_time_ticks := 10
+var is_clibing := false
+
 @export_group('Other')
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
@@ -60,6 +66,7 @@ var held_item: Item
 @onready var art_node2d: Node2D = %Art
 @onready var holder_node2d: Node2D = %Holder
 @onready var pickup_area: Area2D = %PickupArea
+@onready var ladder_dectector_area: Area2D = %LadderDetectorArea
 
 func _ready() -> void:
 	input = DeviceInput.new(-1)
@@ -96,16 +103,43 @@ func _physics_process(delta: float) -> void:
 		direction = sign(input_move.x)
 		flip_node2d.scale.x = direction
 	
-	process_state_platformer(delta)
+	if is_clibing:
+		process_state_climb(delta)
+	else:
+		process_state_platformer(delta)
 
 func process_state_platformer(delta: float) -> void:
 	if is_on_floor():
 		is_jumping = false
 	
+	if ladder_dectector_area.get_overlapping_bodies().size() > 0 and input_move.y < 0:
+		is_clibing = true
+		is_jumping = false
+		return
+	
 	process_movement(delta)
 	process_gravity(delta)
 	process_jump(delta)
 	process_action(delta)
+	
+	move()
+
+func process_state_climb(delta: float) -> void:
+	if ladder_dectector_area.get_overlapping_bodies().size() == 0 or (is_on_floor() and input_move.y > 0):
+		is_clibing = false
+		coyote_timer = climb_coyote_time_ticks/TPS
+		return
+	
+	speed_vertical = input_move.y * climb_speed_vertical
+	speed_move = input_move.x * climb_speed_horizontal
+	
+	if jump_buffer_timer > 0.:
+		jump_buffer_timer = -1.
+		coyote_timer = -1.
+		speed_vertical = -Calc.jump_velocity(jump_height, gravity)
+		is_jumping = true
+		is_clibing = false
+		return
 	
 	move()
 
