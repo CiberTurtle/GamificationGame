@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgx2vb1uecuqx"]
+[gd_scene load_steps=3 format=3 uid="uid://bgx2vb1uecuqx"]
 
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5phig"]
 
+[sub_resource type="Curve" id="Curve_wjeem"]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0]
+point_count = 1
+
 [node name="shotgun_projectile" instance=ExtResource("1_5phig")]
-skew_amount = 0.2
+random_skew = true
+skew_curve = SubResource("Curve_wjeem")
