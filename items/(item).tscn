@@ -7,9 +7,6 @@
 [node name="Item" type="CharacterBody2D"]
 collision_layer = 64
 script = ExtResource("1_88eqp")
-grounded_dec = 128.0
-gravity = 384.0
-max_fall_speed = 512.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 
