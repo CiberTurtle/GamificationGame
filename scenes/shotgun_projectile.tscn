@@ -9,3 +9,6 @@ point_count = 1
 [node name="shotgun_projectile" instance=ExtResource("1_5phig")]
 random_skew = true
 skew_curve = SubResource("Curve_wjeem")
+
+[node name="PassiveHitbox" parent="." index="2"]
+damage = 15
