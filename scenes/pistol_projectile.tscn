@@ -1,9 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://cifn5g7gnuay6"]
+[gd_scene load_steps=10 format=3 uid="uid://dpfcpj04u0k2w"]
 
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5g2v4"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_p1mql"]
+[ext_resource type="Texture2D" uid="uid://cqtp4lf2ok6sa" path="res://content/sprites/bullet.png" id="2_rmat5"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_kfmv5"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_0cb52"]
+[ext_resource type="Script" path="res://scripts/parts/group.gd" id="5_yir22"]
 
-[node name="Pistol Projectile" instance=ExtResource("1_5g2v4")]
+[sub_resource type="Curve" id="Curve_1ycyd"]
+max_value = 600.0
+_data = [Vector2(0, 500), 0.0, 0.0, 0, 0]
+point_count = 1
 
-[node name="Knockback" parent="PassiveHitbox" index="1"]
+[sub_resource type="Curve" id="Curve_hifa3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec2td"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdlnq"]
+radius = 2.0
+
+[node name="Pistol Projectile" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_p1mql")
+lifetime = 40
+speed_over_lifetime = SubResource("Curve_1ycyd")
+skew_curve = SubResource("Curve_hifa3")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_rmat5")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ec2td")
+
+[node name="PassiveHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_kfmv5")
+damage = 15
+auto_attack = true
+remember_hits = true
+
+[node name="Collision" type="CollisionShape2D" parent="PassiveHitbox"]
+shape = SubResource("CircleShape2D_fdlnq")
+debug_color = Color(0.996078, 0, 0.156863, 0.419608)
+
+[node name="Knockback" type="Node2D" parent="PassiveHitbox"]
+script = ExtResource("4_0cb52")
 x_knockback = 64.0
 y_knockback = -30.0
+
+[node name="OnDeath" type="Node2D" parent="."]
+script = ExtResource("5_yir22")
+
+[connection signal="death" from="." to="OnDeath" method="trigger" flags=18]

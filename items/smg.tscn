@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://eh244pcfaslv"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_4n74k"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_eayah"]
+[ext_resource type="Script" path="res://scripts/parts/staggered_fire.gd" id="3_lfhip"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="4_je7jj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g3yt"]
+size = Vector2(15, 7)
+
+[node name="SMG" instance=ExtResource("1_4n74k")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_3g3yt")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.1, 0.05)
+texture = ExtResource("2_eayah")
+
+[node name="Cooldown" parent="OnPickup" index="0"]
+ticks = 0.0
+
+[node name="Cooldown" parent="OnUse" index="0"]
+ticks = 40.0
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("3_lfhip")
+scene = ExtResource("4_je7jj")
+count = 3
+durability = 4

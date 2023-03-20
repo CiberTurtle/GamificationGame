@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_p761c"]
 [ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_xkix1"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_ydpea"]
-[ext_resource type="PackedScene" uid="uid://cifn5g7gnuay6" path="res://scenes/pistol_projectile.tscn" id="4_8lrtx"]
+[ext_resource type="PackedScene" uid="uid://dpfcpj04u0k2w" path="res://scenes/pistol_projectile.tscn" id="4_8lrtx"]
 [ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_cdi8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iy84u"]
@@ -19,7 +19,7 @@ scale = Vector2(0.1, 0.05)
 texture = ExtResource("2_xkix1")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
-ticks = 30.0
+ticks = 0.0
 
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 30.0
