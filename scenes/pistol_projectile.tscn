@@ -5,4 +5,5 @@
 [node name="Pistol Projectile" instance=ExtResource("1_5g2v4")]
 
 [node name="Knockback" parent="PassiveHitbox" index="1"]
+x_knockback = 64.0
 y_knockback = -30.0
