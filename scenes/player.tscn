@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cq68mpffntm2a"]
+[gd_scene load_steps=11 format=3 uid="uid://cq68mpffntm2a"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_q5xfg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d353i"]
 size = Vector2(32, 16)
@@ -65,9 +66,14 @@ position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_mefnu")
 debug_color = Color(0.988235, 0.109804, 0, 0.419608)
 
+[node name="Knockback" type="Node2D" parent="Flip/PunchArea"]
+script = ExtResource("4_q5xfg")
+x_knockback = 64.0
+y_knockback = -64.0
+
 [node name="Holder" type="Marker2D" parent="Flip"]
 unique_name_in_owner = true
-position = Vector2(6, -6)
+position = Vector2(8, -8)
 
 [node name="LadderDetectorArea" type="Area2D" parent="."]
 unique_name_in_owner = true

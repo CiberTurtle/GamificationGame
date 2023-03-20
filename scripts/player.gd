@@ -312,6 +312,8 @@ func take_damage(damage: int, source: Player) -> bool:
 	return true
 
 func die() -> void:
+	death.emit()
+	# placeholder
 	health = base_health
 
 func update_health_bar() -> void:

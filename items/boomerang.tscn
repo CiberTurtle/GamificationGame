@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://drwmwrmrtqfof"]
+[gd_scene load_steps=8 format=3 uid="uid://drwmwrmrtqfof"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_hhn5q"]
 [ext_resource type="Texture2D" uid="uid://cwwvdoe1egsne" path="res://content/sprites/boomerang.png" id="2_087jg"]
 [ext_resource type="Script" path="res://scripts/boomerang.gd" id="2_v6wko"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_mcfx6"]
-[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_81yph"]
 
 [sub_resource type="Curve" id="Curve_d8ag7"]
 min_value = -300.0
@@ -25,7 +24,7 @@ pickup_range = 16.0
 speed_over_lifetime = SubResource("Curve_d8ag7")
 roations_per_second = 2.0
 to_rotate = NodePath("Sprite")
-max_hits = 10
+max_hits = 3
 
 [node name="Hitbox" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -36,10 +35,6 @@ remember_hits = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("RectangleShape2D_xg052")
-
-[node name="Knockback" type="Node2D" parent="Hitbox" index="1"]
-script = ExtResource("4_81yph")
-x_knockback = 50.0
 
 [node name="Collision" parent="." index="1"]
 shape = SubResource("RectangleShape2D_440my")
