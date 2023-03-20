@@ -79,6 +79,7 @@ var held_item: Item
 @onready var holder_node2d: Node2D = %Holder
 @onready var pickup_area: Area2D = %PickupArea
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
+@onready var punch_area: Hitbox = %PunchArea
 @onready var health_bar: ProgressBar = %HealthBar
 
 func _ready() -> void:
@@ -280,7 +281,8 @@ func process_action(delta: float) -> void:
 			action_buffer_timer = -1.
 	else:
 		action_buffer_timer = -1.
-		pass # TODO: punching
+		punch_area.attack_overlap(self)
+		print('attack')
 
 func try_pickup_item(item: Item) -> bool:
 	assert(not held_item, 'cannot pick up item - an item is already being held')

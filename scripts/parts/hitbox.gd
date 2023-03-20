@@ -22,7 +22,7 @@ func trigger() -> void:
 
 func attack_overlap(source: Player, damage: int = -1) -> int:
 	var count = 0
-	for area in get_overlapping_areas():
+	for area in get_overlapping_bodies():
 		if attack_node(area, source, damage):
 			count += 1
 	return count
