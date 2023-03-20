@@ -29,4 +29,4 @@ scene = ExtResource("5_nqanw")
 count = 3
 
 [node name="Cooldown" parent="OnUse" index="2"]
-ticks = 30.0
+ticks = 40.0

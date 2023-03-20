@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgx2vb1uecuqx"]
 
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5phig"]
-[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="2_6ktdy"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="1_5phig"]
+
+[sub_resource type="Curve" id="Curve_qg3bc"]
+max_value = 600.0
+_data = [Vector2(0, 600), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="Curve" id="Curve_wjeem"]
 _data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [node name="shotgun_projectile" instance=ExtResource("1_5phig")]
-random_skew = true
+lifetime = 10
+speed_over_lifetime = SubResource("Curve_qg3bc")
 skew_curve = SubResource("Curve_wjeem")
 
-[node name="PassiveHitbox" parent="." index="2"]
-damage = 15
-
-[node name="Knockback" type="Node2D" parent="PassiveHitbox" index="1"]
-script = ExtResource("2_6ktdy")
+[node name="Knockback" parent="PassiveHitbox" index="1"]
+x_knockback = 100.0
 y_knockback = -100.0
