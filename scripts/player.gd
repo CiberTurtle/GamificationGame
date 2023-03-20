@@ -238,13 +238,15 @@ func process_jump(delta: float) -> void:
 	
 	if jump_buffer_timer > 0.:
 		if input_move.y > 0.: # if chrouching then fall though
+			SoundBank.play('fall', position)
 			jump_buffer_timer = 0.
 			position.y += 1.
 		elif coyote_timer > 0.: # or else jump
+			SoundBank.play('jump', position)
 			is_jumping = true
 			coyote_timer = 0.
 			jump_buffer_timer = 0.
-		
+			
 			var jump_velocity := Calc.jump_velocity(jump_height, gravity)
 			speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
@@ -278,6 +280,7 @@ func process_action(delta: float) -> void:
 			try_pickup_item(item)
 			action_buffer_timer = -1.
 	else:
+		SoundBank.play('punch', position)
 		action_buffer_timer = -1.
 		punch_area.attack_overlap(self)
 
@@ -313,10 +316,19 @@ func try_drop_item() -> bool:
 
 func take_damage(damage: int, source: Player) -> bool:
 	if source == self: return false
+	
 	health -= damage
 	update_health_bar()
-	if health < 0:
+	
+	if damage >= 30:
+		SoundBank.play('hit', position)
+	else:
+		SoundBank.play('hit.big', position)
+	
+	if health <= 0:
 		die()
+		SoundBank.play('hit/big', position)
+	
 	return true
 
 func die() -> void:

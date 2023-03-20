@@ -33,6 +33,12 @@ func check_use() -> bool:
 	if cooldown > 0: return false
 	return true
 
+func _pickup() -> void:
+	SoundBank.play('pickup.' + name, position)
+
+func _drop() -> void:
+	SoundBank.play('drop.' + name, position)
+
 func _physics_process(delta: float) -> void:
 	cooldown -= delta
 	if is_held():
@@ -74,6 +80,7 @@ func take_damage(damage: int, source: Player) -> bool:
 
 func die() -> void:
 	#assert(not player, 'item somehow died while being held, this should not happen')
+	SoundBank.play('destroy.' + name, position)
 	if player:
 		player.held_item = null
 	death.emit()
