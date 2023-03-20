@@ -81,9 +81,6 @@ var held_item: Item
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
 @onready var health_bar: ProgressBar = %HealthBar
 
-
-
-
 func _ready() -> void:
 	update_health_bar()
 	health_bar.modulate = player_data.color
@@ -237,13 +234,17 @@ func process_jump(delta: float) -> void:
 	if is_on_floor():
 		coyote_timer = coyote_time_ticks / TPS
 	
-	if coyote_timer > 0. and jump_buffer_timer > 0.:
-		is_jumping = true
-		coyote_timer = 0.
-		jump_buffer_timer = 0.
+	if jump_buffer_timer > 0.:
+		if input_move.y > 0.: # if chrouching then fall though
+			jump_buffer_timer
+			position.y += 1.
+		elif coyote_timer > 0.: # or else jump
+			is_jumping = true
+			coyote_timer = 0.
+			jump_buffer_timer = 0.
 		
-		var jump_velocity := Calc.jump_velocity(jump_height, gravity) * jump_height_mod
-		speed_vertical = -jump_velocity
+			var jump_velocity := Calc.jump_velocity(jump_height, gravity) * jump_height_mod
+			speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
 
 func process_action(delta: float) -> void:
@@ -337,4 +338,4 @@ func reset_modifiers():
 
 func update_health_bar() -> void:
 	health_bar.value = health
-	health_bar.max_value = base_health
+	health_bar.max_value = base_health + base_health_mod
