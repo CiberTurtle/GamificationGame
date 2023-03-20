@@ -10,7 +10,7 @@ signal death()
 @onready var health := base_health
 
 @export_group('Common')
-@export_range(0, 128, 1, 'or_greater', 'suffix:px/s') var grounded_dec := 64.
+@export_range(0, 128, 1, 'or_greater', 'suffix:px/s') var grounded_dec := 512.
 @export_range(0, 256, 1, 'or_greater', 'suffix:px/s') var gravity := 512.
 @export_range(0, 256, 1, 'or_greater', 'suffix:px/s') var max_fall_speed := 256.
 
