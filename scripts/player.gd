@@ -12,6 +12,7 @@ const TPS = 60.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_speed := 64.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_crouch_speed := 32.
 
+
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_acc_ticks := 4.
 @onready var move_acc_time := move_acc_ticks / TPS
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_dec_ticks := 6.
@@ -30,6 +31,7 @@ const TPS = 60.
 @export_range(0, 128, 1, 'or_greater', 'suffix:px') var jump_height := 48.
 @export_range(0, 120, 1, 'or_greater', 'suffix:ticks') var jump_ticks := 60
 @onready var gravity := Calc.jump_gravity(jump_height, jump_ticks/TPS)
+
 ## The maxinum falling speed based on the jumping speed
 @export var max_fall_ratio := 2.
 @onready var max_fall_speed := Calc.jump_velocity(jump_height, gravity)*max_fall_ratio
@@ -55,6 +57,13 @@ var action_buffer_timer := -1.
 @export var climb_coyote_time_ticks := 10
 var is_clibing := false
 
+@export_group('Modifiers')
+@export var base_health_mod := 0
+@export var move_speed_mod := 1.0
+@export var jump_height_mod := 1.0
+@export var climb_speed_mod := 1.0
+@export var current_mod_duration := 0.0
+
 @export_group('Other')
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
@@ -68,11 +77,15 @@ var held_item: Item
 @onready var pickup_area: Area2D = %PickupArea
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
 
+
+
+
 func _ready() -> void:
 	input = DeviceInput.new(-1)
 
 func _process(delta: float) -> void:
 	process_inputs()
+	check_modifiers(delta)
 
 func reset_movement() -> void:
 	speed_move = 0.
@@ -130,8 +143,8 @@ func process_state_climb(delta: float) -> void:
 		coyote_timer = climb_coyote_time_ticks/TPS
 		return
 	
-	speed_vertical = input_move.y * climb_speed_vertical
-	speed_move = input_move.x * climb_speed_horizontal
+	speed_vertical = input_move.y * climb_speed_vertical * climb_speed_mod
+	speed_move = input_move.x * climb_speed_horizontal * climb_speed_mod
 	
 	if jump_buffer_timer > 0.:
 		jump_buffer_timer = -1.
@@ -144,7 +157,7 @@ func process_state_climb(delta: float) -> void:
 	move()
 
 func move() -> void:
-	velocity.x = speed_move + speed_extra
+	velocity.x = (speed_move + speed_extra) * move_speed_mod
 	velocity.y = speed_vertical
 	
 	move_and_slide()
@@ -224,7 +237,7 @@ func process_jump(delta: float) -> void:
 		coyote_timer = 0.
 		jump_buffer_timer = 0.
 		
-		var jump_velocity := Calc.jump_velocity(jump_height, gravity)
+		var jump_velocity := Calc.jump_velocity(jump_height, gravity) * jump_height_mod
 		speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
 
@@ -297,4 +310,18 @@ func take_damage(damage: int, source: Player) -> bool:
 	return true
 
 func die() -> void:
-	health = base_health
+	health = base_health + base_health_mod
+	
+func check_modifiers(delta):
+	current_mod_duration -= delta * TPS
+	if current_mod_duration < 0:
+		reset_modifiers()
+
+func reset_modifiers():
+	base_health_mod = 0
+	if health > base_health:
+		health = base_health
+	move_speed_mod = 1.0
+	jump_height_mod = 1.0
+	climb_speed_mod = 1.0
+	current_mod_duration = 0.0
