@@ -53,10 +53,6 @@ unique_name_in_owner = true
 position = Vector2(0, -8)
 texture = ExtResource("1_2xlw4")
 
-[node name="Holder" type="Marker2D" parent="Flip/Art"]
-unique_name_in_owner = true
-position = Vector2(6, -6)
-
 [node name="PunchArea" type="Area2D" parent="Flip"]
 unique_name_in_owner = true
 collision_layer = 0
@@ -68,6 +64,10 @@ damage = 10
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_mefnu")
 debug_color = Color(0.988235, 0.109804, 0, 0.419608)
+
+[node name="Holder" type="Marker2D" parent="Flip"]
+unique_name_in_owner = true
+position = Vector2(6, -6)
 
 [node name="LadderDetectorArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -93,5 +93,6 @@ offset_right = 10.0
 offset_bottom = -18.0
 theme_override_styles/background = SubResource("StyleBoxFlat_pl7hj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gd7c4")
+step = 1.0
 value = 67.0
 show_percentage = false
