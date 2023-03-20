@@ -9,6 +9,7 @@
 radius = 6.0
 
 [node name="potion" instance=ExtResource("1_qrm5i")]
+grounded_dec = 512.0
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CircleShape2D_x0y8i")

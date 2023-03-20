@@ -4,5 +4,5 @@ extends Node2D
 
 func trigger() -> void:
 	owner.player.try_drop_item()
-	owner.velocity.x = global_transform.basis_xform(Vector2.RIGHT) * velocity.x
+	owner.velocity.x = global_transform.basis_xform(Vector2.RIGHT).x * velocity.x
 	owner.velocity.y = velocity.y

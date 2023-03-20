@@ -12,6 +12,7 @@ size = Vector2(16, 16)
 [node name="Crate" instance=ExtResource("1_uwg6s")]
 collision_layer = 96
 base_health = 30
+grounded_dec = 512.0
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_05edk")

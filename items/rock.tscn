@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx75kytj8v3fv"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_7ljux"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_2e7fh"]
+[ext_resource type="Script" path="res://scripts/parts/throw.gd" id="2_3dgku"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_84jkd"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_6n24g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2fbew"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2iw5b"]
+radius = 5.0
+
+[node name="Rock" instance=ExtResource("1_7ljux")]
+grounded_dec = 512.0
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("CircleShape2D_2fbew")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_2e7fh")
+
+[node name="Throw" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("2_3dgku")
+velocity = Vector2(256, -128)
+
+[node name="PassiveHitbox" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_84jkd")
+damage = 20
+auto_attack = true
+remember_hits = true
+
+[node name="Collision" type="CollisionShape2D" parent="PassiveHitbox" index="0"]
+shape = SubResource("CircleShape2D_2iw5b")
+debug_color = Color(0.996078, 0, 0.156863, 0.419608)
+
+[node name="Knockback" type="Node2D" parent="PassiveHitbox" index="1"]
+script = ExtResource("4_6n24g")
+x_knockback = 80.0
+y_knockback = -40.0

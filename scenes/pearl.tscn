@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf6w0av5ode7s"]
+[gd_scene load_steps=7 format=3 uid="uid://c3qvcls0modjj"]
 
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_4vg4p"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="1_4vg4p"]
 [ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_qw5mw"]
 [ext_resource type="Script" path="res://scripts/parts/teleport.gd" id="3_72aow"]
 
