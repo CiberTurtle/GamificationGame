@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn1jqyxuhbwpu"]
+[gd_scene load_steps=4 format=3 uid="uid://dn1jqyxuhbwpu"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_epd5g"]
 [ext_resource type="PackedScene" uid="uid://cq68mpffntm2a" path="res://scenes/player.tscn" id="2_etx5l"]
+[ext_resource type="PackedScene" uid="uid://bt82bcq85a27b" path="res://scenes/gui/player_setup.tscn" id="3_nh6xm"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_epd5g")
 player_scene = ExtResource("2_etx5l")
 
-[node name="BackgroundFill" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,37 +18,51 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="Scaler" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Background" type="ColorRect" parent="Scaler"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 1.7778
+color = Color(0.980392, 0.698039, 0.227451, 1)
 
-[node name="GameViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer"]
-layout_mode = 2
+[node name="GameViewportContainer" type="SubViewportContainer" parent="Scaler"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 640.0
+offset_bottom = 360.0
+scale = Vector2(3, 3)
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
 
-[node name="GameViewport" type="SubViewport" parent="AspectRatioContainer/GameViewportContainer"]
+[node name="GameViewport" type="SubViewport" parent="Scaler/GameViewportContainer"]
 unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 physics_object_picking = true
-size = Vector2i(1920, 1079)
-size_2d_override = Vector2i(640, 360)
-size_2d_override_stretch = true
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="World" type="Node2D" parent="AspectRatioContainer/GameViewportContainer/GameViewport"]
+[node name="World" type="Node2D" parent="Scaler/GameViewportContainer/GameViewport"]
 unique_name_in_owner = true
 
-[node name="Camera" type="Camera2D" parent="AspectRatioContainer/GameViewportContainer/GameViewport"]
+[node name="Camera" type="Camera2D" parent="Scaler/GameViewportContainer/GameViewport"]
 unique_name_in_owner = true
+
+[node name="PlayerSetup" parent="Scaler" instance=ExtResource("3_nh6xm")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
 [node name="LoadLevelDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
@@ -59,6 +74,7 @@ dialog_hide_on_ok = true
 file_mode = 0
 root_subfolder = "res://levels/"
 filters = PackedStringArray("*.tscn", "*.scn")
+show_hidden_files = true
 
 [node name="SpawnItemDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
@@ -70,6 +86,7 @@ dialog_hide_on_ok = true
 file_mode = 0
 root_subfolder = "res://items/"
 filters = PackedStringArray("*.tscn", "*.scn")
+show_hidden_files = true
 
 [connection signal="file_selected" from="LoadLevelDialog" to="." method="_on_load_level_dialog_file_selected"]
 [connection signal="file_selected" from="SpawnItemDialog" to="." method="_on_spawn_item_dialog_file_selected"]

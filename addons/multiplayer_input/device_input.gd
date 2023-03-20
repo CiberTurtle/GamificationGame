@@ -24,6 +24,13 @@ func is_keyboard() -> bool:
 func is_joypad() -> bool:
 	return device >= 0
 
+func get_name() -> String:
+	if is_keyboard():
+		return 'Keyboard'
+	if device < 0:
+		return 'Bad device index'
+	return Input.get_joy_name(device)
+
 func get_action_raw_strength(action: StringName, exact_match: bool = false) -> float:
 	return MultiplayerInput.get_action_raw_strength(device, action, exact_match)
 	

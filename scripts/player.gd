@@ -4,6 +4,9 @@ signal death()
 
 const TPS = 60.
 
+var player_data: PlayerData
+@onready var input := player_data.input
+
 @export_range(0, 100, 1, 'or_greater', 'suffix:hp') var base_health := 100
 @onready var health := base_health
 @export var item_drop_velocity := Vector2(16., -16.)
@@ -69,7 +72,6 @@ var is_clibing := false
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
 
-var input: DeviceInput
 var held_item: Item
 
 @onready var flip_node2d: Node2D = %Flip
@@ -77,12 +79,14 @@ var held_item: Item
 @onready var holder_node2d: Node2D = %Holder
 @onready var pickup_area: Area2D = %PickupArea
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
+@onready var health_bar: ProgressBar = %HealthBar
 
 
 
 
 func _ready() -> void:
-	input = DeviceInput.new(-1)
+	update_health_bar()
+	health_bar.modulate = player_data.color
 
 func _process(delta: float) -> void:
 	process_inputs()
@@ -306,11 +310,13 @@ func try_drop_item() -> bool:
 func take_damage(damage: int, source: Player) -> bool:
 	if source == self: return false
 	health -= damage
+	update_health_bar()
 	if health < 0:
 		die()
 	return true
 
 func die() -> void:
+<<<<<<< Updated upstream
 	health = base_health + base_health_mod
 	
 func check_modifiers(delta):
@@ -327,3 +333,11 @@ func reset_modifiers():
 	jump_height_mod = 1.0
 	climb_speed_mod = 1.0
 	current_mod_duration = 0.0
+=======
+	health = base_health
+	update_health_bar()
+
+func update_health_bar() -> void:
+	health_bar.value = health
+	health_bar.max_value = base_health
+>>>>>>> Stashed changes

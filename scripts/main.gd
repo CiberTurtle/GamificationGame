@@ -2,7 +2,12 @@ class_name Main extends Node
 
 @export var player_scene: PackedScene
 
+@onready var scaler_node: CanvasItem = %Scaler
+@onready var game_viewport_container: SubViewportContainer = %GameViewportContainer
 @onready var game_viewport: SubViewport = %GameViewport
+
+@onready var player_setup: PlayerSetup = %PlayerSetup
+
 @onready var load_level_dialog: FileDialog = %LoadLevelDialog
 @onready var spawn_item_dialog: FileDialog = %SpawnItemDialog
 
@@ -13,11 +18,32 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	load_level_dialog.title = "Pick a level to load - Press 'L' to open this again"
 	spawn_item_dialog.title = "Pick an item then click to spawn it - Press 'I' to open this again"
+	load_level_dialog.popup_centered()
 	
 	Console.register('load', func(): load_level_dialog.popup_centered(); Console.close())
 	Console.register('spawn', func(): spawn_item_dialog.popup_centered(); Console.close())
+	Console.register('setup', func(): player_setup.show(); Console.close())
 	
-	load_level_dialog.popup_centered()
+	get_viewport().size_changed.connect(update_viewport)
+	update_viewport()
+
+func _process(delta: float) -> void:
+	update_viewport()
+
+func update_viewport() -> void:
+	var inner := Vector2(1920, 1080)
+	var outer := Vector2(get_viewport().size)
+	var inner_ratio := inner.x/inner.y
+	var outer_ratio := outer.x/outer.y
+	
+	var s := 1.0
+	if inner_ratio >= outer_ratio:
+		s = outer.x/inner.x
+	else:
+		s = outer.y/inner.y
+	
+	scaler_node.scale = Vector2(s, s)
+	scaler_node.global_position = (outer - inner*s)/2.
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_L and event.is_pressed():
@@ -28,6 +54,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_I and event.is_pressed():
 		get_viewport().set_input_as_handled()
 		spawn_item_dialog.popup_centered()
+		return
+	
+	if event is InputEventKey and event.keycode == KEY_P and event.is_pressed():
+		get_viewport().set_input_as_handled()
+		player_setup.show()
 		return
 
 var next_item_spawn: PackedScene
@@ -48,15 +79,21 @@ func load_level(scene: PackedScene) -> void:
 	var level := scene.instantiate() as Level
 	Globals.world.add_child(level)
 	current_level = level
-	game_viewport.size_2d_override.x = current_level.width
-	game_viewport.size_2d_override.y = current_level.height
+	game_viewport.size.x = level.width
+	game_viewport.size.y = level.height
+	game_viewport_container.scale = Vector2(level.size, level.size)
 	
 	spawn_players()
 
 func spawn_players() -> void:
-	var player := player_scene.instantiate() as Player
-	player.global_position = current_level.find_child('PlayerSpawns').get_child(0).position
-	Globals.world.add_child(player)
+	for player_data in Game.player_datas:
+		var player := player_scene.instantiate() as Player
+		player.player_data = player_data
+		
+		var spawns := current_level.find_child('PlayerSpawns')
+		player.global_position = spawns.get_child(randi()%spawns.get_child_count()).position
+		
+		Globals.world.add_child(player)
 
 func spawn_item() -> void:
 	var item := next_item_spawn.instantiate() as Item

@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2fhcxbvjpb1s"]
+
+[ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_68gw1"]
+[ext_resource type="Script" path="res://scripts/gui/player_menu.gd" id="1_j8lk4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di568"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_so6kv"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_di568")
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l083n"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(1, 1, 1, 1)
+
+[node name="PlayerMenu" type="MarginContainer"]
+offset_right = 480.0
+offset_bottom = 1080.0
+theme = SubResource("Theme_so6kv")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+script = ExtResource("1_j8lk4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_68gw1")
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_l083n")
+
+[node name="Ready" type="ColorRect" parent="VBoxContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ControllerName" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Controller name"
+flat = true
+text_overrun_behavior = 3
+
+[node name="ReadyButton2" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "East Button: Ready?"
+
+[node name="LeaveButton" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "South Btn: Leave"
+flat = true

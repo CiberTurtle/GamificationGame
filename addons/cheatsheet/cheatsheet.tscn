@@ -147,7 +147,8 @@ text = "[b]Welcome to the cheatsheet console[/b]
 [color=gray]Type '[color=ff8ccc]help[/color]' to list the available commands[/color]
 
 Press 'L' to load a level
-Press 'I' to spawn an item"
+Press 'I' to spawn an item
+Press 'S' for player setup"
 scroll_following = true
 
 [node name="HBox" type="HBoxContainer" parent="GUI/Menu/Menu/Margin/VBox"]
