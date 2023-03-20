@@ -60,14 +60,6 @@ var action_buffer_timer := -1.
 @export var climb_coyote_time_ticks := 10
 var is_clibing := false
 
-@export_group('Modifiers')
-@export var base_health_mod := 0
-@export var move_speed_mod := 1.0
-@export var jump_height_mod := 1.0
-@export var climb_speed_mod := 1.0
-@export var current_mod_duration := 0.0
-@export var is_mod_perma := false
-
 @export_group('Other')
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
@@ -88,7 +80,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	process_inputs()
-	check_modifiers(delta)
 
 func reset_movement() -> void:
 	speed_move = 0.
@@ -148,8 +139,8 @@ func process_state_climb(delta: float) -> void:
 		coyote_timer = climb_coyote_time_ticks/TPS
 		return
 	
-	speed_vertical = input_move.y * climb_speed_vertical * climb_speed_mod
-	speed_move = input_move.x * climb_speed_horizontal * climb_speed_mod
+	speed_vertical = input_move.y * climb_speed_vertical
+	speed_move = input_move.x * climb_speed_horizontal
 	
 	if jump_buffer_timer > 0.:
 		jump_buffer_timer = -1.
@@ -162,7 +153,7 @@ func process_state_climb(delta: float) -> void:
 	move()
 
 func move() -> void:
-	velocity.x = (speed_move + speed_extra) * move_speed_mod
+	velocity.x = (speed_move + speed_extra)
 	velocity.y = speed_vertical
 	
 	move_and_slide()
@@ -192,8 +183,8 @@ func process_movement(delta: float) -> void:
 		speed_extra = move_toward(speed_extra, 0., extra_air_dec*delta)
 	
 	speed_move += input_move.x * speed
-	var clamp := move_crouch_speed if input_move.y > 0. else move_speed
-	speed_move = clamp(speed_move, -clamp, clamp)
+	var max_speed := move_crouch_speed if input_move.y > 0. else move_speed
+	speed_move = clamp(speed_move, -max_speed, max_speed)
 	
 	var hit_wall_on_left := is_on_wall() and test_move(transform, Vector2.LEFT)
 	var hit_wall_on_right := is_on_wall() and test_move(transform, Vector2.RIGHT)
@@ -247,7 +238,7 @@ func process_jump(delta: float) -> void:
 			coyote_timer = 0.
 			jump_buffer_timer = 0.
 		
-			var jump_velocity := Calc.jump_velocity(jump_height, gravity) * jump_height_mod
+			var jump_velocity := Calc.jump_velocity(jump_height, gravity)
 			speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
 
@@ -282,7 +273,6 @@ func process_action(delta: float) -> void:
 	else:
 		action_buffer_timer = -1.
 		punch_area.attack_overlap(self)
-		print('attack')
 
 func try_pickup_item(item: Item) -> bool:
 	assert(not held_item, 'cannot pick up item - an item is already being held')
@@ -322,25 +312,8 @@ func take_damage(damage: int, source: Player) -> bool:
 	return true
 
 func die() -> void:
-	health = base_health + base_health_mod
-	
-func check_modifiers(delta):
-	if !is_mod_perma:
-		current_mod_duration -= delta * TPS
-		if current_mod_duration < 0:
-			reset_modifiers()
-
-func reset_modifiers():
-	base_health_mod = 0
-	if health > base_health:
-		health = base_health
-	move_speed_mod = 1.0
-	jump_height_mod = 1.0
-	climb_speed_mod = 1.0
-	current_mod_duration = 0.0
 	health = base_health
-	update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health
-	health_bar.max_value = base_health + base_health_mod
+	health_bar.max_value = base_health
