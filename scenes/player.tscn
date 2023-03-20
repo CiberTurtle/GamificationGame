@@ -31,8 +31,12 @@ script = ExtResource("1_erutj")
 item_drop_velocity = Vector2(24, -64)
 move_speed = 96.0
 move_crouch_speed = 48.0
-extra_ground_dec = 256.0
-extra_air_dec = 128.0
+move_acc_ticks = 6.0
+move_opp_ticks = 6.0
+move_acc_air_ticks = 12.0
+move_opp_air_ticks = 12.0
+extra_ground_dec = 512.0
+extra_air_dec = 256.0
 
 [node name="Flip" type="Node2D" parent="."]
 unique_name_in_owner = true

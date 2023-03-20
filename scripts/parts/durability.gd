@@ -4,5 +4,6 @@ extends Node
 
 func trigger() -> void:
 	uses -= 1
+	
 	if uses <= 0:
 		owner.die()

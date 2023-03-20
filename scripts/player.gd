@@ -15,7 +15,6 @@ var player_data: PlayerData
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_speed := 64.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_crouch_speed := 32.
 
-
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_acc_ticks := 4.
 @onready var move_acc_time := move_acc_ticks / TPS
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_dec_ticks := 6.
@@ -80,6 +79,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	process_inputs()
+	var speed_ratio: float = abs(speed_move/move_speed)
+	art_node2d.rotation_degrees = speed_ratio*lerp(10., -15., clamp(speed_vertical/Calc.jump_velocity(jump_height, gravity), 0., 1.))
+	art_node2d.scale.x = 1. - abs(speed_vertical/max_fall_speed)*.5
+	art_node2d.scale.y = 1. + abs(speed_vertical/max_fall_speed)*.5
+	
+	if input_move.y > 0:
+		art_node2d.scale.y -= .5
 
 func reset_movement() -> void:
 	speed_move = 0.
@@ -110,8 +116,6 @@ func _physics_process(delta: float) -> void:
 		direction = sign(input_move.x)
 		flip_node2d.scale.x = direction
 	
-	art_node2d.scale.y = .67 if input_move.y > 0. else 1.
-	
 	if is_clibing:
 		process_state_climb(delta)
 	else:
@@ -121,7 +125,7 @@ func process_state_platformer(delta: float) -> void:
 	if is_on_floor():
 		is_jumping = false
 	
-	if ladder_dectector_area.get_overlapping_bodies().size() > 0 and input_move.y < 0:
+	if ladder_dectector_area.get_overlapping_bodies().size() > 0 and input_move.y < 0 and speed_vertical > -climb_speed_vertical:
 		is_clibing = true
 		is_jumping = false
 		return
@@ -129,10 +133,11 @@ func process_state_platformer(delta: float) -> void:
 	process_movement(delta)
 	process_gravity(delta)
 	process_jump(delta)
-	process_action(delta)
-	
 	move()
+	
+	process_action(delta)
 
+var jumped_from_ladder := false
 func process_state_climb(delta: float) -> void:
 	if ladder_dectector_area.get_overlapping_bodies().size() == 0 or (is_on_floor() and input_move.y > 0):
 		is_clibing = false
@@ -151,6 +156,8 @@ func process_state_climb(delta: float) -> void:
 		return
 	
 	move()
+	
+	process_action(delta)
 
 func move() -> void:
 	velocity.x = (speed_move + speed_extra)
@@ -275,7 +282,8 @@ func process_action(delta: float) -> void:
 		punch_area.attack_overlap(self)
 
 func try_pickup_item(item: Item) -> bool:
-	assert(not held_item, 'cannot pick up item - an item is already being held')
+	if held_item: return false
+	#assert(not held_item, 'cannot pick up item - an item is already being held')
 	
 	item.player = self
 	item.damage_source = self
