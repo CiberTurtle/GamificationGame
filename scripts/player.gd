@@ -316,7 +316,6 @@ func take_damage(damage: int, source: Player) -> bool:
 	return true
 
 func die() -> void:
-<<<<<<< Updated upstream
 	health = base_health + base_health_mod
 	
 func check_modifiers(delta):
@@ -333,11 +332,9 @@ func reset_modifiers():
 	jump_height_mod = 1.0
 	climb_speed_mod = 1.0
 	current_mod_duration = 0.0
-=======
 	health = base_health
 	update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health
 	health_bar.max_value = base_health
->>>>>>> Stashed changes
