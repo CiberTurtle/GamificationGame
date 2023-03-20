@@ -14,7 +14,7 @@ var age := 0.0
 @export var speed_over_lifetime: Curve
 @export var roations_per_second:=2.
 @export var to_rotate:Node2D
-
+var backwards := false
 @export_range(0, 10, 1, 'or_greater', 'suffix:count')  var max_hits := 1
 var hits := 0
 
@@ -34,6 +34,9 @@ func _physics_process(delta: float) -> void:
 	if is_flying:
 		var age_ratio := age/lifetime_sec
 		var speed := speed_over_lifetime.sample_baked(age_ratio)
+		if !backwards && speed < 0:
+			backwards = true
+			$Hitbox.forget_hits()		
 		var motion := transform.basis_xform(Vector2.RIGHT)*speed*delta
 		var hit := move_and_collide(motion)
 		to_rotate.rotate(roations_per_second * 2 * PI * delta)
