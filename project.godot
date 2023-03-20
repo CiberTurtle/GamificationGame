@@ -17,11 +17,16 @@ boot_splash/image="res://icon.png"
 boot_splash/fullsize=false
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://resources/audio_bus.tres"
+
 [autoload]
 
 Consts="*res://scripts/autoloads/consts.gd"
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
 Console="*res://addons/cheatsheet/cheatsheet.tscn"
+SoundBank="*res://addons/sound_bank/scripts/sound_bank.gd"
 Globals="*res://scripts/autoloads/globals.gd"
 Game="*res://scripts/autoloads/game.gd"
 
@@ -37,6 +42,7 @@ gdscript/warnings/unreachable_pattern=0
 gdscript/warnings/narrowing_conversion=0
 gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
+gdscript/warnings/redundant_await=0
 gdscript/warnings/empty_file=0
 
 [display]
@@ -48,7 +54,7 @@ window/size/window_height_override=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg", "res://addons/cheatsheet/plugin.cfg")
+enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg", "res://addons/cheatsheet/plugin.cfg", "res://addons/sound_bank/plugin.cfg")
 
 [input]
 
