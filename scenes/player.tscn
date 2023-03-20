@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq68mpffntm2a"]
+[gd_scene load_steps=10 format=3 uid="uid://cq68mpffntm2a"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d353i"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mefnu"]
 size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0w16f"]
@@ -52,6 +56,18 @@ texture = ExtResource("1_2xlw4")
 [node name="Holder" type="Marker2D" parent="Flip/Art"]
 unique_name_in_owner = true
 position = Vector2(6, -6)
+
+[node name="PunchArea" type="Area2D" parent="Flip"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_e01o0")
+damage = 10
+
+[node name="Collision" type="CollisionShape2D" parent="Flip/PunchArea"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_mefnu")
+debug_color = Color(0.988235, 0.109804, 0, 0.419608)
 
 [node name="LadderDetectorArea" type="Area2D" parent="."]
 unique_name_in_owner = true
