@@ -1,19 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgx2vb1uecuqx"]
+[gd_scene load_steps=10 format=3 uid="uid://bgx2vb1uecuqx"]
 
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5phig"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_0ubur"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="2_6ktdy"]
+[ext_resource type="Texture2D" uid="uid://cqtp4lf2ok6sa" path="res://content/sprites/bullet.png" id="2_i03pt"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_hnpwr"]
+[ext_resource type="Script" path="res://scripts/parts/group.gd" id="5_ci3k5"]
+
+[sub_resource type="Curve" id="Curve_boe4f"]
+max_value = 300.0
+_data = [Vector2(0, 256), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="Curve" id="Curve_wjeem"]
 _data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0]
 point_count = 1
 
-[node name="shotgun_projectile" instance=ExtResource("1_5phig")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec2td"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdlnq"]
+radius = 2.0
+
+[node name="shotgun_projectile" type="CharacterBody2D"]
+collision_layer = 128
+script = ExtResource("1_0ubur")
+speed_over_lifetime = SubResource("Curve_boe4f")
 random_skew = true
 skew_curve = SubResource("Curve_wjeem")
 
-[node name="PassiveHitbox" parent="." index="2"]
-damage = 15
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_i03pt")
 
-[node name="Knockback" type="Node2D" parent="PassiveHitbox" index="1"]
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ec2td")
+
+[node name="PassiveHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_hnpwr")
+damage = 15
+auto_attack = true
+remember_hits = true
+
+[node name="Collision" type="CollisionShape2D" parent="PassiveHitbox"]
+shape = SubResource("CircleShape2D_fdlnq")
+debug_color = Color(0.996078, 0, 0.156863, 0.419608)
+
+[node name="Knockback" type="Node2D" parent="PassiveHitbox"]
 script = ExtResource("2_6ktdy")
-y_knockback = -100.0
+x_knockback = 60.0
+y_knockback = -30.0
+
+[node name="OnDeath" type="Node2D" parent="."]
+script = ExtResource("5_ci3k5")
+
+[connection signal="death" from="." to="OnDeath" method="trigger" flags=18]

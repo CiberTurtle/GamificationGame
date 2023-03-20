@@ -18,15 +18,15 @@ shape = SubResource("RectangleShape2D_gfdac")
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("1_h2d4u")
 
-[node name="Recoil" type="Node2D" parent="OnUse" index="0"]
-script = ExtResource("2_h8dqg")
-velocity = Vector2(-64, -128)
-
-[node name="Shoot" type="Marker2D" parent="OnUse" index="1"]
+[node name="Shoot" type="Marker2D" parent="OnUse" index="0"]
 position = Vector2(8, 0)
 script = ExtResource("3_bhri1")
 scene = ExtResource("5_nqanw")
 count = 3
 
-[node name="Cooldown" parent="OnUse" index="2"]
+[node name="Cooldown" parent="OnUse" index="1"]
 ticks = 30.0
+
+[node name="Recoil" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("2_h8dqg")
+velocity = Vector2(-85, -128)

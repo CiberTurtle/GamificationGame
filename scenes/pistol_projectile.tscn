@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cifn5g7gnuay6"]
+
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5g2v4"]
+
+[node name="Pistol Projectile" instance=ExtResource("1_5g2v4")]
+
+[node name="Knockback" parent="PassiveHitbox" index="1"]
+y_knockback = -30.0
