@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1gjumndyp6q8"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_0vcfo"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_wjuhy"]
+[ext_resource type="Script" path="res://scripts/parts/staggered_fire.gd" id="3_t6e8g"]
+[ext_resource type="PackedScene" uid="uid://du5fgfvrh8m7x" path="res://scenes/minigun_bullet.tscn" id="4_sridm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g5yk"]
+size = Vector2(15, 10)
+
+[node name="Minigun" instance=ExtResource("1_0vcfo")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_6g5yk")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.12, 0.08)
+texture = ExtResource("2_wjuhy")
+
+[node name="Cooldown" parent="OnPickup" index="0"]
+ticks = 0.0
+
+[node name="Cooldown" parent="OnUse" index="0"]
+ticks = 60.0
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("3_t6e8g")
+scene = ExtResource("4_sridm")
+count = 20
+delay = 0.05
+durability = 5
