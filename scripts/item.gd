@@ -74,5 +74,7 @@ func take_damage(damage: int, source: Player) -> bool:
 
 func die() -> void:
 	#assert(not player, 'item somehow died while being held, this should not happen')
+	if player:
+		player.held_item = null
 	death.emit()
 	queue_free()
