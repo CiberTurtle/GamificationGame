@@ -5,13 +5,16 @@ extends Node2D
 @export var delay:=.1
 @export var durability:=1
 var til_spawn = 0.0
-var shots_left
+var shots_left = 0
 #@export var spread: Range
 
 func trigger() -> void:
-	til_spawn = 0.0
-	shots_left = count
-	durability -= 1
+	if shots_left <= 0:
+		til_spawn = 0.0
+		shots_left = count
+		durability -= 1
+	else:
+		owner.cooldown = -1.0
 
 func spawn() -> void:
 	var proj = scene.instantiate() as Node2D
