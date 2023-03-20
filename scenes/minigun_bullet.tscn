@@ -16,3 +16,6 @@ lifetime = 120
 speed_over_lifetime = SubResource("Curve_g4wk0")
 random_skew = true
 skew_curve = SubResource("Curve_jthac")
+
+[node name="PassiveHitbox" parent="." index="2"]
+collision_mask = 64

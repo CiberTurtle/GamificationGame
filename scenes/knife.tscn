@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cungy1m5bjb3b"]
+[gd_scene load_steps=6 format=3 uid="uid://cungy1m5bjb3b"]
 
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_0n4t5"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="1_0n4t5"]
 [ext_resource type="Texture2D" uid="uid://bn7p7htr1810y" path="res://content/sprites/knife.png" id="2_p6655"]
-[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="3_hiqpl"]
 
 [sub_resource type="Curve" id="Curve_efjnm"]
 max_value = 0.01
@@ -24,11 +23,11 @@ texture = ExtResource("2_p6655")
 shape = SubResource("RectangleShape2D_esuqn")
 
 [node name="PassiveHitbox" parent="." index="2"]
+collision_mask = 64
 damage = 60
 
 [node name="Collision" parent="PassiveHitbox" index="0"]
 shape = SubResource("RectangleShape2D_73dyd")
 
-[node name="Knockback" type="Node2D" parent="PassiveHitbox" index="1"]
-script = ExtResource("3_hiqpl")
-x_knockback = 30.0
+[node name="Knockback" parent="PassiveHitbox" index="1"]
+y_knockback = 0.0
