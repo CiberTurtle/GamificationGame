@@ -63,6 +63,7 @@ var is_clibing := false
 @export var jump_height_mod := 1.0
 @export var climb_speed_mod := 1.0
 @export var current_mod_duration := 0.0
+@export var is_mod_perma := false
 
 @export_group('Other')
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
@@ -313,9 +314,10 @@ func die() -> void:
 	health = base_health + base_health_mod
 	
 func check_modifiers(delta):
-	current_mod_duration -= delta * TPS
-	if current_mod_duration < 0:
-		reset_modifiers()
+	if !is_mod_perma:
+		current_mod_duration -= delta * TPS
+		if current_mod_duration < 0:
+			reset_modifiers()
 
 func reset_modifiers():
 	base_health_mod = 0
