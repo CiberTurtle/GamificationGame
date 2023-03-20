@@ -118,6 +118,8 @@ func _physics_process(delta: float) -> void:
 		direction = sign(input_move.x)
 		flip_node2d.scale.x = direction
 	
+	art_node2d.scale.y = .67 if input_move.y > 0. else 1.
+	
 	if is_clibing:
 		process_state_climb(delta)
 	else:
@@ -189,7 +191,8 @@ func process_movement(delta: float) -> void:
 		speed_extra = move_toward(speed_extra, 0., extra_air_dec*delta)
 	
 	speed_move += input_move.x * speed
-	speed_move = clamp(speed_move, -move_speed, move_speed)
+	var clamp := move_crouch_speed if input_move.y > 0. else move_speed
+	speed_move = clamp(speed_move, -clamp, clamp)
 	
 	var hit_wall_on_left := is_on_wall() and test_move(transform, Vector2.LEFT)
 	var hit_wall_on_right := is_on_wall() and test_move(transform, Vector2.RIGHT)
