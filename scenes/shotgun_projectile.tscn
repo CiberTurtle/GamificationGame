@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgx2vb1uecuqx"]
+[gd_scene load_steps=4 format=3 uid="uid://bgx2vb1uecuqx"]
 
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="1_5phig"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="2_6ktdy"]
 
 [sub_resource type="Curve" id="Curve_wjeem"]
 _data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0]
@@ -12,3 +13,7 @@ skew_curve = SubResource("Curve_wjeem")
 
 [node name="PassiveHitbox" parent="." index="2"]
 damage = 15
+
+[node name="Knockback" type="Node2D" parent="PassiveHitbox" index="1"]
+script = ExtResource("2_6ktdy")
+y_knockback = -100.0
