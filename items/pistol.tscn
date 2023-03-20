@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7haygi8wrnkw"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_p761c"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_xkix1"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_ydpea"]
+[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="3_ecnv3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iy84u"]
+size = Vector2(15, 7)
+
+[node name="Pistol" instance=ExtResource("1_p761c")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_iy84u")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.1, 0.05)
+texture = ExtResource("2_xkix1")
+
+[node name="Cooldown" parent="OnPickup" index="0"]
+ticks = 30.0
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("2_ydpea")
+scene = ExtResource("3_ecnv3")
