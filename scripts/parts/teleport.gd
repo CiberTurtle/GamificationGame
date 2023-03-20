@@ -1,6 +1,4 @@
 extends Node
 
-@export var to_move :Node2D
-
 func trigger():
-	to_move.global_position = self.global_position
+	owner.damage_source.global_position = self.global_position

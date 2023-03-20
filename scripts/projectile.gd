@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const TPS := 60.
+signal death()
 
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks')  var lifetime := 60
 @onready var lifetime_sec := lifetime/TPS
@@ -45,4 +46,5 @@ func _physics_process(delta: float) -> void:
 		return
 
 func die() -> void:
+	death.emit()
 	queue_free()

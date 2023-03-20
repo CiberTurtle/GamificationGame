@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://cndyg0xek30fc"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_gj58p"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_cd3ey"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_c5xsu"]
+[ext_resource type="Script" path="res://scripts/parts/kill.gd" id="4_8f7bw"]
+[ext_resource type="PackedScene" uid="uid://bf6w0av5ode7s" path="res://scenes/pearl.tscn" id="4_w35op"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtxbq"]
+radius = 5.0
+
+[node name="Ender Pearl" instance=ExtResource("1_gj58p")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("CircleShape2D_xtxbq")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_cd3ey")
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("3_c5xsu")
+scene = ExtResource("4_w35op")
+
+[node name="Kill" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("4_8f7bw")
