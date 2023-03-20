@@ -30,6 +30,7 @@ func attack_overlap(source: Player, damage: int = -1) -> int:
 func attack_node(node: Node2D, source: Player, damage: int = -1) -> bool:
 	if not node.has_method('take_damage'): return false
 	if things_hit.has(node): return false
+	if node == owner: return false
 	
 	if damage < 0: damage = self.damage
 	
