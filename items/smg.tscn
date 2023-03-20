@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://eh244pcfaslv"]
+[gd_scene load_steps=8 format=3 uid="uid://eh244pcfaslv"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_4n74k"]
 [ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_eayah"]
-[ext_resource type="Script" path="res://scripts/parts/staggered_fire.gd" id="3_lfhip"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_1ox25"]
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="4_je7jj"]
+[ext_resource type="Script" path="res://scripts/parts/repeat.gd" id="4_m0uly"]
+[ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_d66n1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3g3yt"]
 size = Vector2(15, 7)
@@ -23,8 +25,14 @@ ticks = 0.0
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 40.0
 
-[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
-script = ExtResource("3_lfhip")
+[node name="Repeat" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("4_m0uly")
+delay_btw = 6
+
+[node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
+script = ExtResource("3_1ox25")
 scene = ExtResource("4_je7jj")
-count = 3
-durability = 4
+
+[node name="Durability" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("5_d66n1")
+uses = 5

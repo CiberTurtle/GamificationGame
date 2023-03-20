@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1gjumndyp6q8"]
+[gd_scene load_steps=8 format=3 uid="uid://d1gjumndyp6q8"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_0vcfo"]
 [ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_wjuhy"]
-[ext_resource type="Script" path="res://scripts/parts/staggered_fire.gd" id="3_t6e8g"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_eqlbe"]
+[ext_resource type="Script" path="res://scripts/parts/repeat.gd" id="4_rw213"]
 [ext_resource type="PackedScene" uid="uid://du5fgfvrh8m7x" path="res://scenes/minigun_bullet.tscn" id="4_sridm"]
+[ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_w11gc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g5yk"]
 size = Vector2(15, 10)
@@ -23,9 +25,15 @@ ticks = 0.0
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 60.0
 
-[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
-script = ExtResource("3_t6e8g")
-scene = ExtResource("4_sridm")
+[node name="Repeat" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("4_rw213")
 count = 20
-delay = 0.05
-durability = 5
+delay_btw = 3
+
+[node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
+script = ExtResource("3_eqlbe")
+scene = ExtResource("4_sridm")
+
+[node name="Durability" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("5_w11gc")
+uses = 5
