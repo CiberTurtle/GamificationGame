@@ -12,6 +12,8 @@ _data = [Vector2(0, 300), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_q7v67"]
+_data = [Vector2(0, 0.05), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ec2td"]
 radius = 2.0
