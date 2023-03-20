@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Loottable" load_steps=8 format=3 uid="uid://efu0kn5211cm"]
+[gd_resource type="Resource" script_class="Loottable" load_steps=10 format=3 uid="uid://efu0kn5211cm"]
 
 [ext_resource type="PackedScene" uid="uid://bdj6ktgvctx8w" path="res://items/shotgun.tscn" id="1_3bj1e"]
 [ext_resource type="Script" path="res://scripts/resources/loottable.gd" id="1_y6rr2"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://c7haygi8wrnkw" path="res://items/pistol.tscn" id="4_jhs4o"]
 [ext_resource type="PackedScene" uid="uid://cndyg0xek30fc" path="res://items/ender_pearl.tscn" id="5_qucbj"]
 [ext_resource type="PackedScene" uid="uid://ol87uxcu0ntn" path="res://items/potion.tscn" id="6_ur1wf"]
+[ext_resource type="PackedScene" uid="uid://d1gjumndyp6q8" path="res://items/minigun.tscn" id="7_qxarx"]
+[ext_resource type="PackedScene" uid="uid://eh244pcfaslv" path="res://items/smg.tscn" id="8_h8uii"]
 
 [resource]
 script = ExtResource("1_y6rr2")
-scenes = Array[PackedScene]([ExtResource("1_3bj1e"), ExtResource("2_tkq0n"), ExtResource("3_8nm8h"), ExtResource("4_jhs4o"), ExtResource("5_qucbj"), ExtResource("6_ur1wf")])
+scenes = Array[PackedScene]([ExtResource("1_3bj1e"), ExtResource("2_tkq0n"), ExtResource("3_8nm8h"), ExtResource("4_jhs4o"), ExtResource("5_qucbj"), ExtResource("6_ur1wf"), ExtResource("7_qxarx"), ExtResource("8_h8uii")])
