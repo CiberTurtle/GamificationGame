@@ -13,7 +13,6 @@ radius = 5.0
 radius = 5.0
 
 [node name="Rock" instance=ExtResource("1_7ljux")]
-grounded_dec = 512.0
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CircleShape2D_2fbew")

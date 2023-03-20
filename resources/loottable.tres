@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/resources/loottable.gd" id="1_y6rr2"]
 [ext_resource type="PackedScene" uid="uid://dcido5i1c4i5k" path="res://items/knife.tscn" id="2_tkq0n"]
 [ext_resource type="PackedScene" uid="uid://drwmwrmrtqfof" path="res://items/boomerang.tscn" id="3_8nm8h"]
-[ext_resource type="PackedScene" path="res://items/pistol.tscn" id="4_jhs4o"]
-[ext_resource type="PackedScene" path="res://items/ender_pearl.tscn" id="5_qucbj"]
+[ext_resource type="PackedScene" uid="uid://c7haygi8wrnkw" path="res://items/pistol.tscn" id="4_jhs4o"]
+[ext_resource type="PackedScene" uid="uid://cndyg0xek30fc" path="res://items/ender_pearl.tscn" id="5_qucbj"]
 [ext_resource type="PackedScene" uid="uid://ol87uxcu0ntn" path="res://items/potion.tscn" id="6_ur1wf"]
 
 [resource]

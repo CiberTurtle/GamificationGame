@@ -9,7 +9,6 @@
 size = Vector2(15, 7)
 
 [node name="SMG" instance=ExtResource("1_4n74k")]
-grounded_dec = 512.0
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_3g3yt")
