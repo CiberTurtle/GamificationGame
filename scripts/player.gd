@@ -238,7 +238,7 @@ func process_jump(delta: float) -> void:
 	
 	if jump_buffer_timer > 0.:
 		if input_move.y > 0.: # if chrouching then fall though
-			jump_buffer_timer
+			jump_buffer_timer = 0.
 			position.y += 1.
 		elif coyote_timer > 0.: # or else jump
 			is_jumping = true
