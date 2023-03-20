@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c3qvcls0modjj"]
 
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="1_4vg4p"]
-[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_qw5mw"]
+[ext_resource type="Texture2D" uid="uid://cjnrjsdvuyr02" path="res://content/sprites/Pearl.png" id="2_i0kxe"]
 [ext_resource type="Script" path="res://scripts/parts/teleport.gd" id="3_72aow"]
 
 [sub_resource type="Curve" id="Curve_disl5"]
@@ -19,14 +19,12 @@ radius = 5.0
 speed_over_lifetime = SubResource("Curve_disl5")
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_qw5mw")
+texture = ExtResource("2_i0kxe")
 
 [node name="Collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_755ge")
 
 [node name="PassiveHitbox" parent="." index="2"]
-collision_mask = 64
 damage = 0
 
 [node name="Collision" parent="PassiveHitbox" index="0"]

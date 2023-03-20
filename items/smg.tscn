@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://eh244pcfaslv"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_4n74k"]
-[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_eayah"]
+[ext_resource type="Texture2D" uid="uid://udefa4kehexf" path="res://content/sprites/SMG.png" id="2_42qsv"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_1ox25"]
 [ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/smg_proj.tscn" id="4_je7jj"]
 [ext_resource type="Script" path="res://scripts/parts/repeat.gd" id="4_m0uly"]
@@ -16,8 +16,7 @@ size = Vector2(15, 7)
 shape = SubResource("RectangleShape2D_3g3yt")
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2(0.1, 0.05)
-texture = ExtResource("2_eayah")
+texture = ExtResource("2_42qsv")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
 ticks = 0.0

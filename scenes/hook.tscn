@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvv3ndfxevf4p"]
+[gd_scene load_steps=5 format=3 uid="uid://bvv3ndfxevf4p"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_qlnyn"]
+[ext_resource type="Texture2D" uid="uid://cmyvjvwd6x0kc" path="res://content/sprites/Hook.png" id="2_el5oo"]
 [ext_resource type="Script" path="res://scripts/parts/line.gd" id="2_ly2n2"]
 [ext_resource type="Script" path="res://scripts/parts/falls.gd" id="3_8cuhy"]
 
 [node name="hook" instance=ExtResource("1_qlnyn")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_el5oo")
 
 [node name="PassiveHitbox" parent="." index="2"]
 damage = 0

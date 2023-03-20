@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_k1isa"]
 [ext_resource type="Script" path="res://scripts/parts/group.gd" id="2_ines8"]
-[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_vham0"]
+[ext_resource type="Texture2D" uid="uid://ihteqkwps025" path="res://content/sprites/Rod.png" id="2_wjar6"]
 [ext_resource type="Script" path="res://scripts/parts/cooldown.gd" id="3_aeicv"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="4_max3o"]
 [ext_resource type="PackedScene" uid="uid://bvv3ndfxevf4p" path="res://scenes/hook.tscn" id="5_8wyvp"]
@@ -21,8 +21,7 @@ script = ExtResource("1_k1isa")
 shape = SubResource("RectangleShape2D_ctaec")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.06, 0.12)
-texture = ExtResource("2_vham0")
+texture = ExtResource("2_wjar6")
 
 [node name="OnPickup" type="Node2D" parent="."]
 script = ExtResource("2_ines8")
