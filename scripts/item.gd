@@ -39,6 +39,9 @@ func _pickup() -> void:
 func _drop() -> void:
 	SoundBank.play('drop.' + name, position)
 
+func _use() -> void:
+	SoundBank.play('use.' + name, global_position)
+
 func _physics_process(delta: float) -> void:
 	cooldown -= delta
 	if is_held():
@@ -72,6 +75,7 @@ func take_damage(damage: int, source: Player) -> bool:
 	if player: return false # don't take damage if held
 	if health < 0: return false
 	
+	SoundBank.play('hit.' + name, global_position)
 	health -= damage
 	if health < 0:
 		die()

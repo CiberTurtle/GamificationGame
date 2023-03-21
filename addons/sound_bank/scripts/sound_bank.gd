@@ -41,7 +41,7 @@ var loaded_sounds := {}
 func get_sound(name: String) -> AudioStream:
 	if loaded_sounds.has(name):
 		return loaded_sounds[name]
-	var path := SOUND_BANK_FOLDER + name + '.wav'
+	var path := SOUND_BANK_FOLDER + name.replace('.', '/') + '.wav'
 	var sound := FALLBACK_SOUND
 	if FileAccess.file_exists(path):
 		sound = load(path)

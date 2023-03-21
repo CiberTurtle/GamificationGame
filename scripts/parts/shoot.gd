@@ -5,6 +5,7 @@ extends Node2D
 #@export var spread: Range
 
 func trigger() -> void:
+	SoundBank.play('shoot.' + name, position)
 	for i in count:
 		spawn()
 

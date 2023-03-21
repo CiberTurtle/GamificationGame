@@ -146,6 +146,7 @@ func process_state_climb(delta: float) -> void:
 	
 	speed_vertical = input_move.y * climb_speed_vertical
 	speed_move = input_move.x * climb_speed_horizontal
+	speed_extra = 0.
 	
 	if jump_buffer_timer > 0.:
 		jump_buffer_timer = -1.
@@ -268,16 +269,21 @@ func process_action(delta: float) -> void:
 	
 	if input_move.y > 0:
 		var nodes := pickup_area.get_overlapping_bodies()
-		var item: Item
+		var closest_item: Item
+		var closest_distance_sqr := 1./0.
+		
 		for node in nodes:
 			var it := node as Item
 			if not it: continue # not an item
 			if it.player: continue # already is held by another player
-			item = it
-			break
+			
+			var distance := position.distance_squared_to(it.position)
+			if distance < closest_distance_sqr:
+				closest_item = it
+				closest_distance_sqr = distance
 		
-		if item and item.check_pickup():
-			try_pickup_item(item)
+		if closest_item and closest_item.check_pickup():
+			try_pickup_item(closest_item)
 			action_buffer_timer = -1.
 	else:
 		SoundBank.play('punch', position)
@@ -321,20 +327,21 @@ func take_damage(damage: int, source: Player) -> bool:
 	update_health_bar()
 	
 	if damage >= 30:
-		SoundBank.play('hit', position)
+		SoundBank.play('hit.player', position)
 	else:
-		SoundBank.play('hit.big', position)
+		SoundBank.play('hit.big.player', position)
 	
 	if health <= 0:
 		die()
-		SoundBank.play('hit/big', position)
 	
 	return true
 
 func die() -> void:
+	SoundBank.play('death.player', position)
 	death.emit()
 	# placeholder
 	health = base_health
+	update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health
