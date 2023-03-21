@@ -11,7 +11,7 @@ var age := 0.0
 
 @export_range(0, 10, 1, 'or_greater', 'suffix:count')  var max_hits := 1
 var hits := 0
-var damage_source: Player
+var damage_source: PlayerData
 @export var random_skew:=false
 @export var skew_curve:Curve
 var proj_skew:float
