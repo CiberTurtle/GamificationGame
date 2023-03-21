@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://c7haygi8wrnkw" path="res://items/pistol.tscn" id="4_jhs4o"]
 [ext_resource type="PackedScene" uid="uid://cndyg0xek30fc" path="res://items/ender_pearl.tscn" id="5_qucbj"]
 [ext_resource type="PackedScene" uid="uid://ol87uxcu0ntn" path="res://items/potion.tscn" id="6_ur1wf"]
-[ext_resource type="PackedScene" uid="uid://d1gjumndyp6q8" path="res://items/minigun.tscn" id="7_qxarx"]
-[ext_resource type="PackedScene" uid="uid://eh244pcfaslv" path="res://items/smg.tscn" id="8_h8uii"]
-[ext_resource type="PackedScene" uid="uid://bhlqpl6o3lten" path="res://items/rod.tscn" id="9_3vuit"]
-[ext_resource type="PackedScene" uid="uid://dx75kytj8v3fv" path="res://items/rock.tscn" id="10_hujfg"]
-[ext_resource type="PackedScene" uid="uid://di0x1wxwrdult" path="res://items/rocket_launcher.tscn" id="11_uq0d8"]
+[ext_resource type="PackedScene" path="res://items/minigun.tscn" id="7_qxarx"]
+[ext_resource type="PackedScene" path="res://items/smg.tscn" id="8_h8uii"]
+[ext_resource type="PackedScene" path="res://items/rod.tscn" id="9_3vuit"]
+[ext_resource type="PackedScene" path="res://items/rock.tscn" id="10_hujfg"]
+[ext_resource type="PackedScene" path="res://items/rocket_launcher.tscn" id="11_uq0d8"]
 
 [resource]
 script = ExtResource("1_y6rr2")
