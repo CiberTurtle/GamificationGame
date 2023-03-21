@@ -42,13 +42,13 @@ func _physics_process(delta: float) -> void:
 		
 		if hit:
 			is_flying = false
-			to_rotate.rotation = 0.						
+			to_rotate.rotation = 0.
 			return
 		
 		age += delta
 		if age > lifetime_sec / 2 && position.distance_squared_to(damage_source.position) < pickup_range * pickup_range:
 			is_flying = false
-			to_rotate.rotation = 0.			
+			to_rotate.rotation = 0.
 			damage_source.try_pickup_item(self)
 
 

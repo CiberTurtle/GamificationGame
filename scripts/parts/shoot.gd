@@ -12,5 +12,5 @@ func trigger() -> void:
 func spawn() -> void:
 	var proj = scene.instantiate() as Node2D
 	proj.transform = global_transform
-	proj.damage_source = owner.player
+	proj.damage_source = owner.damage_source
 	Globals.world.add_child(proj)

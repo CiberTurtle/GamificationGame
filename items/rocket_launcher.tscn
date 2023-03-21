@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://di0x1wxwrdult"]
+
+[ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_0qmmy"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_rquwh"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_k16s5"]
+[ext_resource type="PackedScene" uid="uid://c1tch5xt8s08k" path="res://scenes/rocket.tscn" id="4_j4xxn"]
+[ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="4_nf5kd"]
+[ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_dj1kl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gexh"]
+size = Vector2(15, 7)
+
+[node name="Rocket Launcher" instance=ExtResource("1_0qmmy")]
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("RectangleShape2D_8gexh")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.12, 0.05)
+texture = ExtResource("2_rquwh")
+
+[node name="Shoot" type="Node2D" parent="OnUse" index="1"]
+script = ExtResource("3_k16s5")
+scene = ExtResource("4_j4xxn")
+
+[node name="Recoil" type="Node2D" parent="OnUse" index="2"]
+script = ExtResource("4_nf5kd")
+velocity = Vector2(-256, -64)
+
+[node name="Durability" type="Node2D" parent="OnUse" index="3"]
+script = ExtResource("5_dj1kl")
+uses = 5

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciiyf1ncu3dr0"]
+
+[ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_146p7"]
+[ext_resource type="Texture2D" uid="uid://dae2l8ktq255t" path="res://icon.png" id="2_nce36"]
+
+[sub_resource type="Curve" id="Curve_w6nlf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6v2f1"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sggel"]
+radius = 20.0
+
+[node name="Rocket Explosion" instance=ExtResource("1_146p7")]
+lifetime = 5
+speed_over_lifetime = SubResource("Curve_w6nlf")
+max_hits = 100
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_nce36")
+
+[node name="Collision" parent="." index="1"]
+shape = SubResource("CircleShape2D_6v2f1")
+
+[node name="PassiveHitbox" parent="." index="2"]
+damage = 50
+
+[node name="Collision" parent="PassiveHitbox" index="0"]
+shape = SubResource("CircleShape2D_sggel")
+
+[node name="Knockback" parent="PassiveHitbox" index="1"]
+x_knockback = 100.0
+y_knockback = -100.0
