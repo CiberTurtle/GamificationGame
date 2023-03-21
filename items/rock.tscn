@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx75kytj8v3fv"]
+[gd_scene load_steps=10 format=3 uid="uid://dx75kytj8v3fv"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_7ljux"]
 [ext_resource type="Texture2D" uid="uid://b2stkwed6lh5f" path="res://content/sprites/Rock.png" id="2_0reed"]
 [ext_resource type="Script" path="res://scripts/parts/throw.gd" id="2_3dgku"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_84jkd"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_6n24g"]
+[ext_resource type="Script" path="res://scripts/parts/disarm.gd" id="6_n31up"]
+[ext_resource type="Script" path="res://scripts/parts/bounce.gd" id="7_curaf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2fbew"]
 radius = 5.0
@@ -41,3 +43,9 @@ debug_color = Color(0.996078, 0, 0.156863, 0.419608)
 script = ExtResource("4_6n24g")
 x_knockback = 80.0
 y_knockback = -40.0
+
+[node name="Disarm" type="Node2D" parent="PassiveHitbox" index="2"]
+script = ExtResource("6_n31up")
+
+[node name="Bounce" type="Node2D" parent="PassiveHitbox" index="3"]
+script = ExtResource("7_curaf")

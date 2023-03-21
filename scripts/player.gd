@@ -295,7 +295,7 @@ func process_action(delta: float) -> void:
 		punch_area.attack_overlap(player_data)
 
 func try_pickup_item(item: Item) -> bool:
-	if held_item: return false
+	if is_instance_valid(held_item): return false
 	#assert(not held_item, 'cannot pick up item - an item is already being held')
 	
 	item.player = self
@@ -311,6 +311,7 @@ func try_pickup_item(item: Item) -> bool:
 	return true
 
 func try_drop_item() -> bool:
+	if not is_instance_valid(held_item): return false
 	var can_drop := held_item.check_drop()
 	if not can_drop: return false
 	

@@ -56,8 +56,6 @@ func _physics_process(delta: float) -> void:
 			to_rotate.rotation = 0.
 			damage_source.player.try_pickup_item(self)
 	super._physics_process(delta)
-	
-
 
 func _process_notheld(delta):
 	if !is_flying:
