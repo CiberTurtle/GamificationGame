@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/parts/cooldown.gd" id="3_rs34f"]
 
 [node name="Item" type="CharacterBody2D"]
-collision_layer = 64
+collision_layer = 48
 floor_constant_speed = true
 floor_max_angle = 1.55334
 script = ExtResource("1_88eqp")
