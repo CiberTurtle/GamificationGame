@@ -326,7 +326,7 @@ func try_drop_item() -> bool:
 	return true
 
 func take_damage(damage: int, source: PlayerData) -> bool:
-	if source == self:
+	if source == player_data:
 		print(source)
 		return false
 	
