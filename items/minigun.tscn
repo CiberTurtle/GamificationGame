@@ -12,6 +12,7 @@
 size = Vector2(25, 10)
 
 [node name="Minigun" instance=ExtResource("1_0vcfo")]
+collision_layer = 112
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_6g5yk")

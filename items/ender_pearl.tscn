@@ -10,6 +10,7 @@
 radius = 5.0
 
 [node name="Ender Pearl" instance=ExtResource("1_gj58p")]
+collision_layer = 112
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CircleShape2D_xtxbq")
