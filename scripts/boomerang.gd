@@ -1,7 +1,7 @@
 extends Item
 
 var is_flying:=false
-
+@onready var hitbox:= $Hitbox
 func check_pickup():
 	return !is_flying
 
@@ -29,13 +29,13 @@ func _ready() -> void:
 		)
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+	hitbox.auto_attack = is_flying
 	if is_flying:
 		var age_ratio := age/lifetime_sec
 		var speed := speed_over_lifetime.sample_baked(age_ratio)
 		if !backwards && speed < 0:
 			backwards = true
-			$Hitbox.forget_hits()		
+			hitbox.forget_hits()		
 		var motion := transform.basis_xform(Vector2.RIGHT)*speed*delta
 		var hit := move_and_collide(motion)
 		to_rotate.rotate(roations_per_second * 2 * PI * delta)
@@ -50,6 +50,8 @@ func _physics_process(delta: float) -> void:
 			is_flying = false
 			to_rotate.rotation = 0.
 			damage_source.try_pickup_item(self)
+	super._physics_process(delta)
+	
 
 
 func _process_notheld(delta):
@@ -58,6 +60,7 @@ func _process_notheld(delta):
 
 
 func _on_use():
-	player.try_drop_item()	
+	hitbox.forget_hits()
+	player.try_drop_item()
 	is_flying = true
 	age = 0.

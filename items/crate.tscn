@@ -10,7 +10,7 @@
 size = Vector2(16, 16)
 
 [node name="Crate" instance=ExtResource("1_uwg6s")]
-collision_layer = 96
+collision_layer = 112
 base_health = 30
 
 [node name="Collision" parent="." index="0"]

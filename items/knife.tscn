@@ -10,6 +10,7 @@
 size = Vector2(15, 7)
 
 [node name="Knife" instance=ExtResource("1_o4v7j")]
+collision_layer = 112
 item_name = "Knife"
 
 [node name="Collision" parent="." index="0"]

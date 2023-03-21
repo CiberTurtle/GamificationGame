@@ -77,7 +77,7 @@ func take_damage(damage: int, source: Player) -> bool:
 	
 	SoundBank.play('hit.' + name, global_position)
 	health -= damage
-	if health < 0:
+	if health <= 0:
 		die()
 	
 	return true
