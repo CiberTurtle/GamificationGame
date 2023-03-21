@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sj6ichyklgye"
-path="res://.godot/imported/big_plat.png-71182683ebda57a781d7fde34ffc4233.ctex"
+uid="uid://8dq8i0l54085"
+path="res://.godot/imported/showdown.png-a8aad126b3773935d9ce717f7c0420e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/big_plat.png"
-dest_files=["res://.godot/imported/big_plat.png-71182683ebda57a781d7fde34ffc4233.ctex"]
+source_file="res://content/sprites/tilesets/showdown.png"
+dest_files=["res://.godot/imported/showdown.png-a8aad126b3773935d9ce717f7c0420e8.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rwpyq65hl7tk"
-path="res://.godot/imported/metal_plant-sheet.png-9456e25fd63b8f85f2a9ef7a769795c1.ctex"
+uid="uid://sj6ichyklgye"
+path="res://.godot/imported/big_molten_platform.png-1e94797b1c079936ceed989ab3352f01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/metal_plant-sheet.png"
-dest_files=["res://.godot/imported/metal_plant-sheet.png-9456e25fd63b8f85f2a9ef7a769795c1.ctex"]
+source_file="res://content/sprites/big_molten_platform.png"
+dest_files=["res://.godot/imported/big_molten_platform.png-1e94797b1c079936ceed989ab3352f01.ctex"]
 
 [params]
 

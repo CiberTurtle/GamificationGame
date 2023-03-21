@@ -319,7 +319,7 @@ func try_drop_item() -> bool:
 	held_item.velocity.y = item_drop_velocity.y
 	
 	held_item.drop.emit()
-	held_item.reparent(Globals.world)
+	held_item.reparent.call_deferred(Globals.world)
 	held_item.player = null
 	held_item = null
 	

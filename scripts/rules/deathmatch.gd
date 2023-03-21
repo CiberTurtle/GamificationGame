@@ -14,7 +14,7 @@ func _player_died(player: Player) -> void:
 	var player_data := player.player_data
 	player.queue_free()
 	var tween := create_tween()
-	tween.tween_callback(func(): spawn_player(player_data))
+	tween.tween_callback(func(): spawn_player(player_data)).set_delay(1.)
 
 func spawn_player(player_data: PlayerData) -> void:
 	var player := PLAYER_SCENE.instantiate() as Player
