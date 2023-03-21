@@ -30,7 +30,7 @@ scene = ExtResource("5_nqanw")
 count = 3
 
 [node name="Cooldown" parent="OnUse" index="2"]
-ticks = 40.0
+ticks = 30.0
 
 [node name="Durability" type="Node2D" parent="OnUse" index="3"]
 script = ExtResource("6_kdjlm")
