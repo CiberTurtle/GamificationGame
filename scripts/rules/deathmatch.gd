@@ -12,8 +12,8 @@ func _game_start() -> void:
 
 func _player_died(player: Player) -> void:
 	player.queue_free()
-	await get_tree().create_timer(1., false, true, false)
-	spawn_player(player.player_data)
+	var tween := create_tween()
+	tween.tween_callback(func(): spawn_player(player.player_data))
 
 func spawn_player(player_data: PlayerData) -> void:
 	var player := PLAYER_SCENE.instantiate() as Player

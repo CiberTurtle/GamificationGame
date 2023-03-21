@@ -27,13 +27,16 @@ texture = ExtResource("2_0reed")
 script = ExtResource("2_3dgku")
 velocity = Vector2(256, -128)
 
+[node name="Forget" type="Node2D" parent="OnUse" index="2"]
+
 [node name="PassiveHitbox" type="Area2D" parent="." index="6"]
 collision_layer = 0
-collision_mask = 96
+collision_mask = 64
 script = ExtResource("3_84jkd")
 damage = 20
 auto_attack = true
 remember_hits = true
+speed_threshold = 16.0
 
 [node name="Collision" type="CollisionShape2D" parent="PassiveHitbox" index="0"]
 shape = SubResource("CircleShape2D_2iw5b")

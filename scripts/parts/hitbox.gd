@@ -6,6 +6,8 @@ signal attack(node: Node2D)
 @export var auto_attack := false
 @export var remember_hits := false
 
+@export var speed_threshold := 0.
+
 var things_hit: Array[Node2D] = []
 func forget_hits():
 	things_hit.clear()
@@ -14,6 +16,7 @@ func _ready() -> void:
 	body_entered.connect(
 		func(body: PhysicsBody2D):
 			if not auto_attack: return
+			if speed_threshold > 0. and owner.velocity.length() < speed_threshold: return
 			attack_node(body, owner.damage_source)
 	)
 
