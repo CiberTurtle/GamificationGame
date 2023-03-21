@@ -1,5 +1,9 @@
 extends Node
 
+signal start()
+signal end()
+signal player_died(player: Player)
+
 var player_datas: Array[PlayerData] = []
 
 var inputs: Array[DeviceInput] = [

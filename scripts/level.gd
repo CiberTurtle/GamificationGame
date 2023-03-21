@@ -5,4 +5,4 @@ class_name Level extends Node2D
 @onready var width := 1920/size
 @onready var height := 1080/size
 
-var damage_source: Player = null
+var damage_source: PlayerData = null

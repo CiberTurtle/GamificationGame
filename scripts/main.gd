@@ -71,7 +71,6 @@ func _input(event: InputEvent) -> void:
 				spawn_item()
 				next_item_spawn = null
 
-var current_level: Level
 func load_level(scene: PackedScene) -> void:
 	# remove previous level and actors
 	for child in Globals.world.get_children():
@@ -80,19 +79,21 @@ func load_level(scene: PackedScene) -> void:
 	# spawn new level
 	var level := scene.instantiate() as Level
 	Globals.world.add_child(level)
-	current_level = level
+	Globals.level = level
 	game_viewport.size.x = level.width
 	game_viewport.size.y = level.height
 	game_viewport_container.scale = Vector2(level.size, level.size)
 	
-	spawn_players()
+	#spawn_players()
+	
+	Game.start.emit()
 
 func spawn_players() -> void:
 	for player_data in Game.player_datas:
 		var player := player_scene.instantiate() as Player
 		player.player_data = player_data
 		
-		var spawns := current_level.find_child('PlayerSpawns')
+		var spawns := Globals.level.find_child('PlayerSpawns')
 		player.global_position = spawns.get_child(randi()%spawns.get_child_count()).position
 		
 		Globals.world.add_child(player)
