@@ -46,10 +46,15 @@ func _physics_process(delta: float) -> void:
 			return
 		
 		age += delta
-		if age > lifetime_sec / 2 && position.distance_squared_to(damage_source.position) < pickup_range * pickup_range:
+		
+		if not is_instance_valid(damage_source.player):
+			queue_free()
+			return
+		
+		if age > lifetime_sec / 2 && position.distance_squared_to(damage_source.player.position) < pickup_range * pickup_range:
 			is_flying = false
 			to_rotate.rotation = 0.
-			damage_source.try_pickup_item(self)
+			damage_source.player.try_pickup_item(self)
 	super._physics_process(delta)
 	
 

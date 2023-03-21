@@ -16,7 +16,7 @@ signal death()
 
 var cooldown := 0.
 var player: Player
-var damage_source: Player
+var damage_source: PlayerData
 
 @onready var on_use := $OnUse
 
@@ -71,7 +71,7 @@ func process_notheld_gravity(delta: float) -> void:
 	
 	move_and_slide()
 
-func take_damage(damage: int, source: Player) -> bool:
+func take_damage(damage: int, source: PlayerData) -> bool:
 	if player: return false # don't take damage if held
 	if health <= 0: return false
 	

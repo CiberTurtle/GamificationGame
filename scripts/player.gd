@@ -120,6 +120,10 @@ func _physics_process(delta: float) -> void:
 		process_state_climb(delta)
 	else:
 		process_state_platformer(delta)
+	
+	if position.y > Globals.level.height/2. + 16.:
+		die()
+	return
 
 func process_state_platformer(delta: float) -> void:
 	if is_on_floor():
@@ -288,14 +292,14 @@ func process_action(delta: float) -> void:
 	else:
 		SoundBank.play('punch', position)
 		action_buffer_timer = -1.
-		punch_area.attack_overlap(self)
+		punch_area.attack_overlap(player_data)
 
 func try_pickup_item(item: Item) -> bool:
 	if held_item: return false
 	#assert(not held_item, 'cannot pick up item - an item is already being held')
 	
 	item.player = self
-	item.damage_source = self
+	item.damage_source = player_data
 	item.pickup.emit()
 	# item was killed when it was picked up
 	if not is_instance_valid(item):
@@ -320,8 +324,10 @@ func try_drop_item() -> bool:
 	
 	return true
 
-func take_damage(damage: int, source: Player) -> bool:
-	if source == self: return false
+func take_damage(damage: int, source: PlayerData) -> bool:
+	if source == self:
+		print(source)
+		return false
 	
 	health -= damage
 	update_health_bar()
@@ -339,9 +345,10 @@ func take_damage(damage: int, source: Player) -> bool:
 func die() -> void:
 	SoundBank.play('death.player', position)
 	death.emit()
+	Game.player_died.emit(self)
 	# placeholder
-	health = base_health
-	update_health_bar()
+	#health = base_health
+	#update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health

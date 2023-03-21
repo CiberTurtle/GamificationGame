@@ -20,14 +20,14 @@ func _ready() -> void:
 func trigger() -> void:
 	attack_overlap(owner.damage_source)
 
-func attack_overlap(source: Player, damage: int = -1) -> int:
+func attack_overlap(source: PlayerData, damage: int = -1) -> int:
 	var count = 0
 	for area in get_overlapping_bodies():
 		if attack_node(area, source, damage):
 			count += 1
 	return count
 
-func attack_node(node: Node2D, source: Player, damage: int = -1) -> bool:
+func attack_node(node: Node2D, source: PlayerData, damage: int = -1) -> bool:
 	if not node.has_method('take_damage'): return false
 	if things_hit.has(node): return false
 	if node == owner: return false

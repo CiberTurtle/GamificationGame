@@ -162,3 +162,6 @@ func get_action_name(device: int, action: StringName) -> StringName:
 
 func _is_joypad_event(event: InputEvent) -> bool:
 	return event is InputEventJoypadButton or event is InputEventJoypadMotion
+
+func _is_joypad_connected() -> bool:
+	return false
