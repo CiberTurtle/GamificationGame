@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve" id="Curve_boe4f"]
 max_value = 600.0
-_data = [Vector2(0, 300), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 500), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_q7v67"]

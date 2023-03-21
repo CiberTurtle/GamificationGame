@@ -22,12 +22,9 @@ texture = ExtResource("2_42qsv")
 [node name="Cooldown" parent="OnPickup" index="0"]
 ticks = 0.0
 
-[node name="Cooldown" parent="OnUse" index="0"]
-ticks = 40.0
-
 [node name="Repeat" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("4_m0uly")
-delay_btw = 6
+delay_btw = 3
 
 [node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
 script = ExtResource("3_1ox25")
