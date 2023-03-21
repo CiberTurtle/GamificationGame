@@ -33,7 +33,7 @@ func attack_node(node: Node2D, source: Player, damage: int = -1) -> bool:
 	if node == owner: return false
 	
 	if damage < 0: damage = self.damage
-	print_debug('hit')
+	
 	var did_attack := node.call('take_damage', damage, source) as bool
 	if did_attack:
 		attack.emit(node)

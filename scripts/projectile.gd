@@ -1,4 +1,4 @@
-class_name Projectile extends CharacterBody2D
+extends CharacterBody2D
 
 const TPS := 60.
 signal death()
