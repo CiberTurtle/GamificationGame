@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://5gqtmrfqoot6"]
+[gd_scene load_steps=4 format=3 uid="uid://5gqtmrfqoot6"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_u6bqt"]
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_lwv2g"]
+[ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_lpcud"]
 
 [node name="City" type="Node2D"]
 script = ExtResource("1_u6bqt")
@@ -14,6 +15,19 @@ layer_0/tile_data = PackedInt32Array(720895, 589824, 0, 655360, 655360, 0, 72089
 [node name="PlayerSpawns" type="Node2D" parent="."]
 
 [node name="PlayerSpawn1" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-1, 146)
 
 [node name="PlayerSpawn2" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(-236, 97)
+position = Vector2(-241, 146)
+
+[node name="PlayerSpawn3" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(209, 146)
+
+[node name="PlayerSpawn4" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-2, -114)
+
+[node name="CrateSpawner" parent="." instance=ExtResource("3_lpcud")]
+offset_left = -300.0
+offset_top = -157.0
+offset_right = 300.0
+offset_bottom = -121.0
