@@ -73,7 +73,7 @@ func process_notheld_gravity(delta: float) -> void:
 
 func take_damage(damage: int, source: Player) -> bool:
 	if player: return false # don't take damage if held
-	if health < 0: return false
+	if health <= 0: return false
 	
 	SoundBank.play('hit.' + name, global_position)
 	health -= damage
