@@ -87,7 +87,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_yw5cy"]
 resource_name = "Car Animation"
-length = 30.0
+length = 25.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
