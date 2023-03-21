@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1tch5xt8s08k"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_2d4hs"]
-[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_eojtk"]
-[ext_resource type="PackedScene" uid="uid://ciiyf1ncu3dr0" path="res://scenes/rocket_explosion.tscn" id="3_bgpmp"]
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="2_ed6f3"]
+[ext_resource type="PackedScene" uid="uid://ciiyf1ncu3dr0" path="res://scenes/rocket_explosion.tscn" id="3_vjqot"]
 
-[sub_resource type="Curve" id="Curve_l00u6"]
+[sub_resource type="Curve" id="Curve_8rn01"]
 max_value = 600.0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 500), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -16,8 +16,9 @@ radius = 4.0
 radius = 4.0
 
 [node name="Rocket" instance=ExtResource("1_2d4hs")]
-lifetime = 120
-speed_over_lifetime = SubResource("Curve_l00u6")
+script = ExtResource("2_ed6f3")
+explosion = ExtResource("3_vjqot")
+speed_over_lifetime = SubResource("Curve_8rn01")
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2(2, 2)
@@ -30,7 +31,3 @@ damage = 0
 
 [node name="Collision" parent="PassiveHitbox" index="0"]
 shape = SubResource("CircleShape2D_7td1f")
-
-[node name="Shoot" type="Node2D" parent="OnDeath" index="0"]
-script = ExtResource("2_eojtk")
-scene = ExtResource("3_bgpmp")
