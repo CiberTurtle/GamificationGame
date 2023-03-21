@@ -8,6 +8,8 @@
 collision_layer = 48
 floor_constant_speed = true
 floor_max_angle = 1.55334
+floor_snap_length = 4.0
+platform_on_leave = 1
 script = ExtResource("1_88eqp")
 
 [node name="Collision" type="CollisionShape2D" parent="."]

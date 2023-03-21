@@ -129,10 +129,11 @@ back={
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="Ladder"
 2d_physics/layer_3="Water"
-2d_physics/layer_5="Actor"
+2d_physics/layer_5="Item"
 2d_physics/layer_6="Melee Vulnerable"
 2d_physics/layer_7="Ranged Vulnerable"
 2d_physics/layer_8="Projectile"
+2d_physics/layer_12="Player"
 
 [rendering]
 
