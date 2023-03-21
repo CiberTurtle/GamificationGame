@@ -11,11 +11,11 @@ func forget_hits():
 	things_hit.clear()
 
 func _ready() -> void:
-	if auto_attack:
-		body_entered.connect(
-			func(body:PhysicsBody2D):
-				attack_node(body, owner.damage_source)
-		)
+	body_entered.connect(
+		func(body: PhysicsBody2D):
+			if not auto_attack: return
+			attack_node(body, owner.damage_source)
+	)
 
 func trigger() -> void:
 	attack_overlap(owner.damage_source)
