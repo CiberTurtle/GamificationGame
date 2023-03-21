@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdj6ktgvctx8w"]
+[gd_scene load_steps=8 format=3 uid="uid://bdj6ktgvctx8w"]
 
 [ext_resource type="Texture2D" uid="uid://c4fenpxg2xp0c" path="res://content/sprites/shotgun.png" id="1_h2d4u"]
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_xy0sw"]
 [ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="2_h8dqg"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_bhri1"]
 [ext_resource type="PackedScene" uid="uid://bgx2vb1uecuqx" path="res://scenes/shotgun_projectile.tscn" id="5_nqanw"]
+[ext_resource type="Script" path="res://scripts/parts/durability.gd" id="6_kdjlm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfdac"]
 size = Vector2(15, 7)
@@ -30,3 +31,7 @@ count = 3
 
 [node name="Cooldown" parent="OnUse" index="2"]
 ticks = 40.0
+
+[node name="Durability" type="Node2D" parent="OnUse" index="3"]
+script = ExtResource("6_kdjlm")
+uses = 5
