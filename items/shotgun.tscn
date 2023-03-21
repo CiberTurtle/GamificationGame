@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_xy0sw"]
 [ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="2_h8dqg"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_bhri1"]
-[ext_resource type="PackedScene" uid="uid://y4rvdb8panhn" path="res://scenes/projectile.tscn" id="5_hugqe"]
+[ext_resource type="PackedScene" uid="uid://bgx2vb1uecuqx" path="res://scenes/shotgun_projectile.tscn" id="5_nqanw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfdac"]
 size = Vector2(15, 7)
@@ -25,7 +25,8 @@ velocity = Vector2(-64, -128)
 [node name="Shoot" type="Marker2D" parent="OnUse" index="1"]
 position = Vector2(8, 0)
 script = ExtResource("3_bhri1")
-scene = ExtResource("5_hugqe")
+scene = ExtResource("5_nqanw")
+count = 3
 
 [node name="Cooldown" parent="OnUse" index="2"]
-ticks = 30.0
+ticks = 40.0

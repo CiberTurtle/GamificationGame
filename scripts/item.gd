@@ -10,7 +10,7 @@ signal death()
 @onready var health := base_health
 
 @export_group('Common')
-@export_range(0, 128, 1, 'or_greater', 'suffix:px/s') var grounded_dec := 64.
+@export_range(0, 128, 1, 'or_greater', 'suffix:px/s') var grounded_dec := 512.
 @export_range(0, 256, 1, 'or_greater', 'suffix:px/s') var gravity := 512.
 @export_range(0, 256, 1, 'or_greater', 'suffix:px/s') var max_fall_speed := 256.
 
@@ -32,6 +32,12 @@ func check_drop() -> bool:
 func check_use() -> bool:
 	if cooldown > 0: return false
 	return true
+
+func _pickup() -> void:
+	SoundBank.play('pickup.' + name, position)
+
+func _drop() -> void:
+	SoundBank.play('drop.' + name, position)
 
 func _physics_process(delta: float) -> void:
 	cooldown -= delta
@@ -64,6 +70,7 @@ func process_notheld_gravity(delta: float) -> void:
 
 func take_damage(damage: int, source: Player) -> bool:
 	if player: return false # don't take damage if held
+	if health < 0: return false
 	
 	health -= damage
 	if health < 0:
@@ -73,5 +80,8 @@ func take_damage(damage: int, source: Player) -> bool:
 
 func die() -> void:
 	#assert(not player, 'item somehow died while being held, this should not happen')
+	SoundBank.play('destroy.' + name, position)
+	if player:
+		player.held_item = null
 	death.emit()
 	queue_free()

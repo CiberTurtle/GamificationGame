@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhlqpl6o3lten"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_k1isa"]
+[ext_resource type="Script" path="res://scripts/parts/group.gd" id="2_ines8"]
+[ext_resource type="Texture2D" uid="uid://ihteqkwps025" path="res://content/sprites/Rod.png" id="2_wjar6"]
+[ext_resource type="Script" path="res://scripts/parts/cooldown.gd" id="3_aeicv"]
+[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="4_max3o"]
+[ext_resource type="PackedScene" uid="uid://bvv3ndfxevf4p" path="res://scenes/hook.tscn" id="5_8wyvp"]
+[ext_resource type="Script" path="res://scripts/parts/durability.gd" id="7_0leej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctaec"]
+size = Vector2(7, 15)
+
+[node name="Rod" type="CharacterBody2D"]
+collision_layer = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
+script = ExtResource("1_k1isa")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ctaec")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_wjar6")
+
+[node name="OnPickup" type="Node2D" parent="."]
+script = ExtResource("2_ines8")
+
+[node name="Cooldown" type="Node2D" parent="OnPickup"]
+script = ExtResource("3_aeicv")
+ticks = 20.0
+
+[node name="OnUse" type="Node2D" parent="."]
+script = ExtResource("2_ines8")
+
+[node name="Cooldown" type="Node2D" parent="OnUse"]
+script = ExtResource("3_aeicv")
+ticks = 20.0
+
+[node name="Shoot" type="Node2D" parent="OnUse"]
+script = ExtResource("4_max3o")
+scene = ExtResource("5_8wyvp")
+
+[node name="Durability" type="Node2D" parent="OnUse"]
+script = ExtResource("7_0leej")
+
+[node name="OnDrop" type="Node2D" parent="."]
+script = ExtResource("2_ines8")
+
+[node name="OnDeath" type="Node2D" parent="."]
+script = ExtResource("2_ines8")
+
+[connection signal="death" from="." to="OnDeath" method="trigger" flags=18]
+[connection signal="drop" from="." to="OnDrop" method="trigger" flags=18]
+[connection signal="pickup" from="." to="OnPickup" method="trigger" flags=18]
+[connection signal="use" from="." to="OnUse" method="trigger" flags=18]

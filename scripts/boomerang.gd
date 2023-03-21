@@ -25,8 +25,7 @@ func _ready() -> void:
 		func(node: Node2D):
 			hits += 1
 			if hits >= max_hits:
-				is_flying = false
-				to_rotate.rotation = 0.
+				die()
 		)
 
 func _physics_process(delta: float) -> void:

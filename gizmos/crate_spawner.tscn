@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdkwm6gr8s8jd"]
+
+[ext_resource type="Script" path="res://scripts/crate_spawner.gd" id="1_y7rcq"]
+
+[node name="CrateSpawner" type="ReferenceRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+border_color = Color(0.898198, 0.503715, 5.77569e-07, 1)
+script = ExtResource("1_y7rcq")

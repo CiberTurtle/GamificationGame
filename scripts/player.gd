@@ -15,7 +15,6 @@ var player_data: PlayerData
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_speed := 64.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s') var move_crouch_speed := 32.
 
-
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_acc_ticks := 4.
 @onready var move_acc_time := move_acc_ticks / TPS
 @export_range(0, 60, 1, 'or_greater', 'suffix:ticks') var move_dec_ticks := 6.
@@ -60,14 +59,6 @@ var action_buffer_timer := -1.
 @export var climb_coyote_time_ticks := 10
 var is_clibing := false
 
-@export_group('Modifiers')
-@export var base_health_mod := 0
-@export var move_speed_mod := 1.0
-@export var jump_height_mod := 1.0
-@export var climb_speed_mod := 1.0
-@export var current_mod_duration := 0.0
-@export var is_mod_perma := false
-
 @export_group('Other')
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
@@ -79,6 +70,7 @@ var held_item: Item
 @onready var holder_node2d: Node2D = %Holder
 @onready var pickup_area: Area2D = %PickupArea
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
+@onready var punch_area: Hitbox = %PunchArea
 @onready var health_bar: ProgressBar = %HealthBar
 
 func _ready() -> void:
@@ -87,7 +79,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	process_inputs()
-	check_modifiers(delta)
+	var speed_ratio: float = abs(speed_move/move_speed)
+	art_node2d.rotation_degrees = speed_ratio*lerp(10., -15., clamp(speed_vertical/Calc.jump_velocity(jump_height, gravity), 0., 1.))
+	art_node2d.scale.x = 1. - abs(speed_vertical/max_fall_speed)*.5
+	art_node2d.scale.y = 1. + abs(speed_vertical/max_fall_speed)*.5
+	
+	if input_move.y > 0:
+		art_node2d.scale.y -= .5
 
 func reset_movement() -> void:
 	speed_move = 0.
@@ -127,7 +125,7 @@ func process_state_platformer(delta: float) -> void:
 	if is_on_floor():
 		is_jumping = false
 	
-	if ladder_dectector_area.get_overlapping_bodies().size() > 0 and input_move.y < 0:
+	if ladder_dectector_area.get_overlapping_bodies().size() > 0 and input_move.y < 0 and speed_vertical > -climb_speed_vertical:
 		is_clibing = true
 		is_jumping = false
 		return
@@ -135,18 +133,19 @@ func process_state_platformer(delta: float) -> void:
 	process_movement(delta)
 	process_gravity(delta)
 	process_jump(delta)
-	process_action(delta)
-	
 	move()
+	
+	process_action(delta)
 
+var jumped_from_ladder := false
 func process_state_climb(delta: float) -> void:
 	if ladder_dectector_area.get_overlapping_bodies().size() == 0 or (is_on_floor() and input_move.y > 0):
 		is_clibing = false
 		coyote_timer = climb_coyote_time_ticks/TPS
 		return
 	
-	speed_vertical = input_move.y * climb_speed_vertical * climb_speed_mod
-	speed_move = input_move.x * climb_speed_horizontal * climb_speed_mod
+	speed_vertical = input_move.y * climb_speed_vertical
+	speed_move = input_move.x * climb_speed_horizontal
 	
 	if jump_buffer_timer > 0.:
 		jump_buffer_timer = -1.
@@ -157,9 +156,11 @@ func process_state_climb(delta: float) -> void:
 		return
 	
 	move()
+	
+	process_action(delta)
 
 func move() -> void:
-	velocity.x = (speed_move + speed_extra) * move_speed_mod
+	velocity.x = (speed_move + speed_extra)
 	velocity.y = speed_vertical
 	
 	move_and_slide()
@@ -189,7 +190,8 @@ func process_movement(delta: float) -> void:
 		speed_extra = move_toward(speed_extra, 0., extra_air_dec*delta)
 	
 	speed_move += input_move.x * speed
-	speed_move = clamp(speed_move, -move_speed, move_speed)
+	var max_speed := move_crouch_speed if input_move.y > 0. else move_speed
+	speed_move = clamp(speed_move, -max_speed, max_speed)
 	
 	var hit_wall_on_left := is_on_wall() and test_move(transform, Vector2.LEFT)
 	var hit_wall_on_right := is_on_wall() and test_move(transform, Vector2.RIGHT)
@@ -236,14 +238,16 @@ func process_jump(delta: float) -> void:
 	
 	if jump_buffer_timer > 0.:
 		if input_move.y > 0.: # if chrouching then fall though
-			jump_buffer_timer
+			SoundBank.play('fall', position)
+			jump_buffer_timer = 0.
 			position.y += 1.
 		elif coyote_timer > 0.: # or else jump
+			SoundBank.play('jump', position)
 			is_jumping = true
 			coyote_timer = 0.
 			jump_buffer_timer = 0.
-		
-			var jump_velocity := Calc.jump_velocity(jump_height, gravity) * jump_height_mod
+			
+			var jump_velocity := Calc.jump_velocity(jump_height, gravity)
 			speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
 
@@ -276,11 +280,13 @@ func process_action(delta: float) -> void:
 			try_pickup_item(item)
 			action_buffer_timer = -1.
 	else:
+		SoundBank.play('punch', position)
 		action_buffer_timer = -1.
-		pass # TODO: punching
+		punch_area.attack_overlap(self)
 
 func try_pickup_item(item: Item) -> bool:
-	assert(not held_item, 'cannot pick up item - an item is already being held')
+	if held_item: return false
+	#assert(not held_item, 'cannot pick up item - an item is already being held')
 	
 	item.player = self
 	item.damage_source = self
@@ -310,32 +316,26 @@ func try_drop_item() -> bool:
 
 func take_damage(damage: int, source: Player) -> bool:
 	if source == self: return false
+	
 	health -= damage
 	update_health_bar()
-	if health < 0:
+	
+	if damage >= 30:
+		SoundBank.play('hit', position)
+	else:
+		SoundBank.play('hit.big', position)
+	
+	if health <= 0:
 		die()
+		SoundBank.play('hit/big', position)
+	
 	return true
 
 func die() -> void:
-	health = base_health + base_health_mod
-	
-func check_modifiers(delta):
-	if !is_mod_perma:
-		current_mod_duration -= delta * TPS
-		if current_mod_duration < 0:
-			reset_modifiers()
-
-func reset_modifiers():
-	base_health_mod = 0
-	if health > base_health:
-		health = base_health
-	move_speed_mod = 1.0
-	jump_height_mod = 1.0
-	climb_speed_mod = 1.0
-	current_mod_duration = 0.0
+	death.emit()
+	# placeholder
 	health = base_health
-	update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health
-	health_bar.max_value = base_health + base_health_mod
+	health_bar.max_value = base_health

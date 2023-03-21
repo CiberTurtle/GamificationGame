@@ -6,6 +6,8 @@
 
 [node name="Item" type="CharacterBody2D"]
 collision_layer = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
 script = ExtResource("1_88eqp")
 
 [node name="Collision" type="CollisionShape2D" parent="."]

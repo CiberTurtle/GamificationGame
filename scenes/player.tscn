@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq68mpffntm2a"]
+[gd_scene load_steps=11 format=3 uid="uid://cq68mpffntm2a"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_q5xfg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d353i"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mefnu"]
 size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0w16f"]
@@ -19,28 +24,32 @@ bg_color = Color(0, 0, 0, 0.25098)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 32
+collision_layer = 96
 floor_constant_speed = true
 platform_on_leave = 1
 script = ExtResource("1_erutj")
 item_drop_velocity = Vector2(24, -64)
 move_speed = 96.0
-move_crouch_speed = 64.0
-extra_ground_dec = 256.0
-extra_air_dec = 128.0
+move_crouch_speed = 48.0
+move_acc_ticks = 6.0
+move_opp_ticks = 6.0
+move_acc_air_ticks = 12.0
+move_opp_air_ticks = 12.0
+extra_ground_dec = 512.0
+extra_air_dec = 256.0
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="Flip" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PickupArea" type="Area2D" parent="Flip"]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 64
 
-[node name="Collision" type="CollisionShape2D" parent="PickupArea"]
+[node name="Collision" type="CollisionShape2D" parent="Flip/PickupArea"]
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_d353i")
 debug_color = Color(0.478431, 0, 0.701961, 0.0784314)
-
-[node name="Flip" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="Art" type="Node2D" parent="Flip"]
 unique_name_in_owner = true
@@ -49,9 +58,26 @@ unique_name_in_owner = true
 position = Vector2(0, -8)
 texture = ExtResource("1_2xlw4")
 
-[node name="Holder" type="Marker2D" parent="Flip/Art"]
+[node name="PunchArea" type="Area2D" parent="Flip"]
 unique_name_in_owner = true
-position = Vector2(6, -6)
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("3_e01o0")
+damage = 10
+
+[node name="Collision" type="CollisionShape2D" parent="Flip/PunchArea"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_mefnu")
+debug_color = Color(0.988235, 0.109804, 0, 0.419608)
+
+[node name="Knockback" type="Node2D" parent="Flip/PunchArea"]
+script = ExtResource("4_q5xfg")
+x_knockback = 64.0
+y_knockback = -64.0
+
+[node name="Holder" type="Marker2D" parent="Flip"]
+unique_name_in_owner = true
+position = Vector2(8, -8)
 
 [node name="LadderDetectorArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -77,5 +103,6 @@ offset_right = 10.0
 offset_bottom = -18.0
 theme_override_styles/background = SubResource("StyleBoxFlat_pl7hj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gd7c4")
+step = 1.0
 value = 67.0
 show_percentage = false

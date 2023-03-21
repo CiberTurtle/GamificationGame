@@ -10,6 +10,7 @@ extends Node
 @export var duration:=600.0
 
 func trigger():
+	"""
 	get_owner().player.reset_modifiers()
 	get_owner().player.is_mod_perma = perma
 	if !perma:
@@ -18,4 +19,4 @@ func trigger():
 	get_owner().player.move_speed_mod = move_speed_modifier
 	get_owner().player.jump_height_mod = jump_height_modifier
 	get_owner().player.climb_speed_mod = climb_speed_modifier
-
+	"""
