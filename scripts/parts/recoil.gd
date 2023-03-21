@@ -9,21 +9,22 @@ extends Node2D
 func trigger() -> void:
 	var player: Player = owner.player
 	var direction := global_transform.basis_xform(Vector2.RIGHT).x
-	if add_to_x:
-		player.speed_extra += direction*velocity.x
-	else:
-		player.speed_extra = direction*velocity.x
-	
-	if velocity.y < 0.:
-		if add_to_y_if_up:
-			player.speed_vertical += velocity.y
+	if player:
+		if add_to_x:
+			player.speed_extra += direction*velocity.x
 		else:
-			player.speed_vertical = velocity.y
-	else:
-		if add_to_y_if_down:
-			player.speed_vertical += velocity.y
-		else:
-			player.speed_vertical = velocity.y
+			player.speed_extra = direction*velocity.x
 	
-	if zero_out_move:
-		player.speed_move = 0.
+		if velocity.y < 0.:
+			if add_to_y_if_up:
+				player.speed_vertical += velocity.y
+			else:
+				player.speed_vertical = velocity.y
+		else:
+			if add_to_y_if_down:
+				player.speed_vertical += velocity.y
+			else:
+				player.speed_vertical = velocity.y
+		
+		if zero_out_move:
+			player.speed_move = 0.
