@@ -33,10 +33,11 @@ var player_data: PlayerData
 @export_range(0, 128, 1, 'or_greater', 'suffix:px') var jump_height := 48.
 @export_range(0, 120, 1, 'or_greater', 'suffix:ticks') var jump_ticks := 60
 @onready var gravity := Calc.jump_gravity(jump_height, jump_ticks/TPS)
+@onready var jump_velocity := Calc.jump_velocity(jump_height, gravity)
 
 ## The maxinum falling speed based on the jumping speed
 @export var max_fall_ratio := 2.
-@onready var max_fall_speed := Calc.jump_velocity(jump_height, gravity)*max_fall_ratio
+@onready var max_fall_speed := jump_velocity*max_fall_ratio
 @export var extra_fall_mult := 1.5
 var is_jumping := false
 
@@ -66,7 +67,6 @@ var is_clibing := false
 var held_item: Item
 
 @onready var flip_node2d: Node2D = %Flip
-@onready var art_node2d: Node2D = %Art
 @onready var holder_node2d: Node2D = %Holder
 @onready var pickup_area: Area2D = %PickupArea
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
@@ -76,16 +76,10 @@ var held_item: Item
 func _ready() -> void:
 	update_health_bar()
 	health_bar.modulate = player_data.color
+	print(jump_velocity)
 
 func _process(delta: float) -> void:
 	process_inputs()
-	var speed_ratio: float = abs(speed_move/move_speed)
-	art_node2d.rotation_degrees = speed_ratio*lerp(10., -15., clamp(speed_vertical/Calc.jump_velocity(jump_height, gravity), 0., 1.))
-	art_node2d.scale.x = 1. - abs(speed_vertical/max_fall_speed)*.5
-	art_node2d.scale.y = 1. + abs(speed_vertical/max_fall_speed)*.5
-	
-	if input_move.y > 0:
-		art_node2d.scale.y -= .5
 
 func reset_movement() -> void:
 	speed_move = 0.
@@ -112,9 +106,12 @@ var speed_extra := 0.
 var speed_vertical := 0.
 var direction := 1.
 func _physics_process(delta: float) -> void:
+	if inv_timer > 0.:
+		inv_timer -= delta
+	
 	if input_move.x != 0:
 		direction = sign(input_move.x)
-		flip_node2d.scale.x = direction
+	flip_node2d.scale.x = direction
 	
 	if is_clibing:
 		process_state_climb(delta)
@@ -155,7 +152,7 @@ func process_state_climb(delta: float) -> void:
 	if jump_buffer_timer > 0.:
 		jump_buffer_timer = -1.
 		coyote_timer = -1.
-		speed_vertical = -Calc.jump_velocity(jump_height, gravity)
+		speed_vertical = -jump_velocity
 		is_jumping = true
 		is_clibing = false
 		return
@@ -252,7 +249,6 @@ func process_jump(delta: float) -> void:
 			coyote_timer = 0.
 			jump_buffer_timer = 0.
 			
-			var jump_velocity := Calc.jump_velocity(jump_height, gravity)
 			speed_vertical = -jump_velocity
 	jump_buffer_timer -= delta
 
@@ -325,10 +321,11 @@ func try_drop_item() -> bool:
 	
 	return true
 
+var inv_timer := -1.
 func take_damage(damage: int, source: PlayerData) -> bool:
-	if is_instance_valid(source) and source.guid == player_data.guid:
-		print(source)
-		return false
+	if health <= 0: return false # already dead, don't die again
+	if inv_timer > 0.: return false # is invulerable, don't take damage
+	if is_instance_valid(source) and source.guid == player_data.guid: return false # hitting it's self, don't
 	
 	health -= damage
 	update_health_bar()

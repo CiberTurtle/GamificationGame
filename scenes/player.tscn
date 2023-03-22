@@ -1,9 +1,78 @@
-[gd_scene load_steps=11 format=3 uid="uid://cq68mpffntm2a"]
+[gd_scene load_steps=14 format=3 uid="uid://cq68mpffntm2a"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
+[ext_resource type="Shader" path="res://shaders/cleanEdge.gdshader" id="2_w8pic"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_q5xfg"]
+
+[sub_resource type="GDScript" id="GDScript_s8mqr"]
+resource_name = "player_sprite"
+script/source = "extends Node2D
+
+@export var walk_tilt := 10.
+@export var jump_tilt := 10.
+@export var fall_tilt := -15.
+
+@export var step_amp := 2.
+@export var step_rate := 5.
+@export var step_offset := 0.
+
+@export var jump_stretch_x := .5
+@export var jump_stretch_y := .5
+
+@export var fall_stretch_x := -.5
+@export var fall_stretch_y := .5
+
+@export var land_stretch_x := .5
+@export var land_stretch_y := .5
+
+@export var inv_flash_rate := 20.
+@export var inv_flash_mod := 2
+@export var inv_flash_opacity_max := 1.
+@export var inv_flash_opacity_min := .5
+
+@onready var player: Player = owner
+
+@onready var sprite: Sprite2D = $Sprite
+
+var time := 0.
+func _process(delta: float) -> void:
+	var move_scale: float = player.speed_move/player.move_speed
+	var move_ratio: float = abs(move_scale)
+	
+	var vert_scale: float = player.speed_vertical/player.jump_velocity
+	var vert_ratio: float = abs(vert_scale)
+	var jump_ratio: float = clamp(vert_scale, -1, 0.)
+	var fall_ratio: float = clamp(vert_scale, 0., 1.)
+	
+	var step_wave: float = sin(time*TAU*step_rate)/2. + step_offset
+	if not player.is_on_floor():
+		step_wave = 0.
+	
+	position.y = -lerp(0., step_wave*step_amp, move_ratio)
+	rotation_degrees = move_scale*lerp(walk_tilt, fall_tilt, fall_ratio)
+	scale.x = 1. + vert_ratio*fall_stretch_x
+	scale.y = 1. + vert_ratio*fall_stretch_y
+	if player.input_move.y > 0.:
+		scale.y *= 0.67 
+	sprite.scale.x = player.direction
+	
+	if player.inv_timer > 0.:
+		modulate.a = inv_flash_opacity_min if int(time*inv_flash_rate)%inv_flash_mod == 0 else inv_flash_opacity_max
+	else:
+		modulate.a = 1.
+	
+	time += delta
+	if time > ProjectSettings.get_setting('rendering/limits/time/time_rollover_secs', 3600.):
+		time = 0.
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3u16h"]
+shader = ExtResource("2_w8pic")
+shader_parameter/highestColor = Color(0.87451, 0.964706, 0.960784, 1)
+shader_parameter/similarThreshold = 0.0
+shader_parameter/lineWidth = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d353i"]
 size = Vector2(32, 16)
@@ -42,6 +111,14 @@ climb_speed_horizontal = 48.0
 extra_ground_dec = 512.0
 extra_air_dec = 256.0
 
+[node name="Art" type="Node2D" parent="."]
+script = SubResource("GDScript_s8mqr")
+
+[node name="Sprite" type="Sprite2D" parent="Art"]
+material = SubResource("ShaderMaterial_3u16h")
+position = Vector2(0, -8)
+texture = ExtResource("1_2xlw4")
+
 [node name="Flip" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -54,13 +131,6 @@ collision_mask = 16
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_d353i")
 debug_color = Color(0.478431, 0, 0.701961, 0.0784314)
-
-[node name="Art" type="Node2D" parent="Flip"]
-unique_name_in_owner = true
-
-[node name="Sprite" type="Sprite2D" parent="Flip/Art"]
-position = Vector2(0, -8)
-texture = ExtResource("1_2xlw4")
 
 [node name="PunchArea" type="Area2D" parent="Flip"]
 unique_name_in_owner = true

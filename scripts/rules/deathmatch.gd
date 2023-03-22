@@ -36,5 +36,7 @@ func spawn_player(player_data: PlayerData) -> void:
 			best_spawn_point_score = score
 			best_spawn_point = spawn_point.position
 	player.global_position = best_spawn_point
+	player.direction = -sign(player.position.x)
+	player.inv_timer = 60/60.
 	
 	Globals.world.add_child(player)
