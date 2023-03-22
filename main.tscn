@@ -10,8 +10,9 @@
 script = ExtResource("1_epd5g")
 player_scene = ExtResource("2_etx5l")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"Music"
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
