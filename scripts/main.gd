@@ -87,6 +87,9 @@ func load_level(scene: PackedScene) -> void:
 	#spawn_players()
 	
 	Game.start.emit()
+	
+	%Music.stream = level.music
+	%Music.play()
 
 func spawn_players() -> void:
 	for player_data in Game.player_datas:
