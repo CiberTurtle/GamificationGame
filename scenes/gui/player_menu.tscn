@@ -1,22 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2fhcxbvjpb1s"]
+[gd_scene load_steps=12 format=3 uid="uid://b2fhcxbvjpb1s"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_68gw1"]
 [ext_resource type="Script" path="res://scripts/gui/player_menu.gd" id="1_j8lk4"]
 [ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_t3fk7"]
+[ext_resource type="FontFile" uid="uid://dd0s3s2x17crx" path="res://content/fonts/Montserrat/static/Montserrat-Black.ttf" id="5_yeu47"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di568"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 8
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyqkj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5iue"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hcdq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv1kg"]
+bg_color = Color(0, 0, 0, 1)
 border_width_top = 8
-border_width_right = 8
 border_width_bottom = 8
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Theme" id="Theme_so6kv"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ocha"]
+
+[sub_resource type="Theme" id="Theme_gky8m"]
 default_font = ExtResource("1_t3fk7")
 default_font_size = 24
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/styles/normal = SubResource("StyleBoxFlat_di568")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("5_yeu47")
+Button/styles/disabled = SubResource("StyleBoxEmpty_gyqkj")
+Button/styles/focus = SubResource("StyleBoxEmpty_o5iue")
+Button/styles/hover = SubResource("StyleBoxEmpty_7hcdq")
+Button/styles/normal = SubResource("StyleBoxFlat_iv1kg")
+Button/styles/pressed = SubResource("StyleBoxEmpty_6ocha")
 Label/colors/font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l083n"]
@@ -25,31 +37,41 @@ content_margin_top = 24.0
 content_margin_right = 24.0
 content_margin_bottom = 24.0
 bg_color = Color(1, 1, 1, 1)
-draw_center = false
 border_width_left = 12
 border_width_top = 12
 border_width_right = 12
 border_width_bottom = 12
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
 
-[node name="PlayerMenu" type="MarginContainer"]
-offset_right = 480.0
-offset_bottom = 1080.0
-theme = SubResource("Theme_so6kv")
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+[node name="Panel" type="PanelContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -228.0
+offset_top = -408.0
+offset_right = 228.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_gky8m")
+theme_override_styles/panel = SubResource("StyleBoxFlat_l083n")
 script = ExtResource("1_j8lk4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 6
 
-[node name="Control" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
+[node name="Skin" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control"]
+[node name="Character" type="TextureRect" parent="VBoxContainer/Skin"]
+custom_minimum_size = Vector2(256, 192)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,40 +79,66 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -128.0
-offset_top = -128.0
+offset_top = -96.0
 offset_right = 128.0
-offset_bottom = 128.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_68gw1")
+stretch_mode = 5
 
-[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_l083n")
-
-[node name="Ready" type="ColorRect" parent="VBoxContainer/Panel"]
-unique_name_in_owner = true
+[node name="LeftArrow" type="TextureRect" parent="VBoxContainer/Skin/Character"]
 visible = false
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
-layout_mode = 2
-theme_override_constants/separation = 6
+[node name="LeftLabel" type="Label" parent="VBoxContainer/Skin/Character"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -80.0
+offset_right = 38.0
+offset_bottom = 80.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "←"
+vertical_alignment = 1
 
-[node name="ControllerName" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
-unique_name_in_owner = true
+[node name="LeftLabel2" type="Label" parent="VBoxContainer/Skin/Character"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -80.0
+offset_bottom = 80.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "→"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Controller name"
+text = "Chicken"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Chicken"
 flat = true
-text_overrun_behavior = 3
 
-[node name="ReadyButton2" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "East Button: Ready?"
-
-[node name="LeaveButton" type="Button" parent="VBoxContainer/Panel/VBoxContainer"]
-layout_mode = 2
-text = "South Btn: Leave"
-flat = true
+text = "Ready?"

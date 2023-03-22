@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	
 	for input in Game.inputs:
 		if not Game.player_datas.any(func(pd: PlayerData): return pd.input.device == input.device):
-			if input.is_action_just_pressed('action'):
+			if input.is_action_just_pressed('ok'):
 				var player_data := PlayerData.new()
 				player_data.input = input
 				Game.player_datas.append(player_data)
