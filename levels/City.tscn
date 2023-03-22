@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://5gqtmrfqoot6"]
+[gd_scene load_steps=18 format=3 uid="uid://5gqtmrfqoot6"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_u6bqt"]
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_lwv2g"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_lpcud"]
 [ext_resource type="Texture2D" uid="uid://dk2li4vx10i1m" path="res://content/sprites/moving_platform.png" id="4_00spt"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_3t2ey"]
+[ext_resource type="Texture2D" uid="uid://deqp8vkqc7nww" path="res://content/sprites/Car .png" id="6_yten6"]
+[ext_resource type="Texture2D" uid="uid://clv7ef5ntgjn4" path="res://content/sprites/City background.png" id="7_w0xm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u586l"]
 size = Vector2(80, 16)
@@ -215,7 +217,6 @@ libraries = {
 
 [node name="Car" type="Area2D" parent="."]
 position = Vector2(32, -25.3333)
-scale = Vector2(0.4, 0.5)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("5_3t2ey")
@@ -225,26 +226,29 @@ auto_attack = true
 [node name="Collision" type="CollisionShape2D" parent="Car"]
 shape = SubResource("RectangleShape2D_u586l")
 
-[node name="Sprite" type="NinePatchRect" parent="Car"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -8.0
-offset_right = 40.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_00spt")
-patch_margin_left = 16
-patch_margin_right = 16
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Car"]
 autoplay = "Car Animation"
 libraries = {
 "": SubResource("AnimationLibrary_i7vgg")
 }
+
+[node name="Sprite2D" type="Sprite2D" parent="Car"]
+position = Vector2(0, -6.69444)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_yten6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.67451, 0.67451, 0.67451, 1)
+z_index = -100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_w0xm1")
