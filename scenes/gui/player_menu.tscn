@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2fhcxbvjpb1s"]
+[gd_scene load_steps=7 format=3 uid="uid://b2fhcxbvjpb1s"]
 
 [ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_68gw1"]
 [ext_resource type="Script" path="res://scripts/gui/player_menu.gd" id="1_j8lk4"]
+[ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_t3fk7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di568"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,6 +13,8 @@ border_width_bottom = 8
 border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Theme" id="Theme_so6kv"]
+default_font = ExtResource("1_t3fk7")
+default_font_size = 24
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/styles/normal = SubResource("StyleBoxFlat_di568")
 Label/colors/font_color = Color(0, 0, 0, 1)

@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_pe0yc"]
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_825yv"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_redtn"]
-[ext_resource type="Texture2D" uid="uid://dk2li4vx10i1m" path="res://content/sprites/moving_platform.png" id="4_22wbk"]
+[ext_resource type="Texture2D" uid="uid://m4ueg18nhbvr" path="res://content/sprites/Boat 2.png" id="4_p5dik"]
 [ext_resource type="Texture2D" uid="uid://b8vtrpoovh248" path="res://content/sprites/Desert.png" id="5_7kgar"]
 [ext_resource type="Texture2D" uid="uid://bl7mu0mqhmtq" path="res://content/sprites/tileatlas.png" id="5_vxbdp"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="7_0wup5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mreof"]
-size = Vector2(80, 16)
+size = Vector2(80, 10)
 
 [sub_resource type="Animation" id="Animation_mglm7"]
 resource_name = "Desert Platform"
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 3, 10, 14),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 190), Vector2(0, 130), Vector2(0, 130), Vector2(0, 190)]
+"values": [Vector2(0, 190), Vector2(0, 138), Vector2(0, 138), Vector2(0, 190)]
 }
 
 [sub_resource type="Animation" id="Animation_j2pm3"]
@@ -122,34 +122,20 @@ offset_bottom = -184.0
 
 [node name="MovingPlatform" type="AnimatableBody2D" parent="."]
 position = Vector2(-32, 92)
-scale = Vector2(0.4, 0.5)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform"]
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_mreof")
-
-[node name="Sprite" type="NinePatchRect" parent="MovingPlatform"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -8.0
-offset_right = 40.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_22wbk")
-patch_margin_left = 16
-patch_margin_right = 16
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
 autoplay = "Desert Platform"
 libraries = {
 "": SubResource("AnimationLibrary_5ggdr")
 }
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingPlatform"]
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_p5dik")
 
 [node name="MovingPlatform2" type="AnimatableBody2D" parent="."]
 position = Vector2(0, 190)
@@ -194,3 +180,13 @@ auto_attack = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 155.5)
 shape = SubResource("RectangleShape2D_xtjjy")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("7_0wup5")
+damage = 5
+auto_attack = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+polygon = PackedVector2Array(122, 116, 134, 116, 136, 100, 139, 97, 148, 97, 152, 101, 153, 115, 159, 116, 162, 103, 165, 105, 166, 123, 152, 124, 128, 124, 127, 133, 125, 136, 122, 132)
