@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cw634453ccsqx"]
 
 [ext_resource type="Texture2D" uid="uid://d4g3h1xxmnap1" path="res://content/sprites/tilesets/metal_plant.png" id="2_26pqb"]
 

@@ -46,7 +46,7 @@ layer_0/tile_data = PackedInt32Array(262139, 0, 0, 262140, 0, 0, 262141, 0, 0, 2
 [node name="PlayerSpawns" type="Node2D" parent="."]
 
 [node name="PlayerSpawn1" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(-88, 24)
+position = Vector2(-56, 32)
 
 [node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(88, 24)
+position = Vector2(56, 32)

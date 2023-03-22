@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bolx2w72rgsle"]
+[gd_scene load_steps=16 format=3 uid="uid://bolx2w72rgsle"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_e750n"]
 [ext_resource type="Texture2D" uid="uid://c20phhalgil34" path="res://content/sprites/bg-x.png" id="2_k1hdb"]
-[ext_resource type="TileSet" path="res://resources/tilesets/metal_plant.tres" id="3_4wd4p"]
+[ext_resource type="TileSet" uid="uid://cw634453ccsqx" path="res://resources/tilesets/metal_plant.tres" id="3_4wd4p"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="4_viybm"]
-[ext_resource type="Texture2D" uid="uid://sj6ichyklgye" path="res://content/sprites/big_molten_platform.png" id="5_sqrc5"]
-[ext_resource type="Texture2D" uid="uid://c1mvu8vyn5cil" path="res://content/sprites/moving_semisolid_platform.png" id="6_hwr3r"]
+[ext_resource type="Texture2D" uid="uid://d4g3h1xxmnap1" path="res://content/sprites/tilesets/metal_plant.png" id="5_d4hid"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="7_286mb"]
 [ext_resource type="Texture2D" uid="uid://bs0mcddh74uel" path="res://content/sprites/lava.png" id="8_2pycv"]
 
@@ -120,13 +119,19 @@ layer_0/tile_data = PackedInt32Array(786411, 1, 0, 786412, 1, 0, 786413, 1, 0, 7
 position = Vector2(-136, 16)
 
 [node name="PlayerSpawn2" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(192, 80)
+position = Vector2(296, -8)
 
 [node name="PlayerSpawn3" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(176, -64)
+position = Vector2(136, 16)
 
 [node name="PlayerSpawn4" type="Node2D" parent="PlayerSpawns"]
-position = Vector2(-176, -64)
+position = Vector2(-248, -48)
+
+[node name="PlayerSpawn5" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-264, 128)
+
+[node name="PlayerSpawn6" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(0, -64)
 
 [node name="CrateSpawner" parent="." instance=ExtResource("4_viybm")]
 offset_left = -250.0
@@ -138,7 +143,9 @@ offset_bottom = -99.0
 position = Vector2(0, 16)
 
 [node name="Sprite2D" type="Sprite2D" parent="MovingPlatform"]
-texture = ExtResource("5_sqrc5")
+texture = ExtResource("5_d4hid")
+region_enabled = true
+region_rect = Rect2(0, 96, 128, 32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
 autoplay = "move"
@@ -168,7 +175,8 @@ offset_right = 24.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_hwr3r")
+texture = ExtResource("5_d4hid")
+region_rect = Rect2(0, 80, 48, 16)
 patch_margin_left = 16
 patch_margin_right = 16
 axis_stretch_horizontal = 1
