@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="7_0wup5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mreof"]
-size = Vector2(80, 11.6667)
+size = Vector2(80, 10)
 
 [sub_resource type="Animation" id="Animation_mglm7"]
 resource_name = "Desert Platform"
@@ -124,7 +124,7 @@ offset_bottom = -184.0
 position = Vector2(-32, 92)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform"]
-position = Vector2(0, 2.16667)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_mreof")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
@@ -180,3 +180,13 @@ auto_attack = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 155.5)
 shape = SubResource("RectangleShape2D_xtjjy")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("7_0wup5")
+damage = 5
+auto_attack = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+polygon = PackedVector2Array(122, 116, 134, 116, 136, 100, 139, 97, 148, 97, 152, 101, 153, 115, 159, 116, 162, 103, 165, 105, 166, 123, 152, 124, 128, 124, 127, 133, 125, 136, 122, 132)
