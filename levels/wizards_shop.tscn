@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ca5l20exg2t45"]
+[gd_scene load_steps=59 format=3 uid="uid://ca5l20exg2t45"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_xrkl5"]
 [ext_resource type="TileSet" uid="uid://bruvdxi3lks2q" path="res://resources/tilesets/wizards_shop.tres" id="2_lstcp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/double_jump.gd" id="5_3r7a1"]
 [ext_resource type="Texture2D" uid="uid://bcx4x3w7c7ku6" path="res://content/sprites/Tiny Wizard Orange.png" id="6_vt7sx"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="9_df71f"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="10_1ma5v"]
 
 [sub_resource type="Animation" id="Animation_2yuvp"]
 resource_name = "RESET"
@@ -601,8 +602,18 @@ _data = {
 "move": SubResource("Animation_uugm2")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a55yu"]
+size = Vector2(640, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw3sg"]
+size = Vector2(640, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqhmf"]
+size = Vector2(20, 620)
+
 [node name="wizards_shop" type="Node2D"]
 script = ExtResource("1_xrkl5")
+metadata/finished = true
 
 [node name="wizards" type="Node2D" parent="."]
 position = Vector2(0, 156)
@@ -1179,6 +1190,38 @@ offset_left = -239.0
 offset_top = -175.0
 offset_right = 239.0
 offset_bottom = -160.0
+
+[node name="Kill" type="Area2D" parent="."]
+position = Vector2(0, -189)
+script = ExtResource("10_1ma5v")
+damage = 420
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill"]
+shape = SubResource("RectangleShape2D_a55yu")
+
+[node name="Kill2" type="Area2D" parent="."]
+position = Vector2(0, 172)
+script = ExtResource("10_1ma5v")
+damage = 420
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill2"]
+shape = SubResource("RectangleShape2D_iw3sg")
+
+[node name="Kill3" type="Area2D" parent="."]
+position = Vector2(-304, 1)
+script = ExtResource("10_1ma5v")
+damage = 420
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill3"]
+shape = SubResource("RectangleShape2D_uqhmf")
+
+[node name="Kill4" type="Area2D" parent="."]
+position = Vector2(300, 1)
+script = ExtResource("10_1ma5v")
+damage = 420
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill4"]
+shape = SubResource("RectangleShape2D_uqhmf")
 
 [connection signal="area_entered" from="Table Parent/Orb1/Area2D" to="Table Parent/Orb1/Area2D" method="_on_area_entered"]
 [connection signal="body_entered" from="Table Parent/Orb1/Area2D" to="Table Parent/Orb1/Area2D" method="_on_body_entered"]
