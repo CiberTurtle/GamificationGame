@@ -9,11 +9,12 @@
 [ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="6_h5h3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g5yk"]
-size = Vector2(25, 10)
+size = Vector2(31, 12)
 
 [node name="Minigun" instance=ExtResource("1_0vcfo")]
 
 [node name="Collision" parent="." index="0"]
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_6g5yk")
 
 [node name="Sprite" parent="." index="1"]
