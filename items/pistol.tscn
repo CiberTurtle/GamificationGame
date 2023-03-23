@@ -20,9 +20,6 @@ texture = ExtResource("2_i0t3g")
 [node name="Cooldown" parent="OnPickup" index="0"]
 ticks = 0.0
 
-[node name="Cooldown" parent="OnUse" index="0"]
-ticks = 30.0
-
 [node name="Shoot" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("2_ydpea")
 scene = ExtResource("4_8lrtx")
