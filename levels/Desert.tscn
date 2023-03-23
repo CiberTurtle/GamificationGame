@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="7_0wup5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mreof"]
-size = Vector2(80, 10)
+size = Vector2(68, 10)
 
 [sub_resource type="Animation" id="Animation_mglm7"]
 resource_name = "Desert Platform"
