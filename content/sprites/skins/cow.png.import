@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bagieheefk3y4"
-path="res://.godot/imported/Broom.png-44af7df0bb57d8e684e26f40e8431f70.ctex"
+uid="uid://4f3k7pqpg305"
+path="res://.godot/imported/cow.png-f7aa8f6870d9cfc12d62e5bfd15141da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/Broom.png"
-dest_files=["res://.godot/imported/Broom.png-44af7df0bb57d8e684e26f40e8431f70.ctex"]
+source_file="res://content/sprites/skins/cow.png"
+dest_files=["res://.godot/imported/cow.png-f7aa8f6870d9cfc12d62e5bfd15141da.ctex"]
 
 [params]
 

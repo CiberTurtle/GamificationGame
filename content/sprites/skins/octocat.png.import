@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdstyj050qwv"
-path="res://.godot/imported/Rocket Launcher.png-b0da8a6be7165409bbeced34429c6e09.ctex"
+uid="uid://cse4uwv12phbh"
+path="res://.godot/imported/octocat.png-79e34374c2fac8608c84eff6e834a8d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/Rocket Launcher.png"
-dest_files=["res://.godot/imported/Rocket Launcher.png-b0da8a6be7165409bbeced34429c6e09.ctex"]
+source_file="res://content/sprites/skins/octocat.png"
+dest_files=["res://.godot/imported/octocat.png-79e34374c2fac8608c84eff6e834a8d5.ctex"]
 
 [params]
 

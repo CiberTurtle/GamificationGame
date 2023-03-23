@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djp68owvl44hn"
-path="res://.godot/imported/Jump Orb.png-7e08a19e3f55988b0a276317194b0249.ctex"
+uid="uid://bca70ljruy8kw"
+path="res://.godot/imported/timmy.png-d9e9d0e50675f6edbf333cb742f52bcc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/Jump Orb.png"
-dest_files=["res://.godot/imported/Jump Orb.png-7e08a19e3f55988b0a276317194b0249.ctex"]
+source_file="res://content/sprites/skins/timmy.png"
+dest_files=["res://.godot/imported/timmy.png-d9e9d0e50675f6edbf333cb742f52bcc.ctex"]
 
 [params]
 

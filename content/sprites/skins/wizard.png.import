@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cse4uwv12phbh"
-path="res://.godot/imported/GitHub Cat Skin.png-464d980f82aea7a92c4a54a34b2bf941.ctex"
+uid="uid://urn0qfiwewj1"
+path="res://.godot/imported/wizard.png-bb0db18e6e432cddd8fbaaa3b7637ef6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/GitHub Cat Skin.png"
-dest_files=["res://.godot/imported/GitHub Cat Skin.png-464d980f82aea7a92c4a54a34b2bf941.ctex"]
+source_file="res://content/sprites/skins/wizard.png"
+dest_files=["res://.godot/imported/wizard.png-bb0db18e6e432cddd8fbaaa3b7637ef6.ctex"]
 
 [params]
 
