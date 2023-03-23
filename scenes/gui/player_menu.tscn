@@ -36,7 +36,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_iv1kg")
 Button/styles/pressed = SubResource("StyleBoxEmpty_6ocha")
 Label/colors/font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l083n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_582if"]
 content_margin_left = 24.0
 content_margin_top = 24.0
 content_margin_right = 24.0
@@ -65,7 +65,7 @@ offset_bottom = 255.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_gky8m")
-theme_override_styles/panel = SubResource("StyleBoxFlat_l083n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_582if")
 script = ExtResource("1_j8lk4")
 
 [node name="Floating" type="Control" parent="."]

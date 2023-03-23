@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://cq68mpffntm2a"]
 
+[ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_2xlw4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
 [ext_resource type="Shader" path="res://shaders/cleanEdge.gdshader" id="2_w8pic"]
-[ext_resource type="Texture2D" uid="uid://b3dv3plhgksqa" path="res://content/sprites/skins/chicken.png" id="3_6pqkg"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_q5xfg"]
 
@@ -36,11 +36,6 @@ script/source = "extends Node2D
 
 @onready var sprite: Sprite2D = $Sprite
 
-func _ready() -> void:
-	sprite.texture = SkinDB.skins[player.player_data.skin_index]
-	sprite.region_enabled = true
-	sprite.region_rect = SkinDB.get_skin_region(sprite.texture, player.player_data.color_index)
-
 var time := 0.
 func _process(delta: float) -> void:
 	var move_scale: float = player.speed_move/player.move_speed
@@ -58,10 +53,9 @@ func _process(delta: float) -> void:
 	position.y = -lerp(0., step_wave*step_amp, move_ratio)
 	rotation_degrees = move_scale*lerp(walk_tilt, fall_tilt, fall_ratio)
 	scale.x = 1. + vert_ratio*fall_stretch_x
-	scale.x = clamp(scale.x, .5, 2.)
 	scale.y = 1. + vert_ratio*fall_stretch_y
-	scale.y = clamp(scale.y, .5, 2.)
-	
+	if player.input_move.y > 0.:
+		scale.y *= 0.67 
 	sprite.scale.x = player.direction
 	
 	if player.inv_timer > 0.:
@@ -72,8 +66,6 @@ func _process(delta: float) -> void:
 	time += delta
 	if time > ProjectSettings.get_setting('rendering/limits/time/time_rollover_secs', 3600.):
 		time = 0.
-	
-	sprite.frame = 1 if (player.input_move.y > 0. and not player.is_clibing) else 0
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3u16h"]
@@ -125,9 +117,7 @@ script = SubResource("GDScript_s8mqr")
 [node name="Sprite" type="Sprite2D" parent="Art"]
 material = SubResource("ShaderMaterial_3u16h")
 position = Vector2(0, -8)
-texture = ExtResource("3_6pqkg")
-hframes = 2
-vframes = 2
+texture = ExtResource("1_2xlw4")
 
 [node name="Flip" type="Node2D" parent="."]
 unique_name_in_owner = true
