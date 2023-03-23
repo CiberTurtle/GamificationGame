@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c61fur6xdx1bw"
-path="res://.godot/imported/  Green Wizard Skin.png-9b2cff82b334d8bd3a94b1cce5ce5d70.ctex"
+uid="uid://yxkc7insopa6"
+path="res://.godot/imported/Broom.png-5448ffa66a9c9a97261599502d09427a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/  Green Wizard Skin.png"
-dest_files=["res://.godot/imported/  Green Wizard Skin.png-9b2cff82b334d8bd3a94b1cce5ce5d70.ctex"]
+source_file="res://content/sprites/Broom.png"
+dest_files=["res://.godot/imported/Broom.png-5448ffa66a9c9a97261599502d09427a.ctex"]
 
 [params]
 

@@ -7,11 +7,12 @@
 [ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_cdi8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iy84u"]
-size = Vector2(15, 7)
+size = Vector2(8, 7)
 
 [node name="Pistol" instance=ExtResource("1_p761c")]
 
 [node name="Collision" parent="." index="0"]
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_iy84u")
 
 [node name="Sprite" parent="." index="1"]
