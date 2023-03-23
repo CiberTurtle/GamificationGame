@@ -11,6 +11,10 @@ func _game_start() -> void:
 		spawn_player(player_data)
 
 func _player_died(player: Player) -> void:
+	if player.last_damage_source:
+		if player.last_damage_source.player:
+			player.last_damage_source.player.health = player.last_damage_source.player.base_health
+			player.last_damage_source.player.update_health_bar()
 	var player_data := player.player_data
 	player.queue_free()
 	var tween := create_tween()

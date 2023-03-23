@@ -27,8 +27,9 @@ Consts="*res://scripts/autoloads/consts.gd"
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
 Console="*res://addons/cheatsheet/cheatsheet.tscn"
 SoundBank="*res://addons/sound_bank/scripts/sound_bank.gd"
-SkinDB="*res://scripts/autoloads/skin_db.gd"
 Globals="*res://scripts/autoloads/globals.gd"
+SkinDB="*res://scripts/autoloads/skin_db.gd"
+LevelDB="*res://scripts/autoloads/level_db.gd"
 Game="*res://scripts/autoloads/game.gd"
 
 [debug]

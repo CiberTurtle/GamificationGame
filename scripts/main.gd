@@ -61,6 +61,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_P and event.is_pressed():
 		get_viewport().set_input_as_handled()
 		player_setup.show()
+		player_setup.update()
 		return
 
 var next_item_spawn: PackedScene

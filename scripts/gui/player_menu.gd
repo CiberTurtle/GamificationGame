@@ -1,7 +1,6 @@
 class_name PlayerMenu extends Control
 
 var player_data: PlayerData
-var is_ready := false
 
 #@onready var ready_node: Control = %Ready
 #@onready var controller_name: Button = %ControllerName
@@ -15,7 +14,7 @@ func _ready() -> void:
 	if not player_data: return
 	
 	self_modulate = player_data.color
-	say('On ' + player_data.input.get_name(), true)
+	say('Using ' + player_data.input.get_name(), true)
 	
 	crow_sprite.visible = player_data.is_leader
 	
@@ -40,15 +39,15 @@ func _process(delta: float) -> void:
 		is_first_frame = false
 		return
 	
-	if is_ready:
+	if player_data.is_ready:
 		if player_data.input.is_action_just_pressed('back'):
-			is_ready = false
+			player_data.is_ready = false
 			update_ready()
 			SoundBank.play_ui('ready')
 			return
 	else:
 		if player_data.input.is_action_just_pressed('ok'):
-			is_ready = true
+			player_data.is_ready = true
 			update_ready()
 			SoundBank.play_ui('unready')
 			return
@@ -92,12 +91,12 @@ func say(text: String, auto_hide := false) -> void:
 		say_timer = 2.
 
 func update_ready() -> void:
-	if is_ready:
+	if player_data.is_ready:
 		say('Ready!')
 	else:
 		say_control.hide()
 	
-	ready_button.visible = not is_ready
+	ready_button.visible = not player_data.is_ready
 
 @onready var skin_sprite: NinePatchRect = %SkinSprite
 @onready var skin_name_label: Label = %SkinNameLabel
