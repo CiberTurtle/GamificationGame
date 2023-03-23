@@ -1193,32 +1193,44 @@ offset_bottom = -160.0
 
 [node name="Kill" type="Area2D" parent="."]
 position = Vector2(0, -189)
+collision_layer = 0
+collision_mask = 2144
 script = ExtResource("10_1ma5v")
 damage = 420
+auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill"]
 shape = SubResource("RectangleShape2D_a55yu")
 
 [node name="Kill2" type="Area2D" parent="."]
 position = Vector2(0, 172)
+collision_layer = 0
+collision_mask = 2144
 script = ExtResource("10_1ma5v")
 damage = 420
+auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill2"]
 shape = SubResource("RectangleShape2D_iw3sg")
 
 [node name="Kill3" type="Area2D" parent="."]
 position = Vector2(-304, 1)
+collision_layer = 0
+collision_mask = 2144
 script = ExtResource("10_1ma5v")
 damage = 420
+auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill3"]
 shape = SubResource("RectangleShape2D_uqhmf")
 
 [node name="Kill4" type="Area2D" parent="."]
 position = Vector2(300, 1)
+collision_layer = 0
+collision_mask = 2144
 script = ExtResource("10_1ma5v")
 damage = 420
+auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill4"]
 shape = SubResource("RectangleShape2D_uqhmf")
