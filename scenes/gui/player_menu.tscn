@@ -1,9 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2fhcxbvjpb1s"]
+[gd_scene load_steps=18 format=3 uid="uid://b2fhcxbvjpb1s"]
 
-[ext_resource type="Texture2D" uid="uid://byqnwxhwlwpo3" path="res://content/sprites/chicken.png" id="1_68gw1"]
 [ext_resource type="Script" path="res://scripts/gui/player_menu.gd" id="1_j8lk4"]
-[ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_t3fk7"]
+[ext_resource type="FontFile" uid="uid://nsk6lcjn2ji3" path="res://content/fonts/Montserrat/static/Montserrat-Bold.ttf" id="2_kxapb"]
+[ext_resource type="Script" path="res://scripts/gui/menu.gd" id="4_1fvpe"]
+[ext_resource type="Texture2D" uid="uid://cpgd6r7y3mcir" path="res://content/sprites/gui/tri_down.svg" id="4_1p4wu"]
+[ext_resource type="Texture2D" uid="uid://bvxdyf52cna46" path="res://content/sprites/gui/crown.png" id="5_w5pqu"]
 [ext_resource type="FontFile" uid="uid://dd0s3s2x17crx" path="res://content/fonts/Montserrat/static/Montserrat-Black.ttf" id="5_yeu47"]
+[ext_resource type="Texture2D" uid="uid://cira3q5erv0x5" path="res://content/sprites/gui/gamepad_n.svg" id="6_bsm4y"]
+[ext_resource type="Texture2D" uid="uid://b3dv3plhgksqa" path="res://content/sprites/skins/chicken.png" id="8_barnc"]
+[ext_resource type="Texture2D" uid="uid://dmc0mfvfwwx2i" path="res://content/sprites/gui/tri_right.svg" id="8_qynhu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyqkj"]
 
@@ -20,7 +25,7 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ocha"]
 
 [sub_resource type="Theme" id="Theme_gky8m"]
-default_font = ExtResource("1_t3fk7")
+default_font = ExtResource("2_kxapb")
 default_font_size = 24
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/fonts/font = ExtResource("5_yeu47")
@@ -35,60 +40,148 @@ Label/colors/font_color = Color(0, 0, 0, 1)
 content_margin_left = 24.0
 content_margin_top = 24.0
 content_margin_right = 24.0
-content_margin_bottom = 24.0
+content_margin_bottom = 12.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 12
 border_width_top = 12
 border_width_right = 12
-border_width_bottom = 12
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwfeo"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
 [node name="Panel" type="PanelContainer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -228.0
-offset_top = -408.0
-offset_right = 228.0
-grow_horizontal = 2
-grow_vertical = 0
+custom_minimum_size = Vector2(360, 0)
+offset_right = 360.0
+offset_bottom = 255.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_gky8m")
 theme_override_styles/panel = SubResource("StyleBoxFlat_l083n")
 script = ExtResource("1_j8lk4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Floating" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Say" type="Control" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -104.0
+offset_bottom = -72.0
+grow_horizontal = 2
+
+[node name="Panel" type="PanelContainer" parent="Floating/Say"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vwfeo")
+
+[node name="SayLabel" type="Label" parent="Floating/Say/Panel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Picking a stage..."
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="TriDown" type="TextureRect" parent="Floating/Say"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = 12.0
+offset_right = 24.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("4_1p4wu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrownSprite" type="TextureRect" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("5_w5pqu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Menu" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
+script = ExtResource("4_1fvpe")
 
-[node name="Skin" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 128)
+[node name="Skin" type="Control" parent="Menu"]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Character" type="TextureRect" parent="VBoxContainer/Skin"]
-custom_minimum_size = Vector2(256, 192)
+[node name="Hint" type="HBoxContainer" parent="Menu/Skin"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -96.0
-offset_right = 128.0
-offset_bottom = 96.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_68gw1")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -109.0
+offset_bottom = 34.0
+grow_horizontal = 0
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="Label" type="Label" parent="Menu/Skin/Hint"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Menu/Skin/Hint"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_bsm4y")
+expand_mode = 1
 stretch_mode = 5
 
-[node name="LeftArrow" type="TextureRect" parent="VBoxContainer/Skin/Character"]
-visible = false
+[node name="SkinSprite" type="NinePatchRect" parent="Menu/Skin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -192.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("8_barnc")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Left" type="TextureRect" parent="Menu/Skin/SkinSprite"]
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -97,8 +190,13 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
+texture = ExtResource("8_qynhu")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
 
-[node name="LeftLabel" type="Label" parent="VBoxContainer/Skin/Character"]
+[node name="LeftLabel" type="Label" parent="Menu/Skin/SkinSprite"]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -111,7 +209,25 @@ theme_override_font_sizes/font_size = 64
 text = "←"
 vertical_alignment = 1
 
-[node name="LeftLabel2" type="Label" parent="VBoxContainer/Skin/Character"]
+[node name="Right" type="TextureRect" parent="Menu/Skin/SkinSprite"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("8_qynhu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="Label" parent="Menu/Skin/SkinSprite"]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -128,17 +244,21 @@ text = "→"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
+[node name="SkinNameLabel" type="Label" parent="Menu/Skin"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Chicken"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Chicken"
-flat = true
-
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="ReadyButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Ready?"

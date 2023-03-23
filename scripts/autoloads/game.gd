@@ -10,8 +10,7 @@ var inputs: Array[DeviceInput] = [
 	DeviceInput.new(-1)
 ]
 
-func get_unassigned_inputs() -> Array[DeviceInput]:
-	return inputs.filter(func(i): return not Game.player_datas.any(func(pd): return pd.i.device == i.device))
+var unassigned_inputs: Array[int] = []
 
 var next_player_color_index := 0
 func get_next_player_color() -> Color:
@@ -40,6 +39,7 @@ func joy_connection_changed(device: int, connected: bool) -> void:
 		inputs.append(DeviceInput.new(device))
 		return
 	else:
+		return
 		var inputs := inputs.filter(func(i: DeviceInput): return i.device == device)
 		assert(inputs.size() == 1)
 		inputs.erase(inputs[0])

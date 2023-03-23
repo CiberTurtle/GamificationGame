@@ -55,3 +55,6 @@ func play(name: String, position: Vector2) -> void:
 	player.stream = sound
 	player.position = position
 	player.play()
+
+func play_ui(name: String) -> void:
+	play(name, Vector2.ZERO)

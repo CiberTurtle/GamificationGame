@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 		all_ready_timer = 0.
 
 func add_player_menu(player_data: PlayerData) -> void:
+	print('add')
 	var menu := player_menu.duplicate()
 	menu.player_data = player_data
 	player_list.add_child(menu)

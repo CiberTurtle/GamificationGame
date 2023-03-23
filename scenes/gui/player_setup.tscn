@@ -1,34 +1,217 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt82bcq85a27b"]
+[gd_scene load_steps=8 format=3 uid="uid://bt82bcq85a27b"]
 
 [ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_duedb"]
 [ext_resource type="Script" path="res://scripts/gui/player_setup.gd" id="2_62bbn"]
 [ext_resource type="PackedScene" uid="uid://b2fhcxbvjpb1s" path="res://scenes/gui/player_menu.tscn" id="2_hbusn"]
+[ext_resource type="FontFile" uid="uid://dd0s3s2x17crx" path="res://content/fonts/Montserrat/static/Montserrat-Black.ttf" id="3_54f37"]
+[ext_resource type="Texture2D" uid="uid://c7ccsrqpfjh4e" path="res://content/sprites/gui/level_thumbnail_placeholder.png" id="3_e45ni"]
 
 [sub_resource type="Theme" id="Theme_khkkg"]
 default_font = ExtResource("1_duedb")
 default_font_size = 24
 Label/colors/font_color = Color(0.188235, 0.172549, 0.180392, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3vve"]
-bg_color = Color(0.980392, 0.698039, 0.227451, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slxm2"]
 
-[node name="PlayerSetup" type="PanelContainer"]
+[node name="PlayerSetup" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_khkkg")
-theme_override_styles/panel = SubResource("StyleBoxFlat_q3vve")
 script = ExtResource("2_62bbn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.980392, 0.698039, 0.227451, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="TurnLabel" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.290196, 0.227451, 1)
+theme_override_fonts/font = ExtResource("3_54f37")
+theme_override_font_sizes/font_size = 64
+text = "Player 1's turn"
+
+[node name="PromptLabel" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_54f37")
+theme_override_font_sizes/font_size = 64
+text = "Pick a stage"
+
+[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LevelButton" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_e45ni")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stage Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelButton2" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton2"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_e45ni")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stage Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelButton3" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton3"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_e45ni")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stage Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelButton4" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton4"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_e45ni")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stage Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelButton5" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton5"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_e45ni")
+
+[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Stage Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayerList" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -255.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="PlayerSetup" parent="PlayerList" instance=ExtResource("2_hbusn")]
-custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+offset_right = 515.0
+offset_bottom = 34.0
+text = "psst... rayce, press L to load a level quickly"
