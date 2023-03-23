@@ -20,7 +20,7 @@ shape = SubResource("RectangleShape2D_6g5yk")
 texture = ExtResource("2_ojlfi")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
-ticks = 0.0
+ticks = 60.0
 
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 60.0
@@ -28,7 +28,7 @@ ticks = 60.0
 [node name="Repeat" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("4_rw213")
 count = 20
-delay_btw = 3
+delay_btw = 2
 
 [node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
 script = ExtResource("3_eqlbe")

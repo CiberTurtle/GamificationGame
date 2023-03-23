@@ -21,7 +21,7 @@ texture = ExtResource("2_wwgol")
 
 [node name="Throw" type="Node2D" parent="OnUse" index="0"]
 script = ExtResource("3_5euxv")
-velocity = Vector2(128, 128)
+velocity = Vector2(128, -128)
 
 [node name="DropLootable" type="Node2D" parent="OnDeath" index="0"]
 script = ExtResource("3_mdjpy")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ca5l20exg2t45"]
+[gd_scene load_steps=55 format=3 uid="uid://ca5l20exg2t45"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_xrkl5"]
 [ext_resource type="TileSet" uid="uid://bruvdxi3lks2q" path="res://resources/tilesets/wizards_shop.tres" id="2_lstcp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cjnrjsdvuyr02" path="res://content/sprites/Pearl.png" id="4_x0es4"]
 [ext_resource type="Script" path="res://scripts/double_jump.gd" id="5_3r7a1"]
 [ext_resource type="Texture2D" uid="uid://bcx4x3w7c7ku6" path="res://content/sprites/Tiny Wizard Orange.png" id="6_vt7sx"]
+[ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="9_df71f"]
 
 [sub_resource type="Animation" id="Animation_2yuvp"]
 resource_name = "RESET"
@@ -1172,6 +1173,12 @@ shape = SubResource("CircleShape2D_jknb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Table Parent/Orb4"]
 texture = ExtResource("4_x0es4")
+
+[node name="CrateSpawner" parent="." instance=ExtResource("9_df71f")]
+offset_left = -239.0
+offset_top = -175.0
+offset_right = 239.0
+offset_bottom = -160.0
 
 [connection signal="area_entered" from="Table Parent/Orb1/Area2D" to="Table Parent/Orb1/Area2D" method="_on_area_entered"]
 [connection signal="body_entered" from="Table Parent/Orb1/Area2D" to="Table Parent/Orb1/Area2D" method="_on_body_entered"]
