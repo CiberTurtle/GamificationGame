@@ -1,17 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvv3ndfxevf4p"]
+[gd_scene load_steps=7 format=3 uid="uid://bvv3ndfxevf4p"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_qlnyn"]
 [ext_resource type="Texture2D" uid="uid://cmyvjvwd6x0kc" path="res://content/sprites/Hook.png" id="2_el5oo"]
 [ext_resource type="Script" path="res://scripts/parts/line.gd" id="2_ly2n2"]
 [ext_resource type="Script" path="res://scripts/parts/falls.gd" id="3_8cuhy"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ie4ou"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0852a"]
+radius = 4.0
+
 [node name="hook" instance=ExtResource("1_qlnyn")]
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_el5oo")
 
+[node name="Collision" parent="." index="1"]
+shape = SubResource("CircleShape2D_ie4ou")
+
 [node name="PassiveHitbox" parent="." index="2"]
 damage = 0
+
+[node name="Collision" parent="PassiveHitbox" index="0"]
+shape = SubResource("CircleShape2D_0852a")
 
 [node name="Knockback" parent="PassiveHitbox" index="1"]
 x_knockback = -256.0

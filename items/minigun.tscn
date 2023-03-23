@@ -37,7 +37,7 @@ scene = ExtResource("4_sridm")
 
 [node name="Recoil" type="Node2D" parent="OnUse/Repeat" index="1"]
 script = ExtResource("6_h5h3f")
-velocity = Vector2(-30, -15)
+velocity = Vector2(-30, -20)
 add_to_y_if_up = true
 
 [node name="Durability" type="Node2D" parent="OnUse" index="2"]
