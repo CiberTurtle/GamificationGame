@@ -8,6 +8,8 @@ signal death()
 @export_placeholder('Give me a name...') var item_name: String
 @export_range(0, 100, 1, 'or_greater', 'suffix:hp') var base_health := 50
 @onready var health := base_health
+@export var despawn_time:= 60.0
+@onready var despawn_timer:=despawn_time
 
 @export_group('Common')
 @export_range(0, 128, 1, 'or_greater', 'suffix:px/s') var grounded_dec := 512.
@@ -34,6 +36,7 @@ func check_use() -> bool:
 	return true
 
 func _pickup() -> void:
+	despawn_timer = despawn_time
 	SoundBank.play('pickup.' + name, position)
 
 func _drop() -> void:
@@ -54,6 +57,9 @@ func _process_held(delta: float) -> void:
 
 func _process_notheld(delta: float) -> void:
 	process_notheld_gravity(delta)
+	despawn_timer -= delta
+	if despawn_timer < 0:
+		die()
 
 func process_notheld_gravity(delta: float) -> void:
 	velocity.y += gravity*delta

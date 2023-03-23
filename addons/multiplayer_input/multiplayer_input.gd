@@ -163,5 +163,12 @@ func get_action_name(device: int, action: StringName) -> StringName:
 func _is_joypad_event(event: InputEvent) -> bool:
 	return event is InputEventJoypadButton or event is InputEventJoypadMotion
 
-func _is_joypad_connected() -> bool:
-	return false
+func is_device_connected(device: int) -> bool:
+	if device == -1: return true
+	if device < 0: return false
+	return Input.get_connected_joypads().has(device)
+
+func is_device_known(device: int) -> bool:
+	if device == -1: return true
+	if device < 0: return false
+	return is_device_connected(device) && Input.is_joy_known(device)

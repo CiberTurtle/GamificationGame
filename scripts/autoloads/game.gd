@@ -10,6 +10,8 @@ var inputs: Array[DeviceInput] = [
 	DeviceInput.new(-1)
 ]
 
+var unassigned_inputs: Array[int] = []
+
 var next_player_color_index := 0
 func get_next_player_color() -> Color:
 	next_player_color_index = next_player_color_index%Consts.player_colors.size()
@@ -36,4 +38,24 @@ func joy_connection_changed(device: int, connected: bool) -> void:
 	if connected:
 		inputs.append(DeviceInput.new(device))
 		return
-	
+	else:
+		return
+		var inputs := inputs.filter(func(i: DeviceInput): return i.device == device)
+		assert(inputs.size() == 1)
+		inputs.erase(inputs[0])
+		for player_data in player_datas:
+			if player_data.input.is_device_connected():
+				Game.set_pause()
+
+var pause_locks := 0
+func update_pause() -> void:
+	assert(pause_locks >= 0)
+	get_tree().paused = pause_locks > 0
+
+func set_pause() -> void:
+	pause_locks += 1
+	update_pause()
+
+func unset_pause() -> void:
+	pause_locks -= 1
+	update_pause()

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16.0px"
+   height="16.0px"
+   viewBox="0 0 16.0 16.0"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="gampad_buttons.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview137"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="53.894347"
+     inkscape:cx="6.0303171"
+     inkscape:cy="8.3125601"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid260" />
+  </sodipodi:namedview>
+  <defs
+     id="defs132" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:none;stroke:#ffffff;stroke-width:0.999997;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path926-5"
+       cx="12.5"
+       cy="8.0000019"
+       rx="2.0000005"
+       ry="2.0000019" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path926-5"
+       id="use1418"
+       transform="translate(-4.5,-4.5)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path926-5"
+       id="use1420"
+       transform="translate(-9)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path926-5"
+       id="use1422"
+       transform="translate(-4.5,4.5)" />
+  </g>
+</svg>

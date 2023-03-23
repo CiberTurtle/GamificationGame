@@ -340,5 +340,5 @@ void fragment() {
 		col = u_col;
 	}
 	
-    COLOR = col;
+    COLOR.rgb = col.rgb;
 }

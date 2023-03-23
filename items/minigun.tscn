@@ -12,7 +12,6 @@
 size = Vector2(25, 10)
 
 [node name="Minigun" instance=ExtResource("1_0vcfo")]
-collision_layer = 112
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_6g5yk")
@@ -21,7 +20,7 @@ shape = SubResource("RectangleShape2D_6g5yk")
 texture = ExtResource("2_ojlfi")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
-ticks = 0.0
+ticks = 60.0
 
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 60.0
@@ -29,7 +28,7 @@ ticks = 60.0
 [node name="Repeat" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("4_rw213")
 count = 20
-delay_btw = 3
+delay_btw = 2
 
 [node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
 script = ExtResource("3_eqlbe")
@@ -37,7 +36,7 @@ scene = ExtResource("4_sridm")
 
 [node name="Recoil" type="Node2D" parent="OnUse/Repeat" index="1"]
 script = ExtResource("6_h5h3f")
-velocity = Vector2(-30, -15)
+velocity = Vector2(-30, -20)
 add_to_y_if_up = true
 
 [node name="Durability" type="Node2D" parent="OnUse" index="2"]

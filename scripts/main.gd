@@ -18,7 +18,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	load_level_dialog.title = "Pick a level to load - Press 'L' to open this again"
 	spawn_item_dialog.title = "Pick an item then click to spawn it - Press 'I' to open this again"
-	load_level_dialog.popup_centered()
+	#load_level_dialog.popup_centered()
 	
 	Console.register('load', func(): load_level_dialog.popup_centered(); Console.close())
 	Console.register('spawn', func(): spawn_item_dialog.popup_centered(); Console.close())
@@ -27,7 +27,7 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(update_viewport)
 	update_viewport()
 	
-	Input.add_joy_mapping('030000006f0e00008101000011010000,PDP CO. LTD. Faceoff Deluxe Wired Pro Controller for Nintendo Switch,a:b2,b:b1,x:b3,y:b0,back:b8,guide:b12,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Linux,', true)
+	Input.add_joy_mapping('0300fb2d6f0e00008101000011010000,Faceoff Deluxe,a:b1,b:b2,x:b0,y:b3,back:b8,guide:b12,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Linux', true)
 
 func _process(delta: float) -> void:
 	update_viewport()
@@ -84,22 +84,11 @@ func load_level(scene: PackedScene) -> void:
 	game_viewport.size.y = level.height
 	game_viewport_container.scale = Vector2(level.size, level.size)
 	
-	#spawn_players()
-	
 	Game.start.emit()
 	
 	%Music.stream = level.music
 	%Music.play()
-
-func spawn_players() -> void:
-	for player_data in Game.player_datas:
-		var player := player_scene.instantiate() as Player
-		player.player_data = player_data
-		
-		var spawns := Globals.level.find_child('PlayerSpawns')
-		player.global_position = spawns.get_child(randi()%spawns.get_child_count()).position
-		
-		Globals.world.add_child(player)
+	player_setup.hide()
 
 func spawn_item() -> void:
 	var item := next_item_spawn.instantiate() as Item

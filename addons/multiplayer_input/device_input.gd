@@ -51,3 +51,9 @@ func is_action_just_released(action: StringName, exact_match: bool = false) -> b
 
 func is_action_pressed(action: StringName, exact_match: bool = false) -> bool:
 	return MultiplayerInput.is_action_pressed(device, action, exact_match)
+
+func is_device_connected() -> bool:
+	return MultiplayerInput.is_device_connected(device)
+
+func is_device_known() -> bool:
+	return MultiplayerInput.is_device_known(device)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://c620cs81wjqto"]
+[gd_scene load_steps=17 format=3 uid="uid://c620cs81wjqto"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_pe0yc"]
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_825yv"]
+[ext_resource type="AudioStream" uid="uid://ibwlhbr6g8o6" path="res://content/music/dessert.ogg" id="2_ryjt2"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_redtn"]
 [ext_resource type="Texture2D" uid="uid://m4ueg18nhbvr" path="res://content/sprites/Boat 2.png" id="4_p5dik"]
 [ext_resource type="Texture2D" uid="uid://b8vtrpoovh248" path="res://content/sprites/Desert.png" id="5_7kgar"]
@@ -13,7 +14,7 @@ size = Vector2(80, 10)
 
 [sub_resource type="Animation" id="Animation_mglm7"]
 resource_name = "Desert Platform"
-length = 20.0
+length = 18.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -92,6 +93,7 @@ size = Vector2(190, 17)
 
 [node name="Desert" type="Node2D"]
 script = ExtResource("1_pe0yc")
+music = ExtResource("2_ryjt2")
 metadata/_edit_horizontal_guides_ = [-136.0, 136.0]
 metadata/_edit_vertical_guides_ = [-240.0, 240.0]
 
