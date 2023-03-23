@@ -12,7 +12,7 @@
 size = Vector2(7, 15)
 
 [node name="Rod" type="CharacterBody2D"]
-collision_layer = 112
+collision_layer = 48
 floor_constant_speed = true
 floor_max_angle = 1.55334
 script = ExtResource("1_k1isa")
