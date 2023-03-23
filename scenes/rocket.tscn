@@ -1,20 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1tch5xt8s08k"]
+[gd_scene load_steps=11 format=3 uid="uid://dl1uj7qna2d4v"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_2d4hs"]
-[ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_eojtk"]
 [ext_resource type="Texture2D" uid="uid://2vsff2bn2xis" path="res://content/sprites/Rocket.png" id="2_olmhx"]
 [ext_resource type="PackedScene" uid="uid://ciiyf1ncu3dr0" path="res://scenes/rocket_explosion.tscn" id="3_bgpmp"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_8fhx0"]
+[ext_resource type="Script" path="res://scripts/parts/spawn.gd" id="5_bxxey"]
+[ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="6_v7imy"]
 
 [sub_resource type="Curve" id="Curve_l00u6"]
 max_value = 600.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 500), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(1, 500), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1eo8m"]
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7td1f"]
-radius = 4.0
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urh7w"]
+radius = 16.0
 
 [node name="Rocket" instance=ExtResource("1_2d4hs")]
 lifetime = 120
@@ -22,16 +27,32 @@ speed_over_lifetime = SubResource("Curve_l00u6")
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_olmhx")
+flip_h = true
 
 [node name="Collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_1eo8m")
 
 [node name="PassiveHitbox" parent="." index="2"]
-damage = 0
+damage = 20
 
 [node name="Collision" parent="PassiveHitbox" index="0"]
 shape = SubResource("CircleShape2D_7td1f")
 
-[node name="Shoot" type="Node2D" parent="OnDeath" index="0"]
-script = ExtResource("2_eojtk")
+[node name="Spawn" type="Node2D" parent="OnDeath" index="0"]
+script = ExtResource("5_bxxey")
 scene = ExtResource("3_bgpmp")
+
+[node name="Hitbox" type="Area2D" parent="OnDeath" index="1"]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("5_8fhx0")
+damage = 50
+
+[node name="Collision" type="CollisionShape2D" parent="OnDeath/Hitbox" index="0"]
+shape = SubResource("CircleShape2D_urh7w")
+debug_color = Color(0.996078, 0, 0.156863, 0.419608)
+
+[node name="Knockback" type="Node2D" parent="OnDeath/Hitbox" index="1"]
+script = ExtResource("6_v7imy")
+apply_x_outward = true
+y_knockback = -100.0

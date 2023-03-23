@@ -193,7 +193,7 @@ position = Vector2(0, 132)
 collision_layer = 0
 collision_mask = 96
 script = ExtResource("7_286mb")
-damage = 100
+damage = 420
 auto_attack = true
 
 [node name="Collision" type="CollisionShape2D" parent="Lava"]

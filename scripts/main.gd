@@ -14,6 +14,8 @@ class_name Main extends Node
 func _enter_tree() -> void:
 	Globals.main = self
 	Globals.world = %World
+	
+	Game.end.connect(_game_end)
 
 func _ready() -> void:
 	load_level_dialog.title = "Pick a level to load - Press 'L' to open this again"
@@ -28,9 +30,16 @@ func _ready() -> void:
 	update_viewport()
 	
 	Input.add_joy_mapping('0300fb2d6f0e00008101000011010000,Faceoff Deluxe,a:b1,b:b2,x:b0,y:b3,back:b8,guide:b12,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Linux', true)
+	
+	player_setup.open()
 
 func _process(delta: float) -> void:
 	update_viewport()
+
+func _game_end() -> void:
+	player_setup.open()
+	for child in Globals.world.get_children():
+		child.queue_free()
 
 func update_viewport() -> void:
 	var inner := Vector2(1920, 1080)

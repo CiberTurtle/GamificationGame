@@ -357,6 +357,11 @@ func die() -> void:
 	SoundBank.play('death.player', position)
 	death.emit()
 	Game.player_died.emit(self)
+	
+	var spawn_fx := preload('res://scenes/fx/death_puff.tscn').instantiate() as Node2D
+	spawn_fx.global_position = global_position
+	spawn_fx.modulate = player_data.color
+	Globals.world.add_child(spawn_fx)
 
 func update_health_bar() -> void:
 	health_bar.value = health

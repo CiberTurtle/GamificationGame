@@ -1,13 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciiyf1ncu3dr0"]
+[gd_scene load_steps=5 format=3 uid="uid://c57kwhkp8uxr5"]
 
-[ext_resource type="Shader" path="res://shaders/clean_edge.gdshader" id="1_73pyt"]
-[ext_resource type="Texture2D" uid="uid://ud3a1r2uucy5" path="res://content/sprites/fx/explosion_lg.png" id="5_gtarg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_smk2q"]
-shader = ExtResource("1_73pyt")
-shader_parameter/highestColor = Color(1, 1, 1, 1)
-shader_parameter/similarThreshold = 0.0
-shader_parameter/lineWidth = 1.0
+[ext_resource type="Texture2D" uid="uid://ud3a1r2uucy5" path="res://content/sprites/fx/explosion_lg.png" id="1_4x25n"]
 
 [sub_resource type="Animation" id="Animation_8qtpg"]
 length = 0.001
@@ -55,21 +48,19 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2e4pn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ilou"]
 _data = {
 "RESET": SubResource("Animation_8qtpg"),
 "explode": SubResource("Animation_67ohd")
 }
 
 [node name="ExplosionMD" type="Sprite2D"]
-material = SubResource("ShaderMaterial_smk2q")
-scale = Vector2(2, 2)
-texture = ExtResource("5_gtarg")
+texture = ExtResource("1_4x25n")
 hframes = 6
 vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "explode"
 libraries = {
-"": SubResource("AnimationLibrary_2e4pn")
+"": SubResource("AnimationLibrary_1ilou")
 }

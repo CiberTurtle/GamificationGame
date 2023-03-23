@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c26yfivgeteet"]
+[gd_scene load_steps=9 format=3 uid="uid://c26yfivgeteet"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_uwg6s"]
 [ext_resource type="Texture2D" uid="uid://r4mtibcoveso" path="res://content/sprites/crate.png" id="2_wwgol"]
 [ext_resource type="Script" path="res://scripts/parts/throw.gd" id="3_5euxv"]
 [ext_resource type="Script" path="res://scripts/parts/drop_lootable.gd" id="3_mdjpy"]
 [ext_resource type="Resource" uid="uid://efu0kn5211cm" path="res://resources/loottable.tres" id="4_kcgy4"]
+[ext_resource type="Script" path="res://scripts/parts/spawn.gd" id="6_113ce"]
+[ext_resource type="PackedScene" uid="uid://bm28nig6cvk1i" path="res://scenes/fx/puff.tscn" id="7_7ikhy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05edk"]
 size = Vector2(16, 16)
@@ -23,6 +25,10 @@ texture = ExtResource("2_wwgol")
 script = ExtResource("3_5euxv")
 velocity = Vector2(128, -128)
 
-[node name="DropLootable" type="Node2D" parent="OnDeath" index="0"]
+[node name="Spawn" type="Node2D" parent="OnDeath" index="0"]
+script = ExtResource("6_113ce")
+scene = ExtResource("7_7ikhy")
+
+[node name="DropLootable" type="Node2D" parent="OnDeath" index="1"]
 script = ExtResource("3_mdjpy")
 loottable = ExtResource("4_kcgy4")
