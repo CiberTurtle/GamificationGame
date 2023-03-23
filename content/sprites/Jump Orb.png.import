@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dijlhlklll2j2"
-path="res://.godot/imported/Green Wizard Skin.png-05049329c709e118838e8ab518536734.ctex"
+uid="uid://cdhwycjik8o6o"
+path="res://.godot/imported/Jump Orb.png-d232a50a92a41275f13532186dbb25e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/Green Wizard Skin.png"
-dest_files=["res://.godot/imported/Green Wizard Skin.png-05049329c709e118838e8ab518536734.ctex"]
+source_file="res://content/sprites/Jump Orb.png"
+dest_files=["res://.godot/imported/Jump Orb.png-d232a50a92a41275f13532186dbb25e4.ctex"]
 
 [params]
 

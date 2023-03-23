@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ca5l20exg2t45"]
+[gd_scene load_steps=60 format=3 uid="uid://dm1sm2o0stvea"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_xrkl5"]
 [ext_resource type="Texture2D" uid="uid://dirgo6oo15hva" path="res://content/sprites/Wizard Background.png" id="2_e5g7e"]
@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dmj0ycn0iwksk" path="res://content/sprites/Tiny Wizard Purple.png" id="3_nn3u4"]
 [ext_resource type="Texture2D" uid="uid://pxrywokhlp32" path="res://content/sprites/tilesets/wizards_shop.png" id="3_xms1v"]
 [ext_resource type="Texture2D" uid="uid://caxrktumb7b63" path="res://content/sprites/Rainbow Wizard.png" id="4_0su0g"]
-[ext_resource type="Texture2D" uid="uid://cjnrjsdvuyr02" path="res://content/sprites/Pearl.png" id="4_x0es4"]
 [ext_resource type="Script" path="res://scripts/double_jump.gd" id="5_3r7a1"]
 [ext_resource type="Texture2D" uid="uid://bcx4x3w7c7ku6" path="res://content/sprites/Tiny Wizard Orange.png" id="6_vt7sx"]
+[ext_resource type="Texture2D" uid="uid://cdhwycjik8o6o" path="res://content/sprites/Jump Orb.png" id="8_migxt"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="9_df71f"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="10_1ma5v"]
 
@@ -166,7 +166,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7k3"]
-size = Vector2(48, 16)
+size = Vector2(48, 3)
 
 [sub_resource type="Animation" id="Animation_ia4ne"]
 resource_name = "RESET"
@@ -617,6 +617,7 @@ script = ExtResource("1_xrkl5")
 metadata/finished = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.556863, 0.556863, 0.556863, 1)
 offset_left = -304.0
 offset_top = -176.0
 offset_right = 306.0
@@ -678,6 +679,7 @@ layer_0/tile_data = PackedInt32Array(786431, 1, 0, 720896, 1, 0, -20, 1, 0, 6551
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-572, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Carpets"]
 autoplay = "move"
@@ -700,10 +702,12 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-380, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-476, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Carpets"]
 position = Vector2(-572, -72)
@@ -720,6 +724,7 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-668, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Carpets"]
 position = Vector2(-764, -72)
@@ -730,6 +735,7 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-764, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D6" type="Sprite2D" parent="Carpets"]
 position = Vector2(-860, -72)
@@ -740,6 +746,7 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Carpets"]
 position = Vector2(-860, -72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Carpets2" type="AnimatableBody2D" parent="."]
 
@@ -751,6 +758,7 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="Carpets2"]
 position = Vector2(380, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -758,9 +766,11 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(380, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="Carpets2"]
 position = Vector2(476, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -768,9 +778,11 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(476, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Carpets2"]
 position = Vector2(572, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -778,9 +790,11 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(572, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D4" type="Sprite2D" parent="Carpets2"]
 position = Vector2(668, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -788,9 +802,11 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(668, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Carpets2"]
 position = Vector2(764, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -798,9 +814,11 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(764, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Sprite2D6" type="Sprite2D" parent="Carpets2"]
 position = Vector2(860, 72)
+scale = Vector2(-1, 1)
 texture = ExtResource("3_xms1v")
 region_enabled = true
 region_rect = Rect2(80, 0, 48, 15.8101)
@@ -808,6 +826,7 @@ region_rect = Rect2(80, 0, 48, 15.8101)
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Carpets2"]
 position = Vector2(860, 72)
 shape = SubResource("RectangleShape2D_5l7k3")
+one_way_collision = true
 
 [node name="Table Parent" type="Node2D" parent="."]
 
@@ -899,7 +918,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="Table Parent/Orb1"]
-texture = ExtResource("4_x0es4")
+texture = ExtResource("8_migxt")
 
 [node name="Area2D" type="Area2D" parent="Table Parent/Orb1"]
 collision_layer = 0
@@ -1003,7 +1022,7 @@ cooldown = 1.0
 shape = SubResource("CircleShape2D_jknb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Table Parent/Orb2"]
-texture = ExtResource("4_x0es4")
+texture = ExtResource("8_migxt")
 
 [node name="Orb3" type="Node2D" parent="Table Parent"]
 position = Vector2(160, -80)
@@ -1097,7 +1116,7 @@ cooldown = 1.0
 shape = SubResource("CircleShape2D_jknb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Table Parent/Orb3"]
-texture = ExtResource("4_x0es4")
+texture = ExtResource("8_migxt")
 
 [node name="Orb4" type="Node2D" parent="Table Parent"]
 position = Vector2(160, 80)
@@ -1191,7 +1210,7 @@ cooldown = 1.0
 shape = SubResource("CircleShape2D_jknb2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Table Parent/Orb4"]
-texture = ExtResource("4_x0es4")
+texture = ExtResource("8_migxt")
 
 [node name="CrateSpawner" parent="." instance=ExtResource("9_df71f")]
 offset_left = -239.0
