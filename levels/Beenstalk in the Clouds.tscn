@@ -136,16 +136,16 @@ layer_0/tile_data = PackedInt32Array(-131074, 917504, 0, -131075, 917504, 0, -13
 [node name="PlayerSpawns" type="Node2D" parent="."]
 
 [node name="PlayerSpawn1" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(0, -72)
+position = Vector2(-240, -59)
 
 [node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(0, 18)
+position = Vector2(166, 82)
 
 [node name="PlayerSpawn3" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(-240, -36)
+position = Vector2(240, -62)
 
 [node name="PlayerSpawn4" type="Marker2D" parent="PlayerSpawns"]
-position = Vector2(240, -34)
+position = Vector2(-183, 82)
 
 [node name="CrateSpawner" parent="." instance=ExtResource("3_4cc5i")]
 offset_left = -289.0
