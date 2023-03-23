@@ -91,6 +91,10 @@ func reset_movement() -> void:
 var input_move := Vector2.ZERO
 var input_jump := false
 func process_inputs() -> void:
+	input_move = Vector2.ZERO
+	input_jump = false
+	if not input.is_device_connected(): return
+	
 	input_move.x = input.get_axis('left', 'right')
 	input_move.y = input.get_axis('up', 'down')
 	
@@ -106,8 +110,11 @@ var speed_extra := 0.
 var speed_vertical := 0.
 var direction := 1.
 func _physics_process(delta: float) -> void:
+	last_damage_timer += delta
 	if inv_timer > 0.:
 		inv_timer -= delta
+	
+	last_damage_timer -= delta
 	
 	if input_move.x != 0:
 		direction = sign(input_move.x)
@@ -322,18 +329,24 @@ func try_drop_item() -> bool:
 	return true
 
 var inv_timer := -1.
+var last_damage_source: PlayerData
+var last_damage_timer := 0.
 func take_damage(damage: int, source: PlayerData) -> bool:
 	if health <= 0: return false # already dead, don't die again
-	if inv_timer > 0.: return false # is invulerable, don't take damage
+	if inv_timer > 0. and damage < 420: return false # is invulerable, don't take damage
 	if is_instance_valid(source) and source.guid == player_data.guid: return false # hitting it's self, don't
+	
+	if source:
+		last_damage_source = source
+	last_damage_timer = 0.
 	
 	health -= damage
 	update_health_bar()
 	
-	if damage >= 30:
+	if damage > 30:
 		SoundBank.play('hit.player', position)
 	else:
-		SoundBank.play('hit.big.player', position)
+		SoundBank.play('hit.player.big', position)
 	
 	if health <= 0:
 		die()
@@ -344,9 +357,6 @@ func die() -> void:
 	SoundBank.play('death.player', position)
 	death.emit()
 	Game.player_died.emit(self)
-	# placeholder
-	#health = base_health
-	#update_health_bar()
 
 func update_health_bar() -> void:
 	health_bar.value = health
