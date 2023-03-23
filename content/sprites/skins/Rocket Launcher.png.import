@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckvr52w04t3ph"
-path="res://.godot/imported/Purple Wizard Skin-sheet.png-905dc28f57b74fd3e60c37ee404068d3.ctex"
+uid="uid://btdstyj050qwv"
+path="res://.godot/imported/Rocket Launcher.png-b0da8a6be7165409bbeced34429c6e09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/sprites/skins/Purple Wizard Skin-sheet.png"
-dest_files=["res://.godot/imported/Purple Wizard Skin-sheet.png-905dc28f57b74fd3e60c37ee404068d3.ctex"]
+source_file="res://content/sprites/skins/Rocket Launcher.png"
+dest_files=["res://.godot/imported/Rocket Launcher.png-b0da8a6be7165409bbeced34429c6e09.ctex"]
 
 [params]
 
