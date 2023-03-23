@@ -84,22 +84,11 @@ func load_level(scene: PackedScene) -> void:
 	game_viewport.size.y = level.height
 	game_viewport_container.scale = Vector2(level.size, level.size)
 	
-	#spawn_players()
-	
 	Game.start.emit()
 	
 	%Music.stream = level.music
 	%Music.play()
-
-func spawn_players() -> void:
-	for player_data in Game.player_datas:
-		var player := player_scene.instantiate() as Player
-		player.player_data = player_data
-		
-		var spawns := Globals.level.find_child('PlayerSpawns')
-		player.global_position = spawns.get_child(randi()%spawns.get_child_count()).position
-		
-		Globals.world.add_child(player)
+	player_setup.hide()
 
 func spawn_item() -> void:
 	var item := next_item_spawn.instantiate() as Item

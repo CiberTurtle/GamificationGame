@@ -103,4 +103,6 @@ func update_ready() -> void:
 @onready var skin_name_label: Label = %SkinNameLabel
 func update_skin() -> void:
 	skin_sprite.texture = SkinDB.skins[player_data.skin_index]
+	skin_sprite.region_rect = SkinDB.get_skin_region(skin_sprite.texture, player_data.color_index)
+	skin_sprite.region_rect.size = Vector2(32, 32)
 	skin_name_label.text = SkinDB.skin_names[player_data.skin_index]

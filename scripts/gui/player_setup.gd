@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 			all_ready_timer = 0.
 			for menu in player_list.get_children():
 				menu.is_ready = false
+				menu.update_ready()
 			finish.emit()
 			hide()
 			return

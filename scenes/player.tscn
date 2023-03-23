@@ -38,6 +38,8 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 	sprite.texture = SkinDB.skins[player.player_data.skin_index]
+	sprite.region_enabled = true
+	sprite.region_rect = SkinDB.get_skin_region(sprite.texture, player.player_data.color_index)
 
 var time := 0.
 func _process(delta: float) -> void:
@@ -56,7 +58,10 @@ func _process(delta: float) -> void:
 	position.y = -lerp(0., step_wave*step_amp, move_ratio)
 	rotation_degrees = move_scale*lerp(walk_tilt, fall_tilt, fall_ratio)
 	scale.x = 1. + vert_ratio*fall_stretch_x
+	scale.x = clamp(scale.x, .5, 2.)
 	scale.y = 1. + vert_ratio*fall_stretch_y
+	scale.y = clamp(scale.y, .5, 2.)
+	
 	sprite.scale.x = player.direction
 	
 	if player.inv_timer > 0.:
@@ -68,7 +73,7 @@ func _process(delta: float) -> void:
 	if time > ProjectSettings.get_setting('rendering/limits/time/time_rollover_secs', 3600.):
 		time = 0.
 	
-	sprite.frame == 1 if (player.input_move.y > 0. and not player.is_clibing) else 0
+	sprite.frame = 1 if (player.input_move.y > 0. and not player.is_clibing) else 0
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3u16h"]
