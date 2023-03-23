@@ -2,13 +2,11 @@ class_name PlayerSetup extends Control
 
 signal finish
 
-@export var ready_delay_before_finish := 1.
-var all_ready_timer := 0.
-
 var level_index := 0
 var picked_level := ''
 
 @onready var cursor: Control = %Cursor
+@onready var turn_label: Label = %TurnLabel
 @onready var player_list: Control = %PlayerList
 @onready var level_list: Control = %LevelList
 
@@ -34,17 +32,31 @@ func _ready() -> void:
 		btn.find_child('ThumbnailSprite', true, false).texture = level_thumbnail
 		btn.find_child('NameLabel', true, false).text = level_name
 		level_list.add_child(btn)
+	
+	update()
+	
+func open() -> void:
+	show()
+	picked_level = ''
+	for player_data in Game.player_datas:
+		player_data.is_ready = false
+	for menu in player_list.get_children():
+		menu.no_say()
+	update()
+	level_list.propagate_call('show')
 
 func update() -> void:
-	%TurnLabel.modulate = Consts.player_colors[Game.player_turn_index]
-	%TurnLabel.text = "Player %s's turn" % Game.player_turn_index
+	var color := Consts.player_colors[Game.player_turn_index]
+	turn_label.modulate = color
+	turn_label.text = "Player %s's turn" % [Game.player_turn_index + 1]
+	cursor.modulate = color
 
 func _process(delta: float) -> void:
 	if not visible: return
 	
 	var target_rect := level_list.get_child(level_index)
-	cursor.size = cursor.size.move_toward(target_rect.size, 2048.*delta)
-	cursor.position = cursor.position.move_toward(target_rect.global_position, 2048.*delta)
+	cursor.size = cursor.size.lerp(target_rect.size, .5)
+	cursor.position = cursor.position.lerp(target_rect.global_position, .5)
 	
 	for input in Game.inputs:
 		if not Game.player_datas.any(func(pd: PlayerData): return pd.input.device == input.device):
@@ -55,17 +67,14 @@ func _process(delta: float) -> void:
 				add_player_menu(player_data)
 	
 	if Game.player_datas.size() >= 1 and Game.player_datas.all(func(pd): return pd.is_ready) and picked_level.length() > 0:
-		all_ready_timer += delta
-		if all_ready_timer > ready_delay_before_finish:
-			all_ready_timer = 0.
-			finish.emit()
-			hide()
-			return
-	else:
-		all_ready_timer = 0.
+		finish.emit()
+		var level := load(picked_level)
+		Globals.main.load_level(level)
+		hide()
+		return
 	
 	var picking_player := Game.player_datas[Game.player_turn_index]
-	if picking_player and picking_player.is_ready:
+	if  picking_player and picking_player.is_ready and picked_level.length() == 0:
 		if picking_player.input.is_action_just_pressed('left'):
 			level_index -= 1
 		if picking_player.input.is_action_just_pressed('right'):
@@ -77,7 +86,9 @@ func _process(delta: float) -> void:
 		level_index = level_index%LevelDB.level_paths.size()
 		if picking_player.input.is_action_just_pressed('ok'):
 			picked_level = LevelDB.level_paths[level_index]
-		pass
+			for child in level_list.get_children():
+				child.hide()
+			level_list.get_child(level_index).show()
 
 func add_player_menu(player_data: PlayerData) -> void:
 	var menu := player_menu.duplicate()
