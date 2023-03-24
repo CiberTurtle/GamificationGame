@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_lpcud"]
 [ext_resource type="Texture2D" uid="uid://dk2li4vx10i1m" path="res://content/sprites/moving_platform.png" id="4_00spt"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_3t2ey"]
-[ext_resource type="Texture2D" uid="uid://ba5ygaod5qesl" path="res://content/sprites/Car .png" id="6_yten6"]
+[ext_resource type="Texture2D" uid="uid://deqp8vkqc7nww" path="res://content/sprites/Car .png" id="6_yten6"]
 [ext_resource type="Texture2D" uid="uid://clv7ef5ntgjn4" path="res://content/sprites/City background.png" id="7_w0xm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u586l"]
@@ -89,7 +89,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_yw5cy"]
 resource_name = "Car Animation"
-length = 25.0
+length = 23.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,10 +98,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(4, 7, 9, 11),
+"times": PackedFloat32Array(4, 6, 9, 11),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-345, 155), Vector2(345, 155), Vector2(345, 220), Vector2(-345, 220)]
+"values": [Vector2(-345, 155), Vector2(358, 155), Vector2(358, 220), Vector2(-345, 220)]
 }
 
 [sub_resource type="Animation" id="Animation_mnunl"]
