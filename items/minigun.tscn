@@ -21,15 +21,12 @@ shape = SubResource("RectangleShape2D_6g5yk")
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_3u32b")
 
-[node name="Cooldown" parent="OnPickup" index="0"]
-ticks = 60.0
-
 [node name="Cooldown" parent="OnUse" index="0"]
 ticks = 60.0
 
 [node name="Repeat" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("4_rw213")
-count = 20
+count = 25
 delay_btw = 2
 
 [node name="Shoot" type="Node2D" parent="OnUse/Repeat" index="0"]
@@ -38,7 +35,7 @@ scene = ExtResource("4_sridm")
 
 [node name="Recoil" type="Node2D" parent="OnUse/Repeat" index="1"]
 script = ExtResource("6_h5h3f")
-velocity = Vector2(-20, -20)
+velocity = Vector2(-16, -16)
 add_to_y_if_up = true
 
 [node name="Durability" type="Node2D" parent="OnUse" index="2"]

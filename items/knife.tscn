@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcido5i1c4i5k"]
+[gd_scene load_steps=9 format=3 uid="uid://dcido5i1c4i5k"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_o4v7j"]
 [ext_resource type="Texture2D" uid="uid://bn7p7htr1810y" path="res://content/sprites/knife.png" id="2_rrtfr"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_lpvkb"]
+[ext_resource type="Script" path="res://scripts/parts/sound.gd" id="6_h38hu"]
 [ext_resource type="Script" path="res://scripts/parts/spawn.gd" id="6_q7mnh"]
 [ext_resource type="PackedScene" path="res://scenes/fx/punch_effect.tscn" id="7_7nbtd"]
 
@@ -23,7 +24,7 @@ texture = ExtResource("2_rrtfr")
 flip_v = true
 
 [node name="Spawn" type="Node2D" parent="OnUse" index="1"]
-position = Vector2(-4, 0)
+position = Vector2(-1, 0)
 scale = Vector2(2, 1)
 script = ExtResource("6_q7mnh")
 scene = ExtResource("7_7nbtd")
@@ -32,8 +33,12 @@ scene = ExtResource("7_7nbtd")
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("5_lpvkb")
-damage = 45
+damage = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OnUse/Hitbox" index="0"]
-position = Vector2(-7, 0)
+position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_yyt25")
+
+[node name="Sound" type="Node2D" parent="OnUse" index="3"]
+script = ExtResource("6_h38hu")
+sound = "blade"

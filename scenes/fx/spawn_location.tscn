@@ -19,7 +19,7 @@ func spawn() -> void:
 	player_data.player = player
 	
 	player.global_position = global_position
-	player.direction = -sign(player.position.x)
+	player.direction = -1. if player.global_position.x > 0. else 1.
 	player.inv_timer = 60/60.
 	
 	Globals.world.add_child(player)

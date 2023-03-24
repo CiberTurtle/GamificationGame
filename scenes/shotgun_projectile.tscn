@@ -39,7 +39,7 @@ shape = SubResource("CircleShape2D_ec2td")
 collision_layer = 0
 collision_mask = 64
 script = ExtResource("3_70tvr")
-damage = 15
+damage = 20
 auto_attack = true
 remember_hits = true
 
