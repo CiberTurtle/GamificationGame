@@ -1,7 +1,6 @@
 class_name PlayerMenu extends Control
 
 var player_data: PlayerData
-var is_ready := false
 
 #@onready var ready_node: Control = %Ready
 #@onready var controller_name: Button = %ControllerName
@@ -15,7 +14,7 @@ func _ready() -> void:
 	if not player_data: return
 	
 	self_modulate = player_data.color
-	say('On ' + player_data.input.get_name(), true)
+	say('Using ' + player_data.input.get_name(), true)
 	
 	crow_sprite.visible = player_data.is_leader
 	
@@ -32,7 +31,7 @@ func _process(delta: float) -> void:
 	if say_timer > 0.:
 		say_timer -= delta
 		if say_timer <= 0:
-			say_control.hide()
+			no_say()
 	
 	if not is_visible_in_tree(): return
 	
@@ -40,15 +39,15 @@ func _process(delta: float) -> void:
 		is_first_frame = false
 		return
 	
-	if is_ready:
+	if player_data.is_ready:
 		if player_data.input.is_action_just_pressed('back'):
-			is_ready = false
+			player_data.is_ready = false
 			update_ready()
 			SoundBank.play_ui('ready')
 			return
 	else:
 		if player_data.input.is_action_just_pressed('ok'):
-			is_ready = true
+			player_data.is_ready = true
 			update_ready()
 			SoundBank.play_ui('unready')
 			return
@@ -64,6 +63,7 @@ func _process(delta: float) -> void:
 			leave_hold_timer = 0.
 		
 		if player_data.input.is_action_just_pressed('left'):
+			SoundBank.play_ui('ui_swap_left')
 			player_data.skin_index -= 1
 			if player_data.skin_index < 0:
 				player_data.skin_index = SkinDB.skins.size() - 1
@@ -71,6 +71,7 @@ func _process(delta: float) -> void:
 			return
 		
 		if player_data.input.is_action_just_pressed('right'):
+			SoundBank.play_ui('ui_swap_right')
 			player_data.skin_index += 1
 			if player_data.skin_index >= SkinDB.skins.size():
 				player_data.skin_index = 0
@@ -91,13 +92,19 @@ func say(text: String, auto_hide := false) -> void:
 	if auto_hide:
 		say_timer = 2.
 
+func no_say() -> void:
+	say_control.hide()
+
 func update_ready() -> void:
-	if is_ready:
-		say('Ready!')
+	if player_data.is_ready:
+		if player_data == Game.player_datas[Game.player_turn_index]:
+			say('Picking stage...')
+		else:
+			say('Ready!')
 	else:
-		say_control.hide()
+		no_say()
 	
-	ready_button.visible = not is_ready
+	ready_button.visible = not player_data.is_ready
 
 @onready var skin_sprite: NinePatchRect = %SkinSprite
 @onready var skin_name_label: Label = %SkinNameLabel

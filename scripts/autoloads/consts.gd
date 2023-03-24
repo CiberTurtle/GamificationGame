@@ -1,5 +1,7 @@
 extends Node
 
+var player_scene: PackedScene = preload('res://scenes/player.tscn')
+
 var player_colors: PackedColorArray = [
 	Color('#EF4A3A'),
 	Color('#3385B8'),

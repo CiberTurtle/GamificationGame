@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5qcelmoej1r7"]
+
+[ext_resource type="Texture2D" uid="uid://cvltll10qp351" path="res://content/sprites/fx/explosion_sm.png" id="1_3rp88"]
+
+[sub_resource type="Animation" id="Animation_gce66"]
+resource_name = "explode"
+length = 1.01667
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 46]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.01667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_20tsh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_covpn"]
+_data = {
+"RESET": SubResource("Animation_20tsh"),
+"explode": SubResource("Animation_gce66")
+}
+
+[node name="ExplosionLG" type="Sprite2D"]
+position = Vector2(0, -2)
+texture = ExtResource("1_3rp88")
+offset = Vector2(0, -17)
+hframes = 7
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "explode"
+libraries = {
+"": SubResource("AnimationLibrary_covpn")
+}

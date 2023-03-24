@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="18"
+   viewBox="0 0 8.4666665 4.7624999"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="placeholder.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="25.591237"
+     inkscape:cx="11.800915"
+     inkscape:cy="13.012267"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid496" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#302c2e;fill-opacity:1;stroke:none;stroke-width:0.265;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="rect600"
+       width="8.4666662"
+       height="4.7624998"
+       x="0"
+       y="0"
+       rx="0"
+       ry="0" />
+    <path
+       style="fill:none;stroke-width:0.264583;paint-order:markers fill stroke;stroke:#5a5353"
+       d="M 0,0 8.4666666,4.7624999"
+       id="path4579" />
+    <path
+       style="fill:none;stroke:#5a5353;stroke-width:0.264583;paint-order:markers fill stroke"
+       d="M 8.4666666,0 0,4.7624999"
+       id="path5223" />
+    <path
+       style="fill:none;stroke:#7d7071;stroke-width:0.264583;paint-order:markers fill stroke"
+       d="M 4.2333333,0 V 4.7624999"
+       id="path5225" />
+    <path
+       style="fill:none;stroke:#7d7071;stroke-width:0.264583;paint-order:markers fill stroke"
+       d="M 8.4666666,2.38125 H 0"
+       id="path5227" />
+    <path
+       style="fill:#5a5353;stroke:none;stroke-width:0.264583;paint-order:markers fill stroke"
+       d="M 0,0 H 8.4666666 V 4.7624999 H 0 V 0.26458333 H 0.26458333 V 4.4979166 H 8.2020832 V 0.26458333 H 0 Z"
+       id="path5229" />
+  </g>
+</svg>

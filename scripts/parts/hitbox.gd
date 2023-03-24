@@ -24,6 +24,9 @@ func trigger() -> void:
 	attack_overlap(owner.damage_source)
 
 func attack_overlap(source: PlayerData, damage: int = -1) -> int:
+	if source == null:
+		source = owner.damage_source
+	
 	var count = 0
 	for area in get_overlapping_bodies():
 		if attack_node(area, source, damage):

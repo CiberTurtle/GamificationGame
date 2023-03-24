@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d1gjumndyp6q8"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_0vcfo"]
-[ext_resource type="Texture2D" uid="uid://f8ge0pqfgh3l" path="res://content/sprites/Minigun.png" id="2_ojlfi"]
+[ext_resource type="Texture2D" uid="uid://c8wfxuwsnf5db" path="res://content/sprites/Minigun copy.png" id="2_3u32b"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_eqlbe"]
 [ext_resource type="Script" path="res://scripts/parts/repeat.gd" id="4_rw213"]
 [ext_resource type="PackedScene" uid="uid://du5fgfvrh8m7x" path="res://scenes/minigun_bullet.tscn" id="4_sridm"]
@@ -9,15 +9,16 @@
 [ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="6_h5h3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g5yk"]
-size = Vector2(25, 10)
+size = Vector2(31, 12)
 
 [node name="Minigun" instance=ExtResource("1_0vcfo")]
 
 [node name="Collision" parent="." index="0"]
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_6g5yk")
 
 [node name="Sprite" parent="." index="1"]
-texture = ExtResource("2_ojlfi")
+texture = ExtResource("2_3u32b")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
 ticks = 60.0
@@ -36,7 +37,7 @@ scene = ExtResource("4_sridm")
 
 [node name="Recoil" type="Node2D" parent="OnUse/Repeat" index="1"]
 script = ExtResource("6_h5h3f")
-velocity = Vector2(-30, -20)
+velocity = Vector2(-20, -20)
 add_to_y_if_up = true
 
 [node name="Durability" type="Node2D" parent="OnUse" index="2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt82bcq85a27b"]
+[gd_scene load_steps=9 format=3 uid="uid://bt82bcq85a27b"]
 
 [ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_duedb"]
 [ext_resource type="Script" path="res://scripts/gui/player_setup.gd" id="2_62bbn"]
@@ -9,9 +9,21 @@
 [sub_resource type="Theme" id="Theme_khkkg"]
 default_font = ExtResource("1_duedb")
 default_font_size = 24
-Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_color = Color(0.188235, 0.172549, 0.180392, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slxm2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuxw3"]
+draw_center = false
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="PlayerSetup" type="Control"]
 layout_mode = 3
@@ -30,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.188235, 0.172549, 0.180392, 1)
+color = Color(0.980392, 0.698039, 0.227451, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,6 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 96
 
 [node name="Header" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -48,13 +61,7 @@ theme_override_constants/margin_top = 24
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header"]
 layout_mode = 2
 theme_override_constants/separation = 48
-
-[node name="TurnLabel" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.937255, 0.290196, 0.227451, 1)
-theme_override_fonts/font = ExtResource("3_54f37")
-theme_override_font_sizes/font_size = 64
-text = "Player 1's turn"
+alignment = 1
 
 [node name="PromptLabel" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
 layout_mode = 2
@@ -62,131 +69,44 @@ theme_override_fonts/font = ExtResource("3_54f37")
 theme_override_font_sizes/font_size = 64
 text = "Pick a stage"
 
-[node name="FlowContainer" type="FlowContainer" parent="VBoxContainer"]
+[node name="TurnLabel" type="Label" parent="VBoxContainer/Header/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_54f37")
+theme_override_font_sizes/font_size = 64
+text = "Player 1's turn"
 
-[node name="LevelButton" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
+[node name="LevelList" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 4
+
+[node name="LevelButton" type="PanelContainer" parent="VBoxContainer/LevelList"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/LevelList/LevelButton"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/LevelList/LevelButton/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer/VBoxContainer"]
+[node name="ThumbnailSprite" type="TextureRect" parent="VBoxContainer/LevelList/LevelButton/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 180)
 layout_mode = 2
 texture = ExtResource("3_e45ni")
+expand_mode = 5
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stage Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LevelButton2" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton2"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_e45ni")
-
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stage Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LevelButton3" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton3"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_e45ni")
-
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stage Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LevelButton4" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton4"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_e45ni")
-
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stage Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LevelButton5" type="PanelContainer" parent="VBoxContainer/FlowContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_slxm2")
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FlowContainer/LevelButton5"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Thumbnail" type="TextureRect" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer/VBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_e45ni")
-
-[node name="Label" type="Label" parent="VBoxContainer/FlowContainer/LevelButton5/MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/LevelList/LevelButton/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stage Name"
 horizontal_alignment = 1
@@ -209,9 +129,9 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Label" type="Label" parent="."]
-self_modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 1
-offset_right = 515.0
-offset_bottom = 34.0
-text = "psst... rayce, press L to load a level quickly"
+[node name="Cursor" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iuxw3")
