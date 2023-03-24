@@ -26,9 +26,14 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="34.883261"
-     inkscape:cx="16.024878"
+     inkscape:cx="16.067879"
      inkscape:cy="7.4820986"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
        id="grid496" />
@@ -114,7 +119,7 @@
        id="path675"
        sodipodi:nodetypes="cccc" />
     <path
-       style="fill:#4f546b;fill-opacity:1;stroke:none;stroke-width:0.264999;stroke-opacity:1;paint-order:markers fill stroke"
+       style="display:none;fill:#4f546b;fill-opacity:1;stroke:none;stroke-width:0.264999;stroke-opacity:1;paint-order:markers fill stroke"
        d="M 0,0 V 4.7624999 H 0.26458333 V 0.26458333 H 8.2020832 V 4.4979166 H 0.26458333 V 4.7624999 H 8.4666666 V 0 H 0"
        id="path2378" />
   </g>
