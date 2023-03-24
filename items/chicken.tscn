@@ -17,6 +17,7 @@ func trigger():
 "
 
 [node name="Chicken" instance=ExtResource("1_hmj0p")]
+item_name = "food"
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_iu0it")

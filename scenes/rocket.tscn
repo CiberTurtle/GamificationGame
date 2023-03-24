@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dl1uj7qna2d4v"]
+[gd_scene load_steps=12 format=3 uid="uid://dl1uj7qna2d4v"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_2d4hs"]
 [ext_resource type="Texture2D" uid="uid://2vsff2bn2xis" path="res://content/sprites/Rocket.png" id="2_olmhx"]
 [ext_resource type="PackedScene" uid="uid://ciiyf1ncu3dr0" path="res://scenes/rocket_explosion.tscn" id="3_bgpmp"]
+[ext_resource type="Script" path="res://scripts/parts/sound.gd" id="3_lkbro"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_8fhx0"]
 [ext_resource type="Script" path="res://scripts/parts/spawn.gd" id="5_bxxey"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="6_v7imy"]
 
 [sub_resource type="Curve" id="Curve_l00u6"]
 max_value = 600.0
-_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(1, 500), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 150), 0.0, 0.0, 0, 0, Vector2(1, 500), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1eo8m"]
@@ -38,11 +39,15 @@ damage = 20
 [node name="Collision" parent="PassiveHitbox" index="0"]
 shape = SubResource("CircleShape2D_7td1f")
 
-[node name="Spawn" type="Node2D" parent="OnDeath" index="0"]
+[node name="Sound" type="Node2D" parent="OnDeath" index="0"]
+script = ExtResource("3_lkbro")
+sound = "explosion"
+
+[node name="Spawn" type="Node2D" parent="OnDeath" index="1"]
 script = ExtResource("5_bxxey")
 scene = ExtResource("3_bgpmp")
 
-[node name="Hitbox" type="Area2D" parent="OnDeath" index="1"]
+[node name="Hitbox" type="Area2D" parent="OnDeath" index="2"]
 collision_layer = 0
 collision_mask = 64
 script = ExtResource("5_8fhx0")

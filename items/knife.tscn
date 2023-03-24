@@ -10,7 +10,7 @@
 size = Vector2(15, 7)
 
 [node name="Knife" instance=ExtResource("1_o4v7j")]
-item_name = "Knife"
+item_name = "knife"
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("RectangleShape2D_gsbct")

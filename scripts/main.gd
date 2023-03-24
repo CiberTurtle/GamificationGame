@@ -37,6 +37,10 @@ func _process(delta: float) -> void:
 	update_viewport()
 
 func _game_end() -> void:
+	Game.player_turn_index += 1
+	if Game.player_turn_index > Game.player_datas.size():
+		Game.player_turn_index = 0
+	
 	player_setup.open()
 	for child in Globals.world.get_children():
 		child.queue_free()

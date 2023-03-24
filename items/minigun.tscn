@@ -12,6 +12,7 @@
 size = Vector2(31, 12)
 
 [node name="Minigun" instance=ExtResource("1_0vcfo")]
+item_name = "minigun"
 
 [node name="Collision" parent="." index="0"]
 position = Vector2(-0.5, -2)
