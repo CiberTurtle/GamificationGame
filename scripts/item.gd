@@ -37,13 +37,14 @@ func check_use() -> bool:
 
 func _pickup() -> void:
 	despawn_timer = despawn_time
-	SoundBank.play('pickup.' + name, position)
+	SoundBank.play('pickup.' + item_name, position)
 
 func _drop() -> void:
-	SoundBank.play('drop.' + name, position)
+	SoundBank.play('drop.' + item_name, position)
 
 func _use() -> void:
-	SoundBank.play('use.' + name, global_position)
+	pass
+	#SoundBank.play('use.' + item_name, global_position)
 
 func _physics_process(delta: float) -> void:
 	cooldown -= delta
@@ -82,7 +83,7 @@ func take_damage(damage: int, source: PlayerData) -> bool:
 	if player: return false # don't take damage if held
 	if health <= 0: return false
 	
-	SoundBank.play('hit.' + name, global_position)
+	SoundBank.play('hit.' + item_name, global_position)
 	health -= damage
 	if health <= 0:
 		die()
@@ -91,7 +92,7 @@ func take_damage(damage: int, source: PlayerData) -> bool:
 
 func die() -> void:
 	#assert(not player, 'item somehow died while being held, this should not happen')
-	SoundBank.play('destroy.' + name, position)
+	SoundBank.play('destroy.' + item_name, position)
 	if player:
 		player.held_item = null
 	death.emit()

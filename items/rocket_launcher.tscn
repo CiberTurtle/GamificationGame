@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_0qmmy"]
 [ext_resource type="Texture2D" uid="uid://c0bfd55bvbax0" path="res://content/sprites/Rocket Launcher.png" id="2_0fhri"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="3_k16s5"]
-[ext_resource type="PackedScene" uid="uid://c1tch5xt8s08k" path="res://scenes/rocket.tscn" id="4_j4xxn"]
+[ext_resource type="PackedScene" uid="uid://dl1uj7qna2d4v" path="res://scenes/rocket.tscn" id="4_j4xxn"]
 [ext_resource type="Script" path="res://scripts/parts/recoil.gd" id="4_nf5kd"]
 [ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_dj1kl"]
 
@@ -11,6 +11,7 @@
 size = Vector2(15, 11.5)
 
 [node name="Rocket Launcher" instance=ExtResource("1_0qmmy")]
+item_name = "rocket_launcher"
 
 [node name="Collision" parent="." index="0"]
 position = Vector2(0, 2.25)

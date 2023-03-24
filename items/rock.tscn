@@ -15,6 +15,7 @@ radius = 5.0
 radius = 5.0
 
 [node name="Rock" instance=ExtResource("1_7ljux")]
+item_name = "rock"
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CircleShape2D_2fbew")

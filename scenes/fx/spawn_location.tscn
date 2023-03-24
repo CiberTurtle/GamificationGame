@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://5ld4ci8t5upw"]
+[gd_scene load_steps=7 format=3 uid="uid://5ld4ci8t5upw"]
 
 [ext_resource type="Texture2D" uid="uid://cvugdsdrf11v5" path="res://content/sprites/fx/puff_md.png" id="1_4n4mq"]
+[ext_resource type="AudioStream" uid="uid://bj8p1i84smjc3" path="res://content/sounds/spawn.wav" id="2_d3yjh"]
 
 [sub_resource type="GDScript" id="GDScript_ucjok"]
 script/source = "extends Sprite2D
@@ -23,6 +24,21 @@ func spawn() -> void:
 	
 	Globals.world.add_child(player)
 "
+
+[sub_resource type="Animation" id="Animation_ls7m3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
 
 [sub_resource type="Animation" id="Animation_jl5f2"]
 resource_name = "spawn"
@@ -58,21 +74,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_ls7m3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [11]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qhd0l"]
 _data = {
 "RESET": SubResource("Animation_ls7m3"),
@@ -91,3 +92,8 @@ autoplay = "spawn"
 libraries = {
 "": SubResource("AnimationLibrary_qhd0l")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_d3yjh")
+volume_db = -6.0
+autoplay = true

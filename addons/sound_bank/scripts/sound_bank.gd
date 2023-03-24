@@ -41,16 +41,24 @@ var loaded_sounds := {}
 func get_sound(name: String) -> AudioStream:
 	if loaded_sounds.has(name):
 		return loaded_sounds[name]
-	var path := SOUND_BANK_FOLDER + name.replace('.', '/') + '.wav'
+	
 	var sound := FALLBACK_SOUND
-	if FileAccess.file_exists(path):
-		sound = load(path)
+	var segs := name.split('.')
+	print(name)
+	
+	while segs.size() > 0:
+		var path := SOUND_BANK_FOLDER + '.'.join(segs) + '.wav'
+		if FileAccess.file_exists(path):
+			sound = load(path)
+			break
+		segs.remove_at(segs.size() - 1)
+	
 	loaded_sounds[name] = sound
 	return sound
 
 func play(name: String, position: Vector2) -> void:
 	var player := get_player()
-	var sound := get_sound(name)
+	var sound := get_sound(name.to_snake_case())
 	player.stop()
 	player.stream = sound
 	player.position = position
