@@ -1216,9 +1216,9 @@ texture = ExtResource("8_migxt")
 
 [node name="CrateSpawner" parent="." instance=ExtResource("9_df71f")]
 offset_left = -238.0
-offset_top = -174.0
+offset_top = -169.0
 offset_right = 237.0
-offset_bottom = -160.0
+offset_bottom = -155.0
 
 [node name="Kill" type="Area2D" parent="."]
 position = Vector2(0, -189)
@@ -1229,6 +1229,7 @@ damage = 420
 auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill"]
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_a55yu")
 
 [node name="Kill2" type="Area2D" parent="."]
@@ -1240,6 +1241,7 @@ damage = 420
 auto_attack = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kill2"]
+position = Vector2(1, 7)
 shape = SubResource("RectangleShape2D_iw3sg")
 
 [node name="Kill3" type="Area2D" parent="."]

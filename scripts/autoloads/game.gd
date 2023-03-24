@@ -4,7 +4,7 @@ signal start()
 signal end()
 signal player_died(player: Player)
 
-var player_turn_index := 0
+var player_turn_index := -1
 var player_datas: Array[PlayerData] = []
 
 func join_player(input: DeviceInput) -> PlayerData:

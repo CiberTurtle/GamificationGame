@@ -82,6 +82,8 @@ func _process(delta: float) -> void:
 	
 	var picking_player := Game.player_datas[Game.player_turn_index]
 	if  picking_player and picking_player.is_ready and picked_level.length() == 0:
+		if not picking_player.input.is_device_connected(): return
+		
 		if picking_player.input.is_action_just_pressed('left'):
 			SoundBank.play_ui('ui_select')
 			level_index -= 1

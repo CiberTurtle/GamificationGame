@@ -22,6 +22,7 @@ func _ready() -> void:
 	update_ready()
 
 var is_first_frame := true
+var previous_error := false
 func _process(delta: float) -> void:
 	if not Game.player_datas.has(player_data):
 		queue_free()
@@ -36,6 +37,10 @@ func _process(delta: float) -> void:
 	
 	if is_first_frame:
 		is_first_frame = false
+		return
+	
+	if not player_data.input.is_device_connected():
+		say('Controller Disconnected!', .5)
 		return
 	
 	if player_data.is_ready:
