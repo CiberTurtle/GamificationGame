@@ -10,7 +10,7 @@
 size = Vector2(15, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyt25"]
-size = Vector2(24, 20)
+size = Vector2(48, 32)
 
 [node name="Knife" instance=ExtResource("1_o4v7j")]
 item_name = "knife"
@@ -23,6 +23,8 @@ texture = ExtResource("2_rrtfr")
 flip_v = true
 
 [node name="Spawn" type="Node2D" parent="OnUse" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(2, 1)
 script = ExtResource("6_q7mnh")
 scene = ExtResource("7_7nbtd")
 
@@ -33,5 +35,5 @@ script = ExtResource("5_lpvkb")
 damage = 45
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OnUse/Hitbox" index="0"]
-position = Vector2(-4, 0)
+position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_yyt25")

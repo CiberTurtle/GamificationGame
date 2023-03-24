@@ -35,14 +35,17 @@ func _physics_process(delta: float) -> void:
 		var speed := speed_over_lifetime.sample_baked(age_ratio)
 		if !backwards && speed < 0:
 			backwards = true
-			hitbox.forget_hits()		
+			hitbox.forget_hits()
 		var motion := transform.basis_xform(Vector2.RIGHT)*speed*delta
 		var hit := move_and_collide(motion)
 		to_rotate.rotate(roations_per_second * 2 * PI * delta)
 		
 		if hit:
-			is_flying = false
-			to_rotate.rotation = 0.
+			if backwards:
+				is_flying = false
+				to_rotate.rotation = 0.
+			else:
+				backwards = true
 			return
 		
 		age += delta
