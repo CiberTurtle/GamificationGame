@@ -117,8 +117,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	last_damage_timer += delta
-	if inv_timer > 0.:
-		inv_timer -= delta
+	inv_timer -= delta
 	
 	last_damage_timer -= delta
 	

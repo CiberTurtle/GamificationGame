@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://drwmwrmrtqfof"]
+[gd_scene load_steps=11 format=3 uid="uid://drwmwrmrtqfof"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_hhn5q"]
 [ext_resource type="Texture2D" uid="uid://cp532sxosyl2i" path="res://content/sprites/boomerang.png" id="2_087jg"]
 [ext_resource type="Script" path="res://scripts/boomerang.gd" id="2_v6wko"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_mcfx6"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_68cka"]
+[ext_resource type="Shader" path="res://shaders/clean_edge.gdshader" id="5_3rb45"]
 
 [sub_resource type="Curve" id="Curve_d8ag7"]
 min_value = -300.0
@@ -17,6 +18,12 @@ size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_440my"]
 size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgudd"]
+shader = ExtResource("5_3rb45")
+shader_parameter/highestColor = Color(1, 1, 1, 1)
+shader_parameter/similarThreshold = 0.0
+shader_parameter/lineWidth = 1.0
 
 [node name="Boomerang" node_paths=PackedStringArray("to_rotate") instance=ExtResource("1_hhn5q")]
 script = ExtResource("2_v6wko")
@@ -48,6 +55,7 @@ y_knockback = 40.0
 shape = SubResource("RectangleShape2D_440my")
 
 [node name="Sprite" parent="." index="2"]
+material = SubResource("ShaderMaterial_lgudd")
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_087jg")
 

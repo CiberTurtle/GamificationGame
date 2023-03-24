@@ -20,12 +20,12 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	countdown_label.visible = timer <= 10.
 	countdown_label.text = str(ceil(timer))
-	var s: float = lerp(.5, 1., ease(fmod(timer/1., 1.), 0.5))
+	var s: float = lerp(.5, 1., ease(fmod(timer/1., 1.), .1))
 	countdown_label.scale = Vector2(s, s)
 
 func _game_start() -> void:
 	is_running = true
-	timer = 3*60
+	timer = 3.*60
 	#timer = 15.
 	
 	for player_data in Game.player_datas:
@@ -37,7 +37,7 @@ func _game_end() -> void:
 	is_running = false
 
 func run(delta: float) -> void:
-	timer_label.text = Calc.convert_m_ss(timer)
+	timer_label.text = Calc.convert_m_ss(ceil(timer))
 	timer -= delta
 	if timer < 0.:
 		is_running = false
