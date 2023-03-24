@@ -51,12 +51,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 96
+theme_override_constants/separation = 32
 
 [node name="Header" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 64
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header"]
 layout_mode = 2
@@ -132,8 +132,8 @@ size_flags_vertical = 8
 [node name="Cursor" type="Panel" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 747.0
-offset_top = 192.0
-offset_right = 1169.0
-offset_bottom = 460.0
+offset_left = 754.0
+offset_top = 175.0
+offset_right = 1176.0
+offset_bottom = 443.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_iuxw3")

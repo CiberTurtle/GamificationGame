@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bolx2w72rgsle"]
+[gd_scene load_steps=17 format=3 uid="uid://bolx2w72rgsle"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_e750n"]
+[ext_resource type="AudioStream" uid="uid://bw615oetgijem" path="res://content/music/metal_plant.ogg" id="2_4cqiw"]
 [ext_resource type="Texture2D" uid="uid://c20phhalgil34" path="res://content/sprites/bg-x.png" id="2_k1hdb"]
 [ext_resource type="TileSet" uid="uid://cw634453ccsqx" path="res://resources/tilesets/metal_plant.tres" id="3_4wd4p"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="4_viybm"]
@@ -94,6 +95,7 @@ size = Vector2(384, 56)
 
 [node name="metal_plant" type="Node2D"]
 script = ExtResource("1_e750n")
+music = ExtResource("2_4cqiw")
 metadata/_edit_horizontal_guides_ = [-184.0, 184.0]
 metadata/_edit_vertical_guides_ = [-320.0, 320.0]
 

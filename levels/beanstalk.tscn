@@ -185,7 +185,7 @@ libraries = {
 "": SubResource("AnimationLibrary_7dlwm")
 }
 
-[node name="MovingPlatform2" type="StaticBody2D" parent="."]
+[node name="MovingPlatform2" type="AnimatableBody2D" parent="."]
 position = Vector2(-290, -75)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform2"]
@@ -218,7 +218,7 @@ libraries = {
 "": SubResource("AnimationLibrary_5ugks")
 }
 
-[node name="MovingPlatform3" type="StaticBody2D" parent="."]
+[node name="MovingPlatform3" type="AnimatableBody2D" parent="."]
 position = Vector2(-290, -75)
 
 [node name="Collision" type="CollisionShape2D" parent="MovingPlatform3"]

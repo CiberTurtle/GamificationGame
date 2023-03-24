@@ -4,5 +4,5 @@ extends Node2D
 
 func trigger() -> void:
 	var node := scene.instantiate() as Node2D
-	node.global_position = global_position
+	node.global_transform = global_transform
 	Globals.world.add_child(node)

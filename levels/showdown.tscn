@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccrcotu61if6a"]
+[gd_scene load_steps=6 format=3 uid="uid://ccrcotu61if6a"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_fgkpy"]
+[ext_resource type="AudioStream" uid="uid://coamqkq2tqnpm" path="res://content/music/showdown.ogg" id="2_feb5c"]
 [ext_resource type="Texture2D" uid="uid://8ej0lmgxo5sv" path="res://content/sprites/backgrounds/sunset-x6.png" id="2_gmg3h"]
 [ext_resource type="TileSet" uid="uid://c013rjrbkq4q8" path="res://resources/tilesets/showdown.tres" id="3_hr4gb"]
+[ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="5_do6w5"]
 
 [node name="Test Level" type="Node2D"]
 script = ExtResource("1_fgkpy")
 size = 6
+music = ExtResource("2_feb5c")
 metadata/_edit_horizontal_guides_ = [-104.0, 104.0]
 metadata/_edit_vertical_guides_ = [-192.0, 192.0]
 
@@ -50,3 +53,9 @@ position = Vector2(-56, 32)
 
 [node name="PlayerSpawn2" type="Marker2D" parent="PlayerSpawns"]
 position = Vector2(56, 32)
+
+[node name="CrateSpawner" parent="." instance=ExtResource("5_do6w5")]
+offset_left = -96.0
+offset_top = -158.0
+offset_right = 77.0
+offset_bottom = -118.0
