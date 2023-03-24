@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7a556noe6m1v"]
+[gd_scene load_steps=17 format=3 uid="uid://b7a556noe6m1v"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_lffiq"]
 [ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_g3ryt"]
+[ext_resource type="AudioStream" uid="uid://cxxf4dxcdytqp" path="res://content/music/beanstalk.ogg" id="2_uqirs"]
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_4cc5i"]
 [ext_resource type="Texture2D" uid="uid://bl7mu0mqhmtq" path="res://content/sprites/tileatlas.png" id="4_r8vl3"]
 [ext_resource type="Texture2D" uid="uid://ccigk8hh6du04" path="res://content/sprites/Sky Background 2.png" id="5_37b06"]
@@ -125,6 +126,7 @@ _data = {
 
 [node name="Clouds" type="Node2D"]
 script = ExtResource("1_lffiq")
+music = ExtResource("2_uqirs")
 metadata/_edit_horizontal_guides_ = [-136.0, 136.0]
 metadata/_edit_vertical_guides_ = [-240.0, 240.0]
 

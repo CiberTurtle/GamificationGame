@@ -1,8 +1,9 @@
-[gd_scene load_steps=60 format=3 uid="uid://dm1sm2o0stvea"]
+[gd_scene load_steps=61 format=3 uid="uid://dm1sm2o0stvea"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_xrkl5"]
 [ext_resource type="Texture2D" uid="uid://dirgo6oo15hva" path="res://content/sprites/Wizard Background.png" id="2_e5g7e"]
 [ext_resource type="TileSet" uid="uid://bruvdxi3lks2q" path="res://resources/tilesets/wizards_shop.tres" id="2_lstcp"]
+[ext_resource type="AudioStream" uid="uid://dhsf74ynj5t24" path="res://content/music/magic_shop.ogg" id="2_lt0kk"]
 [ext_resource type="Texture2D" uid="uid://dmj0ycn0iwksk" path="res://content/sprites/Tiny Wizard Purple.png" id="3_nn3u4"]
 [ext_resource type="Texture2D" uid="uid://pxrywokhlp32" path="res://content/sprites/tilesets/wizards_shop.png" id="3_xms1v"]
 [ext_resource type="Texture2D" uid="uid://caxrktumb7b63" path="res://content/sprites/Rainbow Wizard.png" id="4_0su0g"]
@@ -614,6 +615,7 @@ size = Vector2(20, 620)
 
 [node name="wizards_shop" type="Node2D"]
 script = ExtResource("1_xrkl5")
+music = ExtResource("2_lt0kk")
 metadata/finished = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
