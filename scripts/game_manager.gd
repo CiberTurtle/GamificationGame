@@ -47,7 +47,7 @@ func _player_died(player: Player) -> void:
 	player.player_data.deaths += 1
 	if is_instance_valid(player.last_damage_source) and is_instance_valid(player.last_damage_source.player):
 		player.last_damage_source.kills += 1
-		player.last_damage_source.player.health = (player.last_damage_source.player.health+50)%player.last_damage_source.player.base_health
+		player.last_damage_source.player.health = max(player.last_damage_source.player.health + 50, player.last_damage_source.player.base_health)
 		player.last_damage_source.player.update_health_bar()
 	
 	player.queue_free()
@@ -68,7 +68,7 @@ func spawn_player(player_data: PlayerData) -> void:
 			if not is_instance_valid(pd.player): continue
 			score += pd.player.position.distance_squared_to(spawn_point.position)
 		
-		score += randi_range(-500, 500)
+		score += randi_range(-300, 300)
 		
 		if score > best_spawn_point_score:
 			best_spawn_point_score = score

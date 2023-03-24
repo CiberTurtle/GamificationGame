@@ -59,9 +59,10 @@ func update() -> void:
 func _process(delta: float) -> void:
 	if not visible: return
 	
-	var target_rect := level_list.get_child(level_index)
-	cursor.size = cursor.size.lerp(target_rect.size, .5)
-	cursor.position = cursor.position.lerp(target_rect.global_position, .5)
+	var target_control := level_list.get_child(level_index) as Control
+	var target_position := target_control.position
+	cursor.size = cursor.size.lerp(target_control.size, .5)
+	cursor.position = cursor.position.lerp(target_position + level_list.position, .5)
 	
 	for input in Game.inputs:
 		if not Game.player_datas.any(func(pd: PlayerData): return pd.input.device == input.device):

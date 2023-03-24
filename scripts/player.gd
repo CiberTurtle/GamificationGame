@@ -111,6 +111,11 @@ var speed_extra := 0.
 var speed_vertical := 0.
 var direction := 1.
 func _physics_process(delta: float) -> void:
+	if is_dead: return
+	if health <= 0:
+		die()
+		return
+	
 	last_damage_timer += delta
 	if inv_timer > 0.:
 		inv_timer -= delta
@@ -334,6 +339,7 @@ func try_drop_item() -> bool:
 var inv_timer := -1.
 var last_damage_source: PlayerData
 var last_damage_timer := 0.
+var is_dead := false
 func take_damage(damage: int, source: PlayerData) -> bool:
 	if health <= 0: return false # already dead, don't die again
 	if inv_timer > 0. and damage < 420: return false # is invulerable, don't take damage
@@ -357,6 +363,7 @@ func take_damage(damage: int, source: PlayerData) -> bool:
 	return true
 
 func die() -> void:
+	is_dead = true
 	SoundBank.play('death.player', position)
 	death.emit()
 	Game.player_died.emit(self)
@@ -367,5 +374,5 @@ func die() -> void:
 	Globals.world.add_child(spawn_fx)
 
 func update_health_bar() -> void:
-	health_bar.value = health
-	health_bar.max_value = base_health
+	health_bar.value = ceil(float(health)/base_health*health_bar.max_value)
+	#health_bar.max_value = base_health
