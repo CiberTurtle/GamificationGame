@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	Console.register('load', func(): load_level_dialog.popup_centered(); Console.close())
 	Console.register('spawn', func(): spawn_item_dialog.popup_centered(); Console.close())
-	Console.register('setup', func(): player_setup.show(); Console.close())
+	Console.register('setup', func(): player_setup.open(); Console.close())
 	
 	get_viewport().size_changed.connect(update_viewport)
 	update_viewport()
@@ -69,8 +69,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	
 	if event is InputEventKey and event.keycode == KEY_P and event.is_pressed():
 		get_viewport().set_input_as_handled()
-		player_setup.show()
-		player_setup.update()
+		player_setup.open()
 		return
 
 var next_item_spawn: PackedScene

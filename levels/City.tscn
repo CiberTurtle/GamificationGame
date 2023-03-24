@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_lpcud"]
 [ext_resource type="Texture2D" uid="uid://dk2li4vx10i1m" path="res://content/sprites/moving_platform.png" id="4_00spt"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_3t2ey"]
-[ext_resource type="Texture2D" uid="uid://deqp8vkqc7nww" path="res://content/sprites/Car .png" id="6_yten6"]
+[ext_resource type="Texture2D" uid="uid://ba5ygaod5qesl" path="res://content/sprites/Car .png" id="6_yten6"]
 [ext_resource type="Texture2D" uid="uid://clv7ef5ntgjn4" path="res://content/sprites/City background.png" id="7_w0xm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u586l"]

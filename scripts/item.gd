@@ -6,9 +6,9 @@ signal use()
 signal death()
 
 @export_placeholder('Give me a name...') var item_name: String
-@export_range(0, 100, 1, 'or_greater', 'suffix:hp') var base_health := 50
+@export_range(0, 100, 1, 'or_greater', 'suffix:hp') var base_health := 60
 @onready var health := base_health
-@export var despawn_time := 60.0
+@export var despawn_time := 30.
 @onready var despawn_timer := despawn_time
 
 @export_group('Common')
