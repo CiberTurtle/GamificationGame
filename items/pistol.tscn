@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7haygi8wrnkw"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_p761c"]
-[ext_resource type="Texture2D" uid="uid://ctegrsjnkbjes" path="res://content/sprites/Pistol.png" id="2_i0t3g"]
+[ext_resource type="Texture2D" uid="uid://ddvj2861wo1kt" path="res://content/sprites/Pistol-sheet.png" id="2_35ty5"]
 [ext_resource type="Script" path="res://scripts/parts/shoot.gd" id="2_ydpea"]
 [ext_resource type="PackedScene" uid="uid://dpfcpj04u0k2w" path="res://scenes/pistol_projectile.tscn" id="4_8lrtx"]
 [ext_resource type="Script" path="res://scripts/parts/durability.gd" id="5_cdi8v"]
@@ -17,7 +17,7 @@ position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_iy84u")
 
 [node name="Sprite" parent="." index="1"]
-texture = ExtResource("2_i0t3g")
+texture = ExtResource("2_35ty5")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
 ticks = 0.0
