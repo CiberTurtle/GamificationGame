@@ -72,6 +72,7 @@ var held_item: Item
 @onready var ladder_dectector_area: Area2D = %LadderDetectorArea
 @onready var punch_area: Hitbox = %PunchArea
 @onready var health_bar: ProgressBar = %HealthBar
+@export var punch_effect:PackedScene
 
 func _ready() -> void:
 	update_health_bar()
@@ -296,6 +297,8 @@ func process_action(delta: float) -> void:
 		SoundBank.play('punch', position)
 		action_buffer_timer = -1.
 		punch_area.attack_overlap(player_data)
+		var effect = punch_effect.instantiate() as Node2D
+		holder_node2d.add_child(effect)
 
 func try_pickup_item(item: Item) -> bool:
 	if is_instance_valid(held_item): return false

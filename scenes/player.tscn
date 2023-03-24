@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bv3c7akknavej"]
+[gd_scene load_steps=15 format=3 uid="uid://bv3c7akknavej"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
+[ext_resource type="PackedScene" uid="uid://bfbjfcl2sllvq" path="res://scenes/fx/punch_effect.tscn" id="2_gsu2b"]
 [ext_resource type="Shader" path="res://shaders/clean_edge.gdshader" id="2_mi61b"]
 [ext_resource type="Texture2D" uid="uid://b3dv3plhgksqa" path="res://content/sprites/skins/chicken.png" id="3_05up5"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
@@ -118,6 +119,7 @@ climb_speed_vertical = 80.0
 climb_speed_horizontal = 48.0
 extra_ground_dec = 512.0
 extra_air_dec = 256.0
+punch_effect = ExtResource("2_gsu2b")
 
 [node name="Art" type="Node2D" parent="."]
 script = SubResource("GDScript_s8mqr")
