@@ -30,6 +30,8 @@ func _game_start() -> void:
 	
 	for player_data in Game.player_datas:
 		spawn_player(player_data)
+		player_data.kills = 0
+		player_data.deaths = 0
 
 func _game_end() -> void:
 	is_running = false
@@ -42,8 +44,10 @@ func run(delta: float) -> void:
 		Game.end.emit()
 
 func _player_died(player: Player) -> void:
-	if player.last_damage_source and player.last_damage_source.player:
-		player.last_damage_source.player.health = player.last_damage_source.player.base_health
+	player.player_data.deaths += 1
+	if is_instance_valid(player.last_damage_source) and is_instance_valid(player.last_damage_source.player):
+		player.last_damage_source.kills += 1
+		player.last_damage_source.player.health = (player.last_damage_source.player.health+50)%player.last_damage_source.player.base_health
 		player.last_damage_source.player.update_health_bar()
 	
 	player.queue_free()

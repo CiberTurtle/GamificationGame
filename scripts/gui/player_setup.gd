@@ -45,6 +45,7 @@ func open() -> void:
 	for player_data in Game.player_datas:
 		player_data.is_ready = false
 	for menu in player_list.get_children():
+		menu.update()
 		menu.no_say()
 	update()
 	level_list.propagate_call('show')

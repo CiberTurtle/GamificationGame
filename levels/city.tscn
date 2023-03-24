@@ -1,0 +1,254 @@
+[gd_scene load_steps=18 format=3 uid="uid://5gqtmrfqoot6"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_u6bqt"]
+[ext_resource type="TileSet" uid="uid://dvqqnowuisii3" path="res://resources/tileset.tres" id="2_lwv2g"]
+[ext_resource type="PackedScene" uid="uid://cdkwm6gr8s8jd" path="res://gizmos/crate_spawner.tscn" id="3_lpcud"]
+[ext_resource type="Texture2D" uid="uid://dk2li4vx10i1m" path="res://content/sprites/moving_platform.png" id="4_00spt"]
+[ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="5_3t2ey"]
+[ext_resource type="Texture2D" uid="uid://deqp8vkqc7nww" path="res://content/sprites/Car .png" id="6_yten6"]
+[ext_resource type="Texture2D" uid="uid://clv7ef5ntgjn4" path="res://content/sprites/City background.png" id="7_w0xm1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u586l"]
+size = Vector2(80, 16)
+
+[sub_resource type="Animation" id="Animation_mfu0a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, 92)]
+}
+
+[sub_resource type="Animation" id="Animation_u7eee"]
+resource_name = "move"
+length = 28.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 7, 11, 14, 18, 21, 25, 28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-32, 92), Vector2(-32, 92), Vector2(-32, 28), Vector2(-32, 28), Vector2(-32, -36), Vector2(-32, -36), Vector2(-32, 28), Vector2(-32, 28), Vector2(-32, 92)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_45ok3"]
+_data = {
+"RESET": SubResource("Animation_mfu0a"),
+"move": SubResource("Animation_u7eee")
+}
+
+[sub_resource type="Animation" id="Animation_or03x"]
+resource_name = "Platform 2 move"
+length = 28.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 7, 11, 14, 18, 21, 25, 28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(32, -36), Vector2(32, -36), Vector2(32, 28), Vector2(32, 28), Vector2(32, 92), Vector2(32, 92), Vector2(32, 28), Vector2(32, 28), Vector2(32, -36)]
+}
+
+[sub_resource type="Animation" id="Animation_byq4v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, 92)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wddpm"]
+_data = {
+"Platform 2 move": SubResource("Animation_or03x"),
+"RESET": SubResource("Animation_byq4v")
+}
+
+[sub_resource type="Animation" id="Animation_yw5cy"]
+resource_name = "Car Animation"
+length = 23.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 6, 9, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-345, 155), Vector2(358, 155), Vector2(358, 220), Vector2(-345, 220)]
+}
+
+[sub_resource type="Animation" id="Animation_mnunl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -25.3333)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7vgg"]
+_data = {
+"Car Animation": SubResource("Animation_yw5cy"),
+"RESET": SubResource("Animation_mnunl")
+}
+
+[node name="City" type="Node2D"]
+script = ExtResource("1_u6bqt")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_lwv2g")
+format = 2
+layer_0/tile_data = PackedInt32Array(720895, 589824, 0, 655360, 655360, 0, 720894, 589824, 0, 720893, 655360, 0, 720892, 589824, 0, 720891, 589824, 0, 720890, 655360, 0, 720889, 589824, 0, 720888, 589824, 0, 720887, 655360, 0, 720886, 589824, 0, 720885, 589824, 0, 720884, 655360, 0, 720883, 589824, 0, 720882, 589824, 0, 720881, 655360, 0, 720880, 589824, 0, 720879, 589824, 0, 720878, 655360, 0, 720877, 589824, 0, 720876, 589824, 0, 655361, 589824, 0, 655362, 589824, 0, 655363, 655360, 0, 655364, 589824, 0, 655365, 589824, 0, 655366, 655360, 0, 655367, 589824, 0, 655368, 589824, 0, 655369, 655360, 0, 655370, 589824, 0, 655371, 589824, 0, 655372, 655360, 0, 655373, 589824, 0, 655374, 589824, 0, 655375, 655360, 0, 655376, 589824, 0, 655377, 589824, 0, 655378, 655360, 0, 655379, 589824, 0, 655356, 458752, 1, 589820, 458752, 1, 524284, 458752, 1, 458748, 458752, 1, 393212, 458752, 1, 262140, 458752, 1, 327676, 458752, 1, 196604, 458752, 1, 131068, 458752, 1, 65532, 458752, 1, -4, 458752, 1, 589827, 524288, 1, 524291, 524288, 1, 458755, 524288, 1, 393219, 524288, 1, 327683, 524288, 1, 262147, 524288, 1, 196611, 524288, 1, 65539, 524288, 1, 131075, 524288, 1, 3, 524288, 1, -65533, 524288, 1, -65540, 458752, 1, -131076, 458752, 1, -196612, 458752, 1, -131069, 524288, 1, -196605, 524288, 1, -262141, 524288, 1, -262148, 458752, 1, -327684, 262144, 1, -327677, 524288, 1, -393213, 393216, 1, -393214, 327680, 1, -393215, 327680, 1, -393216, 327680, 1, -327681, 327680, 1, -327682, 327680, 1, -327683, 327680, 1, 524283, 327680, 0, 327675, 327680, 0, 131067, 327680, 0, -65541, 327680, 0, -262149, 327680, 0, 655358, 393216, 0, 589822, 393216, 0, 524286, 393216, 0, 458753, 393216, 0, 524289, 393216, 0, 589825, 393216, 0, 458752, 393216, 0, 524287, 393216, 0, 262153, 589824, 1, 262154, 589824, 1, 262155, 589824, 1, 262156, 589824, 1, 262157, 589824, 1, 262158, 589824, 1, 262159, 589824, 1, 262160, 589824, 1, 327696, 458752, 0, 393232, 458752, 0, 458768, 458752, 0, 524304, 458752, 0, 589840, 458752, 0, 327689, 458752, 0, 393225, 458752, 0, 458761, 458752, 0, 524297, 458752, 0, 589833, 458752, 0, 262152, 655360, 1, 262161, 720896, 1, 196617, 655360, 1, 196624, 720896, 1, 131082, 655360, 1, 131087, 720896, 1, 131083, 589824, 1, 131084, 589824, 1, 131085, 589824, 1, 131086, 589824, 1, 589836, 65536, 1, 524300, 0, 1, 524301, 131072, 1, 589837, 196608, 1, 196618, 589824, 1, 196619, 589824, 1, 196620, 589824, 1, 196621, 589824, 1, 196623, 589824, 1, 196622, 589824, 1, -3, 393216, 0, 589826, 393216, 0, 524290, 393216, 0, 458754, 393216, 0, 393218, 393216, 0, 196610, 393216, 0, 131074, 393216, 0, -65534, 393216, 0, -131070, 393216, 0, -327678, 393216, 0, -327679, 393216, 0, -327680, 393216, 0, -262145, 393216, 0, -262146, 393216, 0, -262147, 393216, 0, -65539, 393216, 0, 196605, 393216, 0, 262141, 393216, 0, 458749, 393216, 0, 524285, 393216, 0, 589821, 393216, 0, 655357, 393216, 0, 458750, 393216, 0, 458751, 393216, 0, 393216, 393216, 0, 393217, 393216, 0, 262144, 393216, 0, 393215, 393216, 0, 327679, 393216, 0, 196608, 393216, 0, 262143, 393216, 0, 196607, 393216, 0, 262142, 393216, 0, 327680, 393216, 0, 196609, 393216, 0, 131073, 393216, 0, 131072, 393216, 0, 196606, 393216, 0, 65536, 393216, 0, 131071, 393216, 0, 65535, 393216, 0, 0, 393216, 0, -2, 393216, 0, -1, 393216, 0, -65536, 393216, 0, -65535, 393216, 0, -131071, 393216, 0, -131072, 393216, 0, -131073, 393216, 0, -65537, 393216, 0, -65538, 393216, 0, -196609, 393216, 0, -262144, 393216, 0, -196608, 393216, 0, 327690, 458752, 0, 327691, 458752, 0, 327692, 458752, 0, 327693, 458752, 0, 327694, 458752, 0, 327695, 458752, 0, 589839, 458752, 0, 524303, 458752, 0, 524302, 458752, 0, 393229, 458752, 0, 393228, 458752, 0, 524298, 458752, 0, 589834, 458752, 0, 589835, 458752, 0, 524299, 458752, 0, 458764, 458752, 0, 458765, 458752, 0, 589838, 458752, 0, 393213, 524288, 0, 393214, 524288, 0, 327678, 524288, 0, 327677, 524288, 0, 262145, 524288, 0, 262146, 524288, 0, 327682, 524288, 0, 327681, 524288, 0, 65533, 524288, 0, 65534, 524288, 0, 131070, 524288, 0, 131069, 524288, 0, -196611, 524288, 0, -196610, 524288, 0, -131074, 524288, 0, -131075, 524288, 0, -262143, 524288, 0, -262142, 524288, 0, -196606, 524288, 0, -196607, 524288, 0, 1, 524288, 0, 2, 524288, 0, 65538, 524288, 0, 65537, 524288, 0, 393226, 524288, 0, 393227, 524288, 0, 458763, 524288, 0, 458762, 524288, 0, 393230, 524288, 0, 393231, 524288, 0, 458767, 524288, 0, 458766, 524288, 0, 655359, 65536, 1, 589823, 0, 1, 589824, 196608, 1, 524288, 131072, 1, 458756, 327680, 0, 262148, 327680, 0, 65540, 327680, 0, -131068, 327680, 0, -327676, 327680, 0, 524282, 327680, 0, 327674, 327680, 0, 131066, 327680, 0, -65542, 327680, 0, -262150, 327680, 0, -327675, 327680, 0, -131067, 327680, 0, 65541, 327680, 0, 262149, 327680, 0, 458757, 327680, 0, 655342, 458752, 0, 589806, 458752, 0, 524270, 458752, 0, 458734, 458752, 0, 393198, 458752, 0, 327662, 458752, 0, 262126, 458752, 0, 262131, 458752, 0, 327667, 458752, 0, 393203, 458752, 0, 458739, 458752, 0, 524275, 458752, 0, 589811, 458752, 0, 655347, 458752, 0, 655346, 458752, 0, 655345, 196608, 1, 655344, 65536, 1, 655343, 458752, 0, 589807, 458752, 0, 524271, 458752, 0, 458735, 524288, 0, 393199, 524288, 0, 327663, 458752, 0, 262127, 524288, 0, 262128, 458752, 0, 262129, 458752, 0, 262130, 524288, 0, 327664, 458752, 0, 327665, 458752, 0, 327666, 458752, 0, 393201, 458752, 0, 393200, 458752, 0, 393202, 524288, 0, 458737, 458752, 0, 458736, 458752, 0, 524273, 458752, 0, 524274, 458752, 0, 524272, 458752, 0, 589808, 0, 1, 589809, 131072, 1, 458738, 524288, 0, 589810, 458752, 0, 196592, 458752, 0, 196593, 458752, 0, 196594, 524288, 0, 196595, 458752, 0, 393204, 720896, 1, 458740, 589824, 1, 524276, 589824, 1, 524277, 589824, 1, 458741, 720896, 1, 524278, 720896, 1, 196597, 327680, 0, 196596, 327680, 0, 196590, 458752, 0, 196591, 524288, 0, 131054, 458752, 0, 131055, 458752, 0, 131056, 458752, 0, 131057, 458752, 0, 131058, 458752, 0, 131059, 458752, 0, 65524, 720896, 1, 65523, 589824, 1, 65522, 589824, 1, -14, 589824, 1, -15, 589824, 1, -16, 589824, 1, -17, 589824, 1, -18, 655360, 1, 65517, 655360, 1, 65518, 589824, 1, 65519, 589824, 1, 65520, 589824, 1, 65521, 589824, 1, -13, 720896, 1, 720875, 0, 0, 655339, 0, 0, 589803, 0, 0, 524267, 0, 0, 458731, 0, 0, 393195, 0, 0, 327659, 0, 0, 262123, 0, 0, 196587, 0, 0, 131051, 0, 0, 65515, 0, 0, -21, 0, 0, -65557, 0, 0, -131093, 0, 0, -196629, 0, 0, -262165, 0, 0, -327701, 0, 0, -393237, 0, 0, -458773, 0, 0, 655380, 0, 0, 589844, 0, 0, 524308, 0, 0, 458772, 0, 0, 393236, 0, 0, 327700, 0, 0, 262164, 0, 0, 196628, 0, 0, 131092, 0, 0, 65556, 0, 0, 20, 0, 0, -65516, 0, 0, -131052, 0, 0, -196588, 0, 0, -262124, 0, 0, -327660, 0, 0, -393196, 0, 0, -458732, 0, 0, -524268, 0, 0)
+
+[node name="PlayerSpawns" type="Node2D" parent="."]
+
+[node name="PlayerSpawn1" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-1, 146)
+
+[node name="PlayerSpawn2" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-241, 146)
+
+[node name="PlayerSpawn3" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(209, 146)
+
+[node name="PlayerSpawn4" type="Node2D" parent="PlayerSpawns"]
+position = Vector2(-2, -114)
+
+[node name="CrateSpawner" parent="." instance=ExtResource("3_lpcud")]
+offset_left = -300.0
+offset_top = -157.0
+offset_right = 300.0
+offset_bottom = -121.0
+
+[node name="MovingPlatform" type="AnimatableBody2D" parent="."]
+position = Vector2(-32, 92)
+scale = Vector2(0.4, 0.5)
+
+[node name="Collision" type="CollisionShape2D" parent="MovingPlatform"]
+shape = SubResource("RectangleShape2D_u586l")
+
+[node name="Sprite" type="NinePatchRect" parent="MovingPlatform"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_00spt")
+patch_margin_left = 16
+patch_margin_right = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
+autoplay = "move"
+libraries = {
+"": SubResource("AnimationLibrary_45ok3")
+}
+
+[node name="MovingPlatform2" type="AnimatableBody2D" parent="."]
+position = Vector2(-32, 92)
+scale = Vector2(0.4, 0.5)
+
+[node name="Collision" type="CollisionShape2D" parent="MovingPlatform2"]
+shape = SubResource("RectangleShape2D_u586l")
+
+[node name="Sprite" type="NinePatchRect" parent="MovingPlatform2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_00spt")
+patch_margin_left = 16
+patch_margin_right = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2"]
+autoplay = "Platform 2 move"
+libraries = {
+"": SubResource("AnimationLibrary_wddpm")
+}
+
+[node name="Car" type="Area2D" parent="."]
+position = Vector2(32, -25.3333)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("5_3t2ey")
+damage = 100
+auto_attack = true
+
+[node name="Collision" type="CollisionShape2D" parent="Car"]
+shape = SubResource("RectangleShape2D_u586l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Car"]
+autoplay = "Car Animation"
+libraries = {
+"": SubResource("AnimationLibrary_i7vgg")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Car"]
+position = Vector2(0, -6.69444)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_yten6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.67451, 0.67451, 0.67451, 1)
+z_index = -100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_w0xm1")

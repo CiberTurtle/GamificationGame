@@ -11,7 +11,7 @@ var player_data: PlayerData
 var leave_hold_timer := 0.
 
 func _ready() -> void:
-	if not player_data: return
+	if not is_instance_valid(player_data): return
 	
 	self_modulate = player_data.color
 	say('Using ' + player_data.input.get_name(), true)
@@ -114,3 +114,7 @@ func update_skin() -> void:
 	skin_sprite.region_rect = SkinDB.get_skin_region(skin_sprite.texture, player_data.color_index)
 	skin_sprite.region_rect.size = Vector2(32, 32)
 	skin_name_label.text = SkinDB.skin_names[player_data.skin_index]
+
+func update() -> void:
+	if not is_instance_valid(player_data): return
+	%StatsLabel.text = '%s kills   %s deaths' % [player_data.kills, player_data.deaths]
