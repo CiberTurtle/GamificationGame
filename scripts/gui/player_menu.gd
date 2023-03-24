@@ -20,7 +20,6 @@ func _ready() -> void:
 	
 	update_skin()
 	update_ready()
-	SoundBank.play_ui('join')
 
 var is_first_frame := true
 func _process(delta: float) -> void:
@@ -63,7 +62,7 @@ func _process(delta: float) -> void:
 			leave_hold_timer = 0.
 		
 		if player_data.input.is_action_just_pressed('left'):
-			SoundBank.play_ui('ui_swap_left')
+			SoundBank.play_ui('ui_left')
 			player_data.skin_index -= 1
 			if player_data.skin_index < 0:
 				player_data.skin_index = SkinDB.skins.size() - 1
@@ -71,7 +70,7 @@ func _process(delta: float) -> void:
 			return
 		
 		if player_data.input.is_action_just_pressed('right'):
-			SoundBank.play_ui('ui_swap_right')
+			SoundBank.play_ui('ui_right')
 			player_data.skin_index += 1
 			if player_data.skin_index >= SkinDB.skins.size():
 				player_data.skin_index = 0
@@ -105,6 +104,8 @@ func update_ready() -> void:
 		no_say()
 	
 	ready_button.visible = not player_data.is_ready
+	for child in skin_sprite.get_children():
+		child.visible = not player_data.is_ready
 
 @onready var skin_sprite: NinePatchRect = %SkinSprite
 @onready var skin_name_label: Label = %SkinNameLabel

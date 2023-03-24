@@ -28,10 +28,14 @@ func _ready() -> void:
 		var level_thumbnail = LevelDB.level_thumbnails[i]
 		
 		var btn := level_button.duplicate()
-		print(btn.get_child_count())
 		btn.find_child('ThumbnailSprite', true, false).texture = level_thumbnail
 		btn.find_child('NameLabel', true, false).text = level_name
 		level_list.add_child(btn)
+	
+	var rand_btn := level_button.duplicate()
+	rand_btn.find_child('ThumbnailSprite', true, false).texture = preload('res://content/thumbnails/random.png')
+	rand_btn.find_child('NameLabel', true, false).text = "Random?"
+	level_list.add_child(rand_btn)
 	
 	update()
 	
@@ -61,6 +65,7 @@ func _process(delta: float) -> void:
 	for input in Game.inputs:
 		if not Game.player_datas.any(func(pd: PlayerData): return pd.input.device == input.device):
 			if input.is_action_just_pressed('ok'):
+				SoundBank.play_ui('ui_join')
 				var player_data := PlayerData.new()
 				player_data.input = input
 				Game.player_datas.append(player_data)
@@ -76,16 +81,24 @@ func _process(delta: float) -> void:
 	var picking_player := Game.player_datas[Game.player_turn_index]
 	if  picking_player and picking_player.is_ready and picked_level.length() == 0:
 		if picking_player.input.is_action_just_pressed('left'):
+			SoundBank.play_ui('ui_select')
 			level_index -= 1
 		if picking_player.input.is_action_just_pressed('right'):
+			SoundBank.play_ui('ui_select')
 			level_index += 1
 		if picking_player.input.is_action_just_pressed('up'):
+			SoundBank.play_ui('ui_select')
 			level_index -= level_list.columns
 		if picking_player.input.is_action_just_pressed('down'):
+			SoundBank.play_ui('ui_select')
 			level_index += level_list.columns
-		level_index = level_index%LevelDB.level_paths.size()
+		level_index = level_index%(LevelDB.level_paths.size() + 1)
 		if picking_player.input.is_action_just_pressed('ok'):
-			picked_level = LevelDB.level_paths[level_index]
+			SoundBank.play_ui('ui_pick')
+			if level_index == LevelDB.level_paths.size():
+				picked_level = LevelDB.level_paths[randi()%LevelDB.level_paths.size()]
+			else:
+				picked_level = LevelDB.level_paths[level_index]
 			for child in level_list.get_children():
 				child.hide()
 			level_list.get_child(level_index).show()
