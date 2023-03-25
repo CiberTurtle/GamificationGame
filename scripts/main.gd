@@ -22,9 +22,11 @@ func _ready() -> void:
 	spawn_item_dialog.title = "Pick an item then click to spawn it - Press 'I' to open this again"
 	#load_level_dialog.popup_centered()
 	
-	Console.register('load', func(): load_level_dialog.popup_centered(); Console.close())
-	Console.register('spawn', func(): spawn_item_dialog.popup_centered(); Console.close())
-	Console.register('setup', func(): player_setup.open(); Console.close())
+	#Console.register('load', func(): load_level_dialog.popup_centered(); Console.close())
+	#Console.register('spawn', func(): spawn_item_dialog.popup_centered(); Console.close())
+	#Console.register('setup', func(): player_setup.open(); Console.close())
+	if not OS.is_debug_build():
+		get_window().mode = Window.MODE_FULLSCREEN
 	
 	get_viewport().size_changed.connect(update_viewport)
 	update_viewport()

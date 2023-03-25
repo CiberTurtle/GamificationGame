@@ -2,7 +2,7 @@ extends Node
 
 const SOUND_BANK_FOLDER := 'res://content/sounds/'
 const FALLBACK_SOUND: AudioStreamWAV = preload('res://content/sounds/fallback.wav')
-const POOL_SIZE := 16.
+const POOL_SIZE := 32.
 
 var bank := {}
 
@@ -22,20 +22,8 @@ func generate_pool(count: int) -> void:
 		player_pool.append(player)
 
 func _ready() -> void:
-	reload_bank()
 	generate_pool(POOL_SIZE)
-
-func reload_bank() -> void:
-	bank.clear()
-	scan_folder(SOUND_BANK_FOLDER)
-
-func scan_folder(path: String) -> void:
-	for file in DirAccess.get_files_at(path):
-		if file.ends_with('.wav'):
-			#bank[dir+file]
-			pass
-	for folder in DirAccess.get_directories_at(path):
-		scan_folder(path + '/' + folder)
+	print(DirAccess.get_files_at(SOUND_BANK_FOLDER))
 
 var loaded_sounds := {}
 func get_sound(name: String) -> AudioStream:
@@ -44,11 +32,11 @@ func get_sound(name: String) -> AudioStream:
 	
 	var sound := FALLBACK_SOUND
 	var segs := name.split('.')
-	print(name)
+	#print(name)
 	
 	while segs.size() > 0:
 		var path := SOUND_BANK_FOLDER + '.'.join(segs) + '.wav'
-		if FileAccess.file_exists(path):
+		if FileAccess.file_exists(path + '.import'):
 			sound = load(path)
 			break
 		segs.remove_at(segs.size() - 1)
@@ -62,6 +50,8 @@ func play(name: String, position: Vector2) -> void:
 	player.stop()
 	player.stream = sound
 	player.position = position
+	player.pitch_scale = randf_range(0.9, 1.1)
+	player.volume_db = randf_range(-2.5, 2.5)
 	player.play()
 
 func play_ui(name: String) -> void:

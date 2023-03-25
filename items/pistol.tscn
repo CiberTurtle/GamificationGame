@@ -20,7 +20,10 @@ shape = SubResource("RectangleShape2D_iy84u")
 texture = ExtResource("2_35ty5")
 
 [node name="Cooldown" parent="OnPickup" index="0"]
-ticks = 0.0
+ticks = 10.0
+
+[node name="Cooldown" parent="OnUse" index="0"]
+ticks = 10.0
 
 [node name="Shoot" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("2_ydpea")

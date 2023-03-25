@@ -10,12 +10,14 @@ config_version=5
 
 [application]
 
-config/name="GamificationGame"
+config/name="Poultry Pounder"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 boot_splash/image="res://icon.png"
 boot_splash/fullsize=false
-config/icon="res://icon.png"
+boot_splash/use_filter=false
+config/icon="res://content/sprites/chicken.png"
 
 [audio]
 
@@ -25,7 +27,6 @@ buses/default_bus_layout="res://resources/audio_bus.tres"
 
 Consts="*res://scripts/autoloads/consts.gd"
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
-Console="*res://addons/cheatsheet/cheatsheet.tscn"
 SoundBank="*res://addons/sound_bank/scripts/sound_bank.gd"
 Globals="*res://scripts/autoloads/globals.gd"
 SkinDB="*res://scripts/autoloads/skin_db.gd"
@@ -56,21 +57,21 @@ window/size/window_height_override=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg", "res://addons/cheatsheet/plugin.cfg", "res://addons/sound_bank/plugin.cfg")
+enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg", "res://addons/sound_bank/plugin.cfg")
 
 [importer_defaults]
 
 wav={
-"compress/mode": 0,
+"compress/mode": 1,
 "edit/loop_begin": 0,
 "edit/loop_end": -1,
 "edit/loop_mode": 0,
 "edit/normalize": true,
-"edit/trim": true,
-"force/8_bit": false,
+"edit/trim": false,
+"force/8_bit": true,
 "force/max_rate": true,
 "force/max_rate_hz": 44100,
-"force/mono": false
+"force/mono": true
 }
 
 [input]

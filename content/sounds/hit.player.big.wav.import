@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/hit.player.big.wav-e2c62cff57d4bec87eb320f900
 
 [params]
 
-force/8_bit=false
-force/mono=false
+force/8_bit=true
+force/mono=true
 force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
@@ -21,4 +21,4 @@ edit/normalize=true
 edit/loop_mode=0
 edit/loop_begin=0
 edit/loop_end=-1
-compress/mode=0
+compress/mode=1

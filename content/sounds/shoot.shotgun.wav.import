@@ -2,7 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dpwn5h53n6bo1"
+uid="uid://cyk6ut1kqayyf"
 path="res://.godot/imported/shoot.shotgun.wav-e3875501f256987ba1986a79d0fbed0f.sample"
 
 [deps]
@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/shoot.shotgun.wav-e3875501f256987ba1986a79d0f
 
 [params]
 
-force/8_bit=false
-force/mono=false
+force/8_bit=true
+force/mono=true
 force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
@@ -21,4 +21,4 @@ edit/normalize=true
 edit/loop_mode=0
 edit/loop_begin=0
 edit/loop_end=-1
-compress/mode=0
+compress/mode=1

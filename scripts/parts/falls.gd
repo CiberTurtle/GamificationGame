@@ -1,8 +1,13 @@
 extends Node
 
-@export var gravity:=0.0
-@export var max_fall_speed:=0.0
-@export var grounded_dec:=0.0
+@export var init_y := 0.
+
+@export var gravity := 0.
+@export var max_fall_speed := 0.
+@export var grounded_dec := 0.
+
+func _ready() -> void:
+	owner.velocity.y = init_y
 
 func _process(delta):
 	owner.velocity.y += gravity*delta

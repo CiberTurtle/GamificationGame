@@ -7,8 +7,10 @@ var skin_names: Array[String]
 
 func _enter_tree() -> void:
 	for file in DirAccess.get_files_at(SKINS_FOLDER):
+		if not file.ends_with('.png.import'): continue
+		file = file.trim_suffix('.import')
+		
 		var path := SKINS_FOLDER + file
-		if not path.ends_with('.png'): continue
 		
 		var skin := load(path) as CompressedTexture2D
 		if not skin: continue

@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	crow_sprite.visible = player_data.is_leader
 	
+	update()
 	update_skin()
 	update_ready()
 

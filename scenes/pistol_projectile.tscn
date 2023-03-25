@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://scripts/parts/group.gd" id="5_yir22"]
 
 [sub_resource type="Curve" id="Curve_1ycyd"]
-max_value = 600.0
-_data = [Vector2(0, 500), 0.0, 0.0, 0, 0]
-point_count = 1
+max_value = 1000.0
+_data = [Vector2(0, 500), 0.0, 0.0, 0, 0, Vector2(0, 600), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_hifa3"]
 

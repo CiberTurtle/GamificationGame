@@ -8,8 +8,8 @@
 
 [sub_resource type="Curve" id="Curve_boe4f"]
 max_value = 300.0
-_data = [Vector2(0, 256), 0.0, 0.0, 0, 0]
-point_count = 1
+_data = [Vector2(0, 116.379), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_8yilo"]
 
