@@ -22,6 +22,11 @@ var damage_source: PlayerData
 
 @onready var on_use := $OnUse
 
+func _ready() -> void:
+	pickup.connect(_pickup)
+	drop.connect(_drop)
+	use.connect(_use)
+
 func is_held() -> bool:
 	return player != null
 

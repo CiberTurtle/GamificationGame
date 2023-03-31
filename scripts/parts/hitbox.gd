@@ -13,12 +13,7 @@ func forget_hits():
 	things_hit.clear()
 
 func _ready() -> void:
-	body_entered.connect(
-		func(body: PhysicsBody2D):
-			if not auto_attack: return
-			if speed_threshold > 0. and owner.velocity.length() < speed_threshold: return
-			attack_node(body, owner.damage_source)
-	)
+	body_entered.connect(_body_entered)
 
 func trigger() -> void:
 	attack_overlap(owner.damage_source)
@@ -48,3 +43,9 @@ func attack_node(node: Node2D, source: PlayerData, damage: int = -1) -> bool:
 			things_hit.append(node)
 		return true
 	return false
+
+func _body_entered(body: Node2D) -> void:
+	if not auto_attack: return
+	if speed_threshold > 0. and owner.velocity.length() < speed_threshold: return
+	attack_node(body, owner.damage_source)
+	

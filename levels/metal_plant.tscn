@@ -100,6 +100,7 @@ metadata/_edit_horizontal_guides_ = [-184.0, 184.0]
 metadata/_edit_vertical_guides_ = [-320.0, 320.0]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+z_index = -100
 custom_minimum_size = Vector2(640, 360)
 anchors_preset = 15
 anchor_right = 1.0

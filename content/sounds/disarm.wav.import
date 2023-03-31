@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bj8p1i84smjc3"
-path="res://.godot/imported/spawn.wav-fc71937041a2095eca024d81c6729219.sample"
+uid="uid://nw2by3cgmxtg"
+path="res://.godot/imported/disarm.wav-8a945da997cf06b3f4a9d4d652af4ecf.sample"
 
 [deps]
 
-source_file="res://content/sounds/spawn.wav"
-dest_files=["res://.godot/imported/spawn.wav-fc71937041a2095eca024d81c6729219.sample"]
+source_file="res://content/sounds/disarm.wav"
+dest_files=["res://.godot/imported/disarm.wav-8a945da997cf06b3f4a9d4d652af4ecf.sample"]
 
 [params]
 

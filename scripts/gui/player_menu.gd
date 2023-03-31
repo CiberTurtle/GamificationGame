@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if not player_data.input.is_device_connected():
-		say('Controller Disconnected!', .5)
+		say('Disconnected!', .5)
 		return
 	
 	if player_data.is_ready:
@@ -124,3 +124,5 @@ func update_skin() -> void:
 func update() -> void:
 	if not is_instance_valid(player_data): return
 	%StatsLabel.text = '%s kills   %s deaths' % [player_data.kills, player_data.deaths]
+	update_ready()
+	update_skin()

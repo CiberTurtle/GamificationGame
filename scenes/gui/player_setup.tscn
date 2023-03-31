@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt82bcq85a27b"]
+[gd_scene load_steps=21 format=3 uid="uid://bt82bcq85a27b"]
 
 [ext_resource type="FontFile" uid="uid://cc6ug5fvvkedc" path="res://content/fonts/Montserrat/static/Montserrat-SemiBold.ttf" id="1_duedb"]
 [ext_resource type="Script" path="res://scripts/gui/player_setup.gd" id="2_62bbn"]
 [ext_resource type="PackedScene" uid="uid://b2fhcxbvjpb1s" path="res://scenes/gui/player_menu.tscn" id="2_hbusn"]
 [ext_resource type="FontFile" uid="uid://dd0s3s2x17crx" path="res://content/fonts/Montserrat/static/Montserrat-Black.ttf" id="3_54f37"]
 [ext_resource type="Texture2D" uid="uid://c4pp8gm0vsh5k" path="res://content/thumbnails/placeholder.svg" id="4_6t47u"]
+[ext_resource type="FontFile" uid="uid://nsk6lcjn2ji3" path="res://content/fonts/Montserrat/static/Montserrat-Bold.ttf" id="6_khm22"]
+[ext_resource type="Script" path="res://scripts/gui/menu.gd" id="7_cvd1x"]
 
 [sub_resource type="Theme" id="Theme_khkkg"]
 default_font = ExtResource("1_duedb")
@@ -12,6 +14,52 @@ default_font_size = 24
 Label/colors/font_color = Color(0.188235, 0.172549, 0.180392, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_slxm2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyqkj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5iue"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hcdq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv1kg"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ocha"]
+
+[sub_resource type="Theme" id="Theme_gky8m"]
+default_font = ExtResource("6_khm22")
+default_font_size = 24
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("3_54f37")
+Button/styles/disabled = SubResource("StyleBoxEmpty_gyqkj")
+Button/styles/focus = SubResource("StyleBoxEmpty_o5iue")
+Button/styles/hover = SubResource("StyleBoxEmpty_7hcdq")
+Button/styles/normal = SubResource("StyleBoxFlat_iv1kg")
+Button/styles/pressed = SubResource("StyleBoxEmpty_6ocha")
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cqx8v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aysec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0fbv"]
+bg_color = Color(0.188235, 0.172549, 0.180392, 1)
+border_width_left = 12
+border_width_top = 8
+border_width_right = 12
+border_width_bottom = 8
+border_color = Color(0.188235, 0.172549, 0.180392, 1)
+
+[sub_resource type="Theme" id="Theme_knpo4"]
+Button/colors/font_color = Color(1, 0.921569, 0.960784, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_aysec")
+Button/styles/hover = SubResource("StyleBoxFlat_t0fbv")
+Button/styles/normal = SubResource("StyleBoxFlat_t0fbv")
+Button/styles/pressed = SubResource("StyleBoxFlat_t0fbv")
+Label/colors/font_color = Color(0.188235, 0.172549, 0.180392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuxw3"]
 draw_center = false
@@ -112,22 +160,91 @@ text = "Stage Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerList" type="HBoxContainer" parent="."]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -255.0
+offset_top = -301.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="PlayerSetup" parent="PlayerList" instance=ExtResource("2_hbusn")]
+[node name="PlayerList" type="HBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="PlayerSetup" parent="HBoxContainer/PlayerList" instance=ExtResource("2_hbusn")]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="JoinPrompt" type="PanelContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 301)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_gky8m")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cqx8v")
+
+[node name="Menu" type="VBoxContainer" parent="HBoxContainer/JoinPrompt"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+script = ExtResource("7_cvd1x")
+
+[node name="StatsLabel" type="Label" parent="HBoxContainer/JoinPrompt/Menu"]
+layout_mode = 2
+text = "Press any button to join"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 59.0
+grow_horizontal = 2
+theme = SubResource("Theme_knpo4")
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Left" type="HBoxContainer" parent="Bar"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 6
+
+[node name="KickButton" type="Button" parent="Bar/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Kick unready players"
+
+[node name="Right" type="HBoxContainer" parent="Bar"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="FullscreenButton" type="Button" parent="Bar/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Go fullscreen"
+
+[node name="WebWarnLabel" type="Label" parent="Bar"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 2
+text = "This is a web build - There may be limitations"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Cursor" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -137,3 +254,6 @@ offset_top = 175.0
 offset_right = 1176.0
 offset_bottom = 443.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_iuxw3")
+
+[connection signal="pressed" from="Bar/Left/KickButton" to="." method="_on_kick_button_pressed"]
+[connection signal="pressed" from="Bar/Right/FullscreenButton" to="." method="_on_fullscreen_button_pressed"]

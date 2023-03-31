@@ -74,9 +74,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		spawn_item_dialog.popup_centered()
 		return
 	
-	if event is InputEventKey and event.keycode == KEY_P and event.is_pressed():
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and event.is_pressed():
 		get_viewport().set_input_as_handled()
-		player_setup.open()
+		#player_setup.open()
+		Game.end.emit()
 		return
 
 var next_item_spawn: PackedScene

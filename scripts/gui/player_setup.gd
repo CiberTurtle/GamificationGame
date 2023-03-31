@@ -39,6 +39,13 @@ func _ready() -> void:
 	
 	update()
 	
+	if OS.has_feature('web'):
+		%FullscreenButton.hide()
+		%WebWarnLabel.show()
+	else:
+		await get_tree().process_frame
+		update_window_button()
+
 func open() -> void:
 	show()
 	picked_level = ''
@@ -73,15 +80,21 @@ func _process(delta: float) -> void:
 				Game.player_datas.append(player_data)
 				add_player_menu(player_data)
 	
-	if Game.player_datas.size() >= 1 and Game.player_datas.all(func(pd): return pd.is_ready) and picked_level.length() > 0:
+	var unready_players := Game.player_datas.filter(func(pd: PlayerData): return not pd.is_ready)
+	
+	if Game.player_datas.size() >= 1 and unready_players.size() == 0 and picked_level.length() > 0:
 		finish.emit()
 		var level := load(picked_level)
 		Globals.main.load_level(level)
 		hide()
 		return
 	
+	%KickButton.visible = unready_players.size() > 0
+	%JoinPrompt.visible = Game.player_datas.size() < 4
+	
+	Game.player_turn_index = Game.player_turn_index%Game.player_datas.size()
 	var picking_player := Game.player_datas[Game.player_turn_index]
-	if  picking_player and picking_player.is_ready and picked_level.length() == 0:
+	if  picking_player and picking_player.is_ready and picked_level.is_empty():
 		if not picking_player.input.is_device_connected(): return
 		
 		if picking_player.input.is_action_just_pressed('left'):
@@ -96,13 +109,17 @@ func _process(delta: float) -> void:
 		if picking_player.input.is_action_just_pressed('down'):
 			SoundBank.play_ui('ui_select')
 			level_index += level_list.columns
+		
 		level_index = level_index%(LevelDB.level_paths.size() + 1)
+		
 		if picking_player.input.is_action_just_pressed('ok'):
 			SoundBank.play_ui('ui_pick')
+			
 			if level_index == LevelDB.level_paths.size():
 				picked_level = LevelDB.level_paths[randi()%LevelDB.level_paths.size()]
 			else:
 				picked_level = LevelDB.level_paths[level_index]
+			
 			for child in level_list.get_children():
 				child.hide()
 			level_list.get_child(level_index).show()
@@ -111,3 +128,22 @@ func add_player_menu(player_data: PlayerData) -> void:
 	var menu := player_menu.duplicate()
 	menu.player_data = player_data
 	player_list.add_child(menu)
+
+func _on_fullscreen_button_pressed() -> void:
+	if get_window().mode != Window.MODE_FULLSCREEN:
+		get_window().mode = Window.MODE_FULLSCREEN
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+	
+	update_window_button()
+
+func update_window_button() -> void:
+	if get_window().mode == Window.MODE_FULLSCREEN:
+		%FullscreenButton.text = 'Go windowed'
+	else:
+		%FullscreenButton.text = 'Go fullscreen'
+
+func _on_kick_button_pressed() -> void:
+	var unready_players := Game.player_datas.filter(func(pd: PlayerData): return not pd.is_ready)
+	for player_data in unready_players:
+		Game.player_datas.erase(player_data)

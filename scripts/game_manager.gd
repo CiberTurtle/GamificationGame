@@ -17,11 +17,16 @@ func _physics_process(delta: float) -> void:
 	if is_running:
 		run(delta)
 
+var prev_scale := 1./0
 func _process(delta: float) -> void:
 	countdown_label.visible = timer <= 10.
 	countdown_label.text = str(ceil(timer))
 	var s: float = lerp(.5, 1., ease(fmod(timer/1., 1.), .1))
 	countdown_label.scale = Vector2(s, s)
+	
+	if prev_scale < s and timer < 10.:
+		SoundBank.play_ui('boo')
+	prev_scale = s
 
 func _game_start() -> void:
 	is_running = true
@@ -32,6 +37,8 @@ func _game_start() -> void:
 		spawn_player(player_data)
 		player_data.kills = 0
 		player_data.deaths = 0
+	
+	SoundBank.play_ui('game_start')
 
 func _game_end() -> void:
 	is_running = false

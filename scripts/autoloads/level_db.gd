@@ -9,7 +9,6 @@ var level_names: Array[String] = []
 var level_thumbnails: Array[CompressedTexture2D] = []
 
 func _enter_tree() -> void:
-	print(DirAccess.get_files_at(THUMBNAIL_FOLDER))
 	for file in DirAccess.get_files_at(LEVEL_FOLDER):
 		file = file.trim_suffix('.remap')
 		

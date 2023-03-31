@@ -19,6 +19,10 @@ var backwards := false
 var hits := 0
 
 func _ready() -> void:
+	pickup.connect(_pickup)
+	drop.connect(_drop)
+	use.connect(_use)
+	
 	var hitboxes := find_children('*', 'Hitbox')
 	for hitbox in hitboxes:
 		hitbox.attack.connect(
@@ -27,6 +31,10 @@ func _ready() -> void:
 			if hits >= max_hits:
 				die()
 		)
+
+func _use() -> void:
+	super._use()
+	backwards = false
 
 func _physics_process(delta: float) -> void:
 	hitbox.auto_attack = is_flying

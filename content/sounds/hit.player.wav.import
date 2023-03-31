@@ -2,7 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://br3iahm3eqlxs"
+uid="uid://dkoq7vpf42ldf"
 path="res://.godot/imported/hit.player.wav-d066d08b3a6f85bd7fd29f564815c493.sample"
 
 [deps]
@@ -16,7 +16,7 @@ force/8_bit=true
 force/mono=true
 force/max_rate=true
 force/max_rate_hz=44100
-edit/trim=false
+edit/trim=true
 edit/normalize=true
 edit/loop_mode=0
 edit/loop_begin=0

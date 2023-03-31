@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dx75kytj8v3fv"]
+[gd_scene load_steps=11 format=3 uid="uid://dx75kytj8v3fv"]
 
 [ext_resource type="PackedScene" uid="uid://dww6yjs6qfyhp" path="res://items/(item).tscn" id="1_7ljux"]
 [ext_resource type="Texture2D" uid="uid://b2stkwed6lh5f" path="res://content/sprites/Rock.png" id="2_0reed"]
 [ext_resource type="Script" path="res://scripts/parts/throw.gd" id="2_3dgku"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_84jkd"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_6n24g"]
+[ext_resource type="Script" path="res://scripts/parts/forget.gd" id="4_3561j"]
 [ext_resource type="Script" path="res://scripts/parts/disarm.gd" id="6_n31up"]
 [ext_resource type="Script" path="res://scripts/parts/bounce.gd" id="7_curaf"]
 
@@ -27,7 +28,9 @@ texture = ExtResource("2_0reed")
 script = ExtResource("2_3dgku")
 velocity = Vector2(256, -128)
 
-[node name="Forget" type="Node2D" parent="OnUse" index="2"]
+[node name="Forget" type="Node2D" parent="OnUse" index="2" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_3561j")
+hitbox = NodePath("../../PassiveHitbox")
 
 [node name="PassiveHitbox" type="Area2D" parent="." index="6"]
 collision_layer = 0

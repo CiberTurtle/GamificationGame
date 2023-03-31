@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_xrkl5"]
 [ext_resource type="Texture2D" uid="uid://dirgo6oo15hva" path="res://content/sprites/Wizard Background.png" id="2_e5g7e"]
-[ext_resource type="TileSet" uid="uid://bruvdxi3lks2q" path="res://resources/tilesets/wizards_shop.tres" id="2_lstcp"]
+[ext_resource type="TileSet" uid="uid://bdxb4xd6vj0hp" path="res://resources/tilesets/wizards_shop.tres" id="2_lstcp"]
 [ext_resource type="AudioStream" uid="uid://dhsf74ynj5t24" path="res://content/music/magic_shop.ogg" id="2_lt0kk"]
 [ext_resource type="Texture2D" uid="uid://dmj0ycn0iwksk" path="res://content/sprites/Tiny Wizard Purple.png" id="3_nn3u4"]
 [ext_resource type="Texture2D" uid="uid://pxrywokhlp32" path="res://content/sprites/tilesets/wizards_shop.png" id="3_xms1v"]
@@ -620,6 +620,7 @@ metadata/finished = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.556863, 0.556863, 0.556863, 1)
+z_index = -100
 offset_left = -304.0
 offset_top = -176.0
 offset_right = 306.0

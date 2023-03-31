@@ -75,9 +75,14 @@ var held_item: Item
 @export var punch_effect:PackedScene
 
 func _ready() -> void:
+	if is_instance_valid(player_data.player):
+		printerr('I should not exsist. An extra player was spawned and killed.')
+		health = -base_health
+		queue_free()
+		return
+	player_data.player = self
 	update_health_bar()
 	health_bar.modulate = player_data.color
-	print(jump_velocity)
 
 func _process(delta: float) -> void:
 	process_inputs()
@@ -252,7 +257,7 @@ func process_jump(delta: float) -> void:
 	
 	if jump_buffer_timer > 0.:
 		if input_move.y > 0.: # if chrouching then fall though
-			SoundBank.play('fall', position)
+			SoundBank.play('fallthrough', position)
 			jump_buffer_timer = 0.
 			position.y += 1.
 		elif coyote_timer > 0.: # or else jump
@@ -269,7 +274,7 @@ func process_action(delta: float) -> void:
 	action_buffer_timer -= delta
 	
 	if is_instance_valid(held_item):
-		if input_move.y > 0:
+		if input_move.y > 0 and not is_clibing:
 			try_drop_item()
 			action_buffer_timer = -1.
 			return
@@ -351,13 +356,18 @@ func take_damage(damage: int, source: PlayerData) -> bool:
 	health -= damage
 	update_health_bar()
 	
-	if damage > 30:
-		SoundBank.play('hit.player', position)
-	else:
+	if damage > 25:
 		SoundBank.play('hit.player.big', position)
+	else:
+		SoundBank.play('hit.player', position)
 	
 	if health <= 0:
 		die()
+	
+	var spawn_fx := preload('res://scenes/fx/hurt_puff.tscn').instantiate() as Node2D
+	spawn_fx.global_position = global_position
+	spawn_fx.modulate = player_data.color
+	Globals.world.add_child(spawn_fx)
 	
 	return true
 
@@ -373,5 +383,6 @@ func die() -> void:
 	Globals.world.add_child(spawn_fx)
 
 func update_health_bar() -> void:
-	health_bar.value = ceil(float(health)/base_health*health_bar.max_value)
+	if is_instance_valid(health_bar):
+		health_bar.value = ceil(float(health)/base_health*health_bar.max_value)
 	#health_bar.max_value = base_health
