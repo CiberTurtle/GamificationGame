@@ -65,6 +65,7 @@ func update() -> void:
 
 func _process(delta: float) -> void:
 	if not visible: return
+	update()
 	
 	var target_control := level_list.get_child(level_index) as Control
 	var target_position := target_control.position
@@ -91,6 +92,8 @@ func _process(delta: float) -> void:
 	
 	%KickButton.visible = unready_players.size() > 0
 	%JoinPrompt.visible = Game.player_datas.size() < 4
+	
+	if Game.player_datas.size() == 0: return
 	
 	Game.player_turn_index = Game.player_turn_index%Game.player_datas.size()
 	var picking_player := Game.player_datas[Game.player_turn_index]
@@ -123,6 +126,8 @@ func _process(delta: float) -> void:
 			for child in level_list.get_children():
 				child.hide()
 			level_list.get_child(level_index).show()
+	
+	cursor.visible = picking_player and picking_player.is_ready and picked_level.is_empty()
 
 func add_player_menu(player_data: PlayerData) -> void:
 	var menu := player_menu.duplicate()

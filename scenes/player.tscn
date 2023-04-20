@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bv3c7akknavej"]
+[gd_scene load_steps=13 format=3 uid="uid://bv3c7akknavej"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erutj"]
 [ext_resource type="PackedScene" uid="uid://bfbjfcl2sllvq" path="res://scenes/fx/punch_effect.tscn" id="2_gsu2b"]
-[ext_resource type="Shader" path="res://shaders/clean_edge.gdshader" id="2_mi61b"]
 [ext_resource type="Texture2D" uid="uid://b3dv3plhgksqa" path="res://content/sprites/skins/chicken.png" id="3_05up5"]
 [ext_resource type="Script" path="res://scripts/parts/hitbox.gd" id="3_e01o0"]
 [ext_resource type="Script" path="res://scripts/parts/knockback.gd" id="4_q5xfg"]
@@ -77,12 +76,6 @@ func _process(delta: float) -> void:
 	sprite.frame = 1 if player.input_move.y > 0 and not player.is_clibing else 0
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3u16h"]
-shader = ExtResource("2_mi61b")
-shader_parameter/highestColor = Color(0.87451, 0.964706, 0.960784, 1)
-shader_parameter/similarThreshold = 0.0
-shader_parameter/lineWidth = 1.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d353i"]
 size = Vector2(32, 16)
 
@@ -125,7 +118,6 @@ punch_effect = ExtResource("2_gsu2b")
 script = SubResource("GDScript_s8mqr")
 
 [node name="Sprite" type="Sprite2D" parent="Art"]
-material = SubResource("ShaderMaterial_3u16h")
 position = Vector2(0, -8)
 texture = ExtResource("3_05up5")
 hframes = 2

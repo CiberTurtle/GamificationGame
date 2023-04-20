@@ -1,11 +1,18 @@
 class_name PlayerData extends RefCounted
 
+enum Team {
+	None,
+	Alpha,
+	Bravo,
+}
+
 var guid: int
 var player: Player
 var input: DeviceInput
 var color: Color
 var color_index: int
 var skin_index: int
+var team := Team.None
 
 var is_ready := false
 var is_leader := false

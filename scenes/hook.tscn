@@ -1,14 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvv3ndfxevf4p"]
+[gd_scene load_steps=7 format=3 uid="uid://bvv3ndfxevf4p"]
 
 [ext_resource type="PackedScene" uid="uid://f6sxhy6ou814" path="res://scenes/projectile.tscn" id="1_qlnyn"]
 [ext_resource type="Texture2D" uid="uid://cmyvjvwd6x0kc" path="res://content/sprites/Hook.png" id="2_el5oo"]
 [ext_resource type="Script" path="res://scripts/parts/line.gd" id="2_ly2n2"]
-[ext_resource type="Script" path="res://scripts/parts/falls.gd" id="3_8cuhy"]
 
 [sub_resource type="Curve" id="Curve_yxvae"]
-max_value = 300.0
-_data = [Vector2(0, 240), 0.0, 0.0, 0, 0, Vector2(1, 80), 0.0, 0.0, 0, 0]
-point_count = 2
+max_value = 600.0
+_data = [Vector2(0, 600), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ie4ou"]
 radius = 4.0
@@ -17,7 +16,7 @@ radius = 4.0
 radius = 4.0
 
 [node name="hook" instance=ExtResource("1_qlnyn")]
-lifetime = 90
+lifetime = 30
 speed_over_lifetime = SubResource("Curve_yxvae")
 
 [node name="Sprite" parent="." index="0"]
@@ -39,10 +38,3 @@ y_knockback = -256.0
 [node name="line" type="Line2D" parent="." index="4"]
 width = 1.0
 script = ExtResource("2_ly2n2")
-
-[node name="falls" type="Node2D" parent="." index="5"]
-script = ExtResource("3_8cuhy")
-init_y = -96.0
-gravity = 512.0
-max_fall_speed = 256.0
-grounded_dec = 512.0

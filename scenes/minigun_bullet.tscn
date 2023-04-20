@@ -12,7 +12,7 @@ _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [node name="Minigun bullet" instance=ExtResource("1_wpqrj")]
-lifetime = 120
+lifetime = 90
 speed_over_lifetime = SubResource("Curve_g4wk0")
 random_skew = true
 skew_curve = SubResource("Curve_jthac")

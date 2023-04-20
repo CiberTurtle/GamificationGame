@@ -17,7 +17,7 @@ var damage_source: PlayerData
 var proj_skew:float
 
 func _ready() -> void:
-	var hitboxes := find_children('*', 'Hitbox')
+	var hitboxes := find_children('PassiveHitbox')
 	if random_skew:
 		proj_skew = randf_range(-1, 1)
 	else:

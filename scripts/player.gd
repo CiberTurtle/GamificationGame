@@ -64,6 +64,9 @@ var is_clibing := false
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_ground_dec := 128.
 @export_range(0, 128., 1, 'or_greater', 'suffix:px/s')  var extra_air_dec := 0.
 
+@export var punch_cooldown_frames := 12
+var punch_cooldown := 0.
+
 var held_item: Item
 
 @onready var flip_node2d: Node2D = %Flip
@@ -270,6 +273,7 @@ func process_jump(delta: float) -> void:
 	jump_buffer_timer -= delta
 
 func process_action(delta: float) -> void:
+	punch_cooldown -= delta
 	if action_buffer_timer <= 0.: return
 	action_buffer_timer -= delta
 	
@@ -303,7 +307,11 @@ func process_action(delta: float) -> void:
 			try_pickup_item(closest_item)
 			action_buffer_timer = -1.
 	else:
+		if punch_cooldown > 0.: return
+		punch_cooldown = punch_cooldown_frames/TPS
+		
 		SoundBank.play('punch', position)
+		
 		action_buffer_timer = -1.
 		punch_area.attack_overlap(player_data)
 		var effect = punch_effect.instantiate() as Node2D
@@ -347,7 +355,9 @@ var is_dead := false
 func take_damage(damage: int, source: PlayerData) -> bool:
 	if health <= 0: return false # already dead, don't die again
 	if inv_timer > 0. and damage < 420: return false # is invulerable, don't take damage
-	if is_instance_valid(source) and source.guid == player_data.guid: return false # hitting it's self, don't
+	if is_instance_valid(source):
+		if source.guid == player_data.guid: return false # hitting it's self, don't
+		if player_data.team != 0 and source.team == player_data.team: return false # hit by teammate, don't
 	
 	if source:
 		last_damage_source = source
@@ -356,7 +366,7 @@ func take_damage(damage: int, source: PlayerData) -> bool:
 	health -= damage
 	update_health_bar()
 	
-	if damage > 25:
+	if damage >= 25:
 		SoundBank.play('hit.player.big', position)
 	else:
 		SoundBank.play('hit.player', position)

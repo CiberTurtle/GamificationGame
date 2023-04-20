@@ -82,6 +82,28 @@ func _process(delta: float) -> void:
 				player_data.skin_index = 0
 			update_skin()
 			return
+		
+		if player_data.input.is_action_just_pressed('team'):
+			SoundBank.play_ui('ui_team')
+			say('Alpha team')
+			match player_data.team:
+				PlayerData.Team.None:
+					player_data.team = PlayerData.Team.Alpha
+					say('Alpha team', true)
+					%TeamLabel.text = 'Alpha team'
+				PlayerData.Team.Alpha:
+					player_data.team = PlayerData.Team.Bravo
+					say('Bravo team', true)
+					%TeamLabel.text = 'Bravo team'
+				_:
+					say('No team', true)
+					player_data.team = PlayerData.Team.None
+					%TeamLabel.text = 'No team'
+			%TeamSprite.region_rect.position.x = player_data.team * 16
+			#SoundBank.play_ui('team.none')
+			#SoundBank.play_ui('team.alpha')
+			#SoundBank.play_ui('team.bravo')
+			return
 
 @onready var say_control: Control = %Say
 @onready var say_label: Label = %SayLabel

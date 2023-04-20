@@ -1,12 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2wo1vr1g78ji"]
+[gd_scene load_steps=5 format=3 uid="uid://c2wo1vr1g78ji"]
 
-[ext_resource type="Shader" path="res://shaders/drop_shadow.gdshader" id="1_5pdst"]
 [ext_resource type="Texture2D" uid="uid://cmbgnpad3pflh" path="res://content/sprites/fx/puff_lg.png" id="1_fb8ad"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_acu5b"]
-shader = ExtResource("1_5pdst")
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/offset_in_pixels = Vector2(1, 1)
 
 [sub_resource type="Animation" id="Animation_don3l"]
 length = 0.001
@@ -62,7 +56,6 @@ _data = {
 
 [node name="DeathPuff" type="Sprite2D"]
 z_index = 10
-material = SubResource("ShaderMaterial_acu5b")
 texture = ExtResource("1_fb8ad")
 offset = Vector2(-1, -3)
 hframes = 3

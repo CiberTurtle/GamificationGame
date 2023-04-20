@@ -13,7 +13,7 @@
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iw5b"]
-radius = 5.0
+radius = 8.0
 
 [node name="Rock" instance=ExtResource("1_7ljux")]
 item_name = "rock"
@@ -26,7 +26,7 @@ texture = ExtResource("2_0reed")
 
 [node name="Throw" type="Node2D" parent="OnUse" index="1"]
 script = ExtResource("2_3dgku")
-velocity = Vector2(256, -128)
+velocity = Vector2(256, -96)
 
 [node name="Forget" type="Node2D" parent="OnUse" index="2" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("4_3561j")

@@ -18,7 +18,15 @@ music = ExtResource("2_qmw5r")
 metadata/_edit_horizontal_guides_ = [-184.0, 184.0]
 metadata/_edit_vertical_guides_ = [-320.0, 320.0]
 
+[node name="JungleTreeArtBackground" type="Sprite2D" parent="."]
+modulate = Color(0.709804, 0.694118, 0.666667, 1)
+z_index = -100
+position = Vector2(-18.5, -23.5)
+scale = Vector2(1.07705, 1.03056)
+texture = ExtResource("4_jtihl")
+
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -50
 position = Vector2(-28, -31)
 tile_set = ExtResource("2_mc5jo")
 format = 2
@@ -44,13 +52,6 @@ offset_left = -339.0
 offset_top = -251.0
 offset_right = 291.0
 offset_bottom = -211.0
-
-[node name="JungleTreeArtBackground" type="Sprite2D" parent="."]
-modulate = Color(0.709804, 0.694118, 0.666667, 1)
-z_index = -100
-position = Vector2(-18.5, -23.5)
-scale = Vector2(1.07705, 1.03056)
-texture = ExtResource("4_jtihl")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
