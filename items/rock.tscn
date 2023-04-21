@@ -13,7 +13,6 @@
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iw5b"]
-radius = 8.0
 
 [node name="Rock" instance=ExtResource("1_7ljux")]
 item_name = "rock"

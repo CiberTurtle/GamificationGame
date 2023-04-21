@@ -63,14 +63,18 @@ func update() -> void:
 	turn_label.text = "Player %s's turn" % [Game.player_turn_index + 1]
 	cursor.modulate = color
 
+var time := 0.
 func _process(delta: float) -> void:
 	if not visible: return
 	update()
+	time += delta
 	
 	var target_control := level_list.get_child(level_index) as Control
 	var target_position := target_control.position
 	cursor.size = cursor.size.lerp(target_control.size, .5)
 	cursor.position = cursor.position.lerp(target_position + level_list.position, .5)
+	cursor.pivot_offset = cursor.size/2.
+	cursor.rotation = sin(time*PI*2*2)*0.075
 	
 	for input in Game.inputs:
 		if not Game.player_datas.any(func(pd: PlayerData): return pd.input.device == input.device):
@@ -90,7 +94,6 @@ func _process(delta: float) -> void:
 		hide()
 		return
 	
-	%KickButton.visible = unready_players.size() > 0
 	%JoinPrompt.visible = Game.player_datas.size() < 4
 	
 	if Game.player_datas.size() == 0: return
@@ -149,6 +152,6 @@ func update_window_button() -> void:
 		%FullscreenButton.text = 'Go fullscreen'
 
 func _on_kick_button_pressed() -> void:
-	var unready_players := Game.player_datas.filter(func(pd: PlayerData): return not pd.is_ready)
-	for player_data in unready_players:
+	#var unready_players := Game.player_datas.filter(func(pd: PlayerData): return not pd.is_ready)
+	for player_data in Game.player_datas.duplicate():
 		Game.player_datas.erase(player_data)

@@ -24,6 +24,8 @@ func _ready() -> void:
 
 var is_first_frame := true
 var previous_error := false
+var skin_tween: Tween
+var team_tween: Tween
 func _process(delta: float) -> void:
 	if not Game.player_datas.has(player_data):
 		queue_free()
@@ -68,6 +70,7 @@ func _process(delta: float) -> void:
 			leave_hold_timer = 0.
 		
 		if player_data.input.is_action_just_pressed('left'):
+			skin_anim()
 			SoundBank.play_ui('ui_left')
 			player_data.skin_index -= 1
 			if player_data.skin_index < 0:
@@ -76,6 +79,7 @@ func _process(delta: float) -> void:
 			return
 		
 		if player_data.input.is_action_just_pressed('right'):
+			skin_anim()
 			SoundBank.play_ui('ui_right')
 			player_data.skin_index += 1
 			if player_data.skin_index >= SkinDB.skins.size():
@@ -84,31 +88,52 @@ func _process(delta: float) -> void:
 			return
 		
 		if player_data.input.is_action_just_pressed('team'):
-			SoundBank.play_ui('ui_team')
-			say('Alpha team')
+			if is_instance_valid(team_tween):
+				team_tween.kill()
+			team_tween = create_tween()
+			team_tween.set_ease(Tween.EASE_OUT)
+			team_tween.set_trans(Tween.TRANS_BACK)
+			team_tween.tween_property(%TeamSprite, 'scale', Vector2.ONE, 0.2).from(Vector2.ONE*1.33)
+			
 			match player_data.team:
 				PlayerData.Team.None:
 					player_data.team = PlayerData.Team.Alpha
 					say('Alpha team', true)
 					%TeamLabel.text = 'Alpha team'
+					SoundBank.play_ui('ui_team.alpha')
 				PlayerData.Team.Alpha:
 					player_data.team = PlayerData.Team.Bravo
 					say('Bravo team', true)
 					%TeamLabel.text = 'Bravo team'
+					SoundBank.play_ui('ui_team.bravo')
 				_:
 					say('No team', true)
 					player_data.team = PlayerData.Team.None
 					%TeamLabel.text = 'No team'
+					SoundBank.play_ui('ui_team.none')
+				
 			%TeamSprite.region_rect.position.x = player_data.team * 16
-			#SoundBank.play_ui('team.none')
-			#SoundBank.play_ui('team.alpha')
-			#SoundBank.play_ui('team.bravo')
 			return
+
+func skin_anim() -> void:
+	if is_instance_valid(skin_tween):
+		skin_tween.kill()
+	skin_tween = create_tween()
+	skin_tween.set_ease(Tween.EASE_OUT)
+	skin_tween.set_trans(Tween.TRANS_BACK)
+	skin_tween.tween_property(skin_sprite, 'scale', Vector2.ONE, 0.2).from(Vector2.ONE*1.33)
 
 @onready var say_control: Control = %Say
 @onready var say_label: Label = %SayLabel
 var say_timer := 0.
+var say_tween: Tween
 func say(text: String, auto_hide := false) -> void:
+	if is_instance_valid(say_tween):
+		say_tween.kill()
+	say_tween = create_tween()
+	say_tween.set_ease(Tween.EASE_OUT)
+	say_tween.set_trans(Tween.TRANS_BACK)
+	say_tween.tween_property(say_control, 'scale', Vector2.ONE, 0.2).from(Vector2.ONE*1.33)
 	#create_tween().tween_property(say_control, 'scale', Vector2.ONE, 0.2).from(Vector2(1.1, 1.1)).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	#say_control.pivot_offset.x = say_control.size.x/2.
 	#say_control.pivot_offset.y = say_control.size.y

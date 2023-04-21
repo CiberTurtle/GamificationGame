@@ -85,7 +85,17 @@ func _ready() -> void:
 		return
 	player_data.player = self
 	update_health_bar()
-	health_bar.modulate = player_data.color
+	var has_teamed_player := Game.player_datas.any(func(pd: PlayerData): return pd.team != 0)
+	print_debug(has_teamed_player)
+	if player_data.team == 1:
+		print('team alpha')
+		health_bar.modulate = Consts.player_colors[0]
+	elif player_data.team == 2:
+		print('team bravo')
+		health_bar.modulate = Consts.player_colors[1]
+	elif player_data.team == 0 and not has_teamed_player:
+		health_bar.modulate = player_data.color
+		print('personal')
 
 func _process(delta: float) -> void:
 	process_inputs()
@@ -389,7 +399,8 @@ func die() -> void:
 	
 	var spawn_fx := preload('res://scenes/fx/death_puff.tscn').instantiate() as Node2D
 	spawn_fx.global_position = global_position
-	spawn_fx.modulate = player_data.color
+	if is_instance_valid(last_damage_source):
+		spawn_fx.modulate = last_damage_source.color
 	Globals.world.add_child(spawn_fx)
 
 func update_health_bar() -> void:
